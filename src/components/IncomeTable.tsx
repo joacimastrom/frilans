@@ -1,9 +1,6 @@
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { DIVIDEND_TAX } from "@/lib/constants";
-import { addThousandSeparator, getNearestHundreds } from "@/lib/helpers";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { useDebounce } from "use-debounce";
+import { addThousandSeparator, swedishIncomeTax } from "@/lib/helpers";
 
 type Props = {
   salary: number;
@@ -11,7 +8,7 @@ type Props = {
 };
 
 export const IncomeTable = ({ salary, dividend }: Props) => {
-  const [debouncedSalary] = useDebounce(salary, 2000);
+  /*   const [debouncedSalary] = useDebounce(salary, 2000);
   const monthlySalary = debouncedSalary / 12;
   const { roundedDown, roundedUp } = getNearestHundreds(monthlySalary);
 
@@ -25,21 +22,42 @@ export const IncomeTable = ({ salary, dividend }: Props) => {
       if (data?.results.length > 1) console.log("More than one result");
       return data?.results[0]["kolumn 1"];
     },
+    enabled: monthlySalary < 80000,
   });
 
-  if (isPending) return <p>Hämtar skattesats...</p>;
+  if (isPending) return <p>Hämtar skattesats...</p>; 
 
-  const taxPercentage = Math.round((data / monthlySalary) * 100 * 100) / 100;
-  const salaryAfterTaxes = salary - data * 12;
+  const taxPercentage =
+    monthlySalary < 80000
+      ? Math.round((data / monthlySalary) * 100 * 100) / 100
+      : getHighIncomeTaxPercentage(monthlySalary);
+*/
+
+  const taxPercentage = swedishIncomeTax(salary);
+
+  const salaryAfterTaxes = salary * (1 - taxPercentage / 100);
   const dividendAfterTaxes = dividend * (1 - DIVIDEND_TAX);
+
+  const referenceTaxPercentage = taxPercentage + 2;
+
+  console.log(referenceTaxPercentage, salaryAfterTaxes);
+  const referenceSalary =
+    (salaryAfterTaxes + dividendAfterTaxes) /
+    (1 - referenceTaxPercentage / 100) /
+    12;
 
   return (
     <Table className="font-bold">
       <TableBody>
         <TableRow>
-          <TableCell className="font-medium">Årslön</TableCell>
+          <TableCell className="font-medium">
+            Månadslön{" "}
+            <span className="text-muted-foreground whitespace-nowrap">
+              ({taxPercentage}% skatt)
+            </span>
+          </TableCell>
           <TableCell className="text-right">
-            {addThousandSeparator(salary)}
+            {addThousandSeparator(salary / 12)}
           </TableCell>
         </TableRow>
         <TableRow>
@@ -48,7 +66,7 @@ export const IncomeTable = ({ salary, dividend }: Props) => {
             {addThousandSeparator(dividend)}
           </TableCell>
         </TableRow>
-        <TableRow>
+        {/* <TableRow>
           <TableCell className="font-medium">
             Lön efter skatt
             <span className="text-muted-foreground"> ({taxPercentage}%)</span>
@@ -68,11 +86,17 @@ export const IncomeTable = ({ salary, dividend }: Props) => {
           <TableCell className="text-right">
             {addThousandSeparator(dividendAfterTaxes)}
           </TableCell>
-        </TableRow>
+        </TableRow> 
         <TableRow>
-          <TableCell className="font-bold">Total </TableCell>
+          <TableCell className="font-bold">Total</TableCell>
           <TableCell className="text-right">
-            {addThousandSeparator(salaryAfterTaxes + dividendAfterTaxes)}
+            {addThousandSeparator(salary + dividend)}
+          </TableCell>
+        </TableRow>*/}
+        <TableRow>
+          <TableCell className="font-bold">Jämförelselön</TableCell>
+          <TableCell className="text-right whitespace-nowrap">
+            {addThousandSeparator(referenceSalary) + " kr / månad"}
           </TableCell>
         </TableRow>
       </TableBody>

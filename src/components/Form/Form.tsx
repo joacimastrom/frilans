@@ -88,7 +88,12 @@ const Form = () => {
   const resultBeforeTax = adjustedRevenue - totalCosts - totalSalaryCosts;
   const resultAfterTax = resultBeforeTax * (1 - RESULT_TAX);
 
-  const maxDividend = Math.max(totalSalaries / 2, BASE_DIVIDEND);
+  // Schablon > Utdelning > Resultat efter skatt
+
+  const maxDividend = Math.min(
+    Math.max(totalSalaries / 2, BASE_DIVIDEND),
+    resultAfterTax
+  );
   const balancedProfit = resultAfterTax - maxDividend;
 
   return (

@@ -1,5 +1,8 @@
 import {
   HOURS_PER_WORKDAY,
+  MUNICIPAL_TAX,
+  STATE_TAX,
+  TAX_LIMIT,
   WORKDAYS__PER_MONTH,
   WORKDAYS_PER_WEEK,
   WORKING_DAYS_SWEDEN,
@@ -108,21 +111,52 @@ export const addThousandSeparator = (number: number, separator = " ") =>
     .replace(/\B(?=(\d{3})+(?!\d))/g, separator);
 
 export const getNearestHundreds = (num: number) => {
+  if (num > 90000) {
+    // Nearest even 400s logic
+    const roundedDown = Math.floor(num / 400) * 400 - 399; // Nearest 400 rounded down + 1
+    const roundedUp = Math.ceil(num / 400) * 400; // Nearest 400 rounded up
+    return { roundedDown, roundedUp };
+  }
   if (num > 20000) {
     // Nearest even 200s logic
     const roundedDown = Math.floor(num / 200) * 200 - 199; // Nearest 200 rounded down + 1
     const roundedUp = Math.ceil(num / 200) * 200; // Nearest 200 rounded up
     return { roundedDown, roundedUp };
-  } else {
-    // Nearest 100s logic
-    const roundedDown = Math.floor(num / 100) * 100 + 1; // Nearest 100 rounded down + 1
-    const roundedUp = Math.ceil(num / 100) * 100; // Nearest 100 rounded up
-
-    // Adjust for exact multiples of 100
-    if (num % 100 === 0) {
-      return { roundedDown: roundedDown - 100, roundedUp };
-    }
-
-    return { roundedDown, roundedUp };
   }
+
+  // Nearest 100s logic
+  const roundedDown = Math.floor(num / 100) * 100 + 1; // Nearest 100 rounded down + 1
+  const roundedUp = Math.ceil(num / 100) * 100; // Nearest 100 rounded up
+
+  // Adjust for exact multiples of 100
+  if (num % 100 === 0) {
+    return { roundedDown: roundedDown - 100, roundedUp };
+  }
+
+  return { roundedDown, roundedUp };
+};
+
+export const getHighIncomeTaxPercentage = (monthlySalary: number) => {
+  if (monthlySalary > 141000) return 41;
+  if (monthlySalary > 128800) return 40;
+  if (monthlySalary > 118400) return 39;
+  if (monthlySalary > 109600) return 38;
+  if (monthlySalary > 102000) return 37;
+  if (monthlySalary > 95400) return 36;
+  if (monthlySalary > 89601) return 35;
+  if (monthlySalary > 84600) return 34;
+  return 33;
+};
+
+export const swedishIncomeTax = (yearlyIncome: number) => {
+  const incomeOverLimit = Math.max(yearlyIncome - TAX_LIMIT, 0);
+  const highIncomeTax = incomeOverLimit * (MUNICIPAL_TAX + STATE_TAX);
+
+  const incomeUnderLimit = Math.min(yearlyIncome, TAX_LIMIT);
+  const lowIncomeTax = incomeUnderLimit * MUNICIPAL_TAX;
+
+  const totalTax = lowIncomeTax + highIncomeTax;
+  const effectiveTaxRate = (totalTax / yearlyIncome) * 100;
+
+  return Math.floor(effectiveTaxRate * 100) / 100;
 };
