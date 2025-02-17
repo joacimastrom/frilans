@@ -15,28 +15,28 @@ export const ResultTable = ({
   balancedProfit,
 }: Props) => {
   return (
-    <Table className="font-bold">
+    <Table>
       <TableBody>
         <TableRow>
-          <TableCell className="font-medium">Resultat innan skatt</TableCell>
+          <TableCell>Resultat innan skatt</TableCell>
           <TableCell className="text-right">
             {addThousandSeparator(resultBeforeTax)}
           </TableCell>
         </TableRow>
         <TableRow>
-          <TableCell className="font-medium">Resultat efter skatt</TableCell>
+          <TableCell>Resultat efter skatt</TableCell>
           <TableCell className="text-right">
             {addThousandSeparator(resultAfterTax)}
           </TableCell>
         </TableRow>
         <TableRow>
-          <TableCell className="font-medium">Max utdelning</TableCell>
+          <TableCell>Max utdelning</TableCell>
           <TableCell className="text-right">
             {addThousandSeparator(maxDividend)}
           </TableCell>
         </TableRow>
-        <TableRow>
-          <TableCell className="font-medium">Balanserad vinst</TableCell>
+        <TableRow className="font-bold">
+          <TableCell>Balanserad vinst</TableCell>
           <TableCell className="text-right">
             {addThousandSeparator(balancedProfit)}
           </TableCell>

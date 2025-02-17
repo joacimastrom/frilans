@@ -1,70 +1,80 @@
 import {
   BASE_DIVIDEND,
+  DIVIDEND_TAX,
   RESULT_TAX,
+  SALARY_TAX,
   WORKING_DAYS_SWEDEN,
 } from "@/lib/constants";
 import {
-  addThousandSeparator,
-  calculateDaysOfLostRevenue,
   calculateYearlyInput,
+  getIncomeTax,
   getTitleByPeriod,
 } from "@/lib/helpers";
 import { FinancialPost } from "@/lib/types";
 import { useEffect, useState } from "react";
-import { Data } from "../Data";
 import { IncomeTable } from "../IncomeTable";
-import InfoPopover from "../InfoPopover";
 import { ResultTable } from "../ResultTable";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
-import { Label } from "../ui/label";
-import { Switch } from "../ui/switch";
-import InputGroup from "./InputGroup";
+import TaxTable from "../TaxTable";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import AdditionalCosts from "./AdditionalCosts";
+import BenefitsCard from "./BenefitsCard";
+import PeriodToggle from "./PeriodToggle";
+import RevenueCard from "./RevenueCard";
 
 type FormData = {
-  revenue: FinancialPost[];
+  revenue: {
+    hourlyRate: number;
+    scope: number;
+  };
+  benefits: {
+    salary: number;
+    vacation: number;
+    pension: number;
+  };
   lostRevenue: FinancialPost[];
   salaries: FinancialPost[];
   costs: FinancialPost[];
 };
 
+/* 
+  Calculate values for salary +/- 10k and make graphs for the different values
+*/
+
 const Form = () => {
   const savedData = localStorage.getItem("formData");
   const jsonData = savedData && JSON.parse(savedData);
-  const [formData, setFormData] = useState<FormData>(
-    jsonData || {
-      revenue: [
-        {
-          id: 1,
-          description: "Fakturering",
-          amount: 850,
-          period: "hourly",
-        },
-      ],
-      lostRevenue: [
-        {
-          id: 1,
-          description: "Semester",
-          amount: 6,
-          period: "weekly",
-        },
-      ],
-      salaries: [
-        {
-          id: 1,
-          description: "Lön",
-          amount: 45000,
-          period: "monthly",
-        },
-      ],
-      costs: [],
-    }
-  );
+  const [formData, setFormData] = useState<FormData>({
+    revenue: {
+      hourlyRate: 900,
+      scope: 100,
+    },
+    benefits: {
+      salary: 45000,
+      vacation: 25,
+      pension: 4.5,
+    },
+    costs: [
+      {
+        id: 1738783675953,
+        description: "Telefon",
+        amount: "450",
+        period: "monthly",
+      },
+      {
+        id: 1738783727097,
+        description: "Bil",
+        amount: "2500",
+        period: "monthly",
+      },
+      {
+        id: 1738783731573,
+        description: "Försäkring",
+        amount: "5000",
+        period: "monthly",
+      },
+    ],
+    ...jsonData,
+  });
 
   useEffect(() => {
     localStorage.setItem("formData", JSON.stringify(formData));
@@ -72,131 +82,85 @@ const Form = () => {
 
   const [showMonthly, setShowMonthly] = useState(false);
 
-  const { revenue, salaries, costs, lostRevenue } = formData;
+  const { revenue, benefits, costs } = formData;
 
-  const totalRevenue = calculateYearlyInput(revenue);
-  const dailyRevenue = totalRevenue / WORKING_DAYS_SWEDEN;
+  const dailyRevenue = revenue.hourlyRate * (revenue.scope / 100) * 8;
 
-  const daysOfLostRevenue = calculateDaysOfLostRevenue(formData.lostRevenue);
-  const totalLostRevenue = Math.floor(daysOfLostRevenue * dailyRevenue);
+  const totalLostRevenue = Math.floor(benefits.vacation * dailyRevenue);
+  const pensionCost = benefits.salary * (benefits.pension / 100);
+
+  const totalRevenue = dailyRevenue * WORKING_DAYS_SWEDEN;
   const adjustedRevenue = totalRevenue - totalLostRevenue;
 
-  const totalSalaries = calculateYearlyInput(salaries);
-  const totalSalaryCosts = totalSalaries * 1.3142;
-  const totalCosts = calculateYearlyInput(costs);
+  const totalSalary = benefits.salary * 12;
+  const employerFee = benefits.salary * SALARY_TAX;
+  const totalSalaryCosts = benefits.salary + employerFee;
 
+  const incomeTagPercentage = getIncomeTax(benefits.salary * 12);
+  const incomeTax = totalSalary * (incomeTagPercentage / 100);
+
+  const totalAdditionalCosts = calculateYearlyInput(costs);
+
+  const totalCosts =
+    totalAdditionalCosts + (totalSalaryCosts + pensionCost) * 12;
+
+  // Result calculations
   const resultBeforeTax = adjustedRevenue - totalCosts - totalSalaryCosts;
-  const resultAfterTax = resultBeforeTax * (1 - RESULT_TAX);
+  const profitTax = resultBeforeTax * RESULT_TAX;
+  const resultAfterTax = resultBeforeTax - profitTax;
 
-  // Schablon > Utdelning > Resultat efter skatt
-
+  // Dividend calculations
   const maxDividend = Math.min(
-    Math.max(totalSalaries / 2, BASE_DIVIDEND),
+    Math.max(totalSalary / 2, BASE_DIVIDEND),
     resultAfterTax
   );
+
+  const dividendTax = maxDividend * DIVIDEND_TAX;
   const balancedProfit = resultAfterTax - maxDividend;
+
+  // Income calculations
+  const taxPercentage = getIncomeTax(totalSalary);
+
+  const salaryAfterTaxes = totalSalary * (1 - taxPercentage / 100);
+  const dividendAfterTaxes = maxDividend - dividendTax;
+
+  const referenceTaxPercentage = taxPercentage + 2; // Add 2% to the tax percentage to account for
+  const referenceSalary =
+    (salaryAfterTaxes + dividendAfterTaxes) /
+    (1 - referenceTaxPercentage / 100) /
+    12;
 
   return (
     <div className="flex gap-8">
-      <div className="mt-2 flex flex-col shrink-0 basis-3/5">
-        <div className="flex items-center space-x-2">
-          <div className="ml-auto flex items-center space-x-2">
-            <Label htmlFor="monthly-mode">Årsvis</Label>
-            <Switch
-              id="monthly-mode"
-              checked={showMonthly}
-              onCheckedChange={() => setShowMonthly(!showMonthly)}
-            />
-            <Label htmlFor="monthly-mode">Månadsvis</Label>
-          </div>
-        </div>
+      <div className="mt-2 flex flex-col shrink-0 basis-1/2">
+        <PeriodToggle
+          showMonthly={showMonthly}
+          setShowMonthly={setShowMonthly}
+        />
         <div className="mt-2 space-y-2">
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="flex items-center">
-                Intäkter
-                <CardDescription className="ml-auto flex items-center">
-                  {getTitleByPeriod(totalRevenue, showMonthly)}
-                  <InfoPopover />
-                </CardDescription>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <InputGroup
-                inputs={revenue}
-                setInputs={(revenue) => setFormData({ ...formData, revenue })}
-              />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="flex items-center">
-                Uteblivna intäkter
-                <CardDescription className="ml-auto flex items-center">
-                  {getTitleByPeriod(totalLostRevenue, showMonthly)}
-                  <InfoPopover />
-                </CardDescription>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <InputGroup
-                inputs={lostRevenue || []}
-                setInputs={(lostRevenue) =>
-                  setFormData({ ...formData, lostRevenue })
-                }
-                alternateLabel
-              />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="flex items-center">
-                Lön
-                <CardDescription className="ml-auto flex items-center">
-                  {getTitleByPeriod(totalSalaryCosts, showMonthly)}
-                  <InfoPopover />
-                </CardDescription>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <InputGroup
-                inputs={salaries}
-                isArray={false}
-                setInputs={(salaries) => setFormData({ ...formData, salaries })}
-                additionalRowData={(input) =>
-                  !!input.amount && (
-                    <Data
-                      className="text-muted-foreground mt-1 ml-1"
-                      label="+ Arbetsgivaragift (31.42%)"
-                      value={`${addThousandSeparator(
-                        input.amount * 0.3142
-                      )} kr`}
-                    />
-                  )
-                }
-              />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="flex items-center">
-                Kostnader
-                <CardDescription className="ml-auto flex items-center">
-                  {getTitleByPeriod(totalCosts, showMonthly)}
-                  <InfoPopover />
-                </CardDescription>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <InputGroup
-                inputs={costs}
-                setInputs={(costs) => setFormData({ ...formData, costs })}
-              />
-            </CardContent>
-          </Card>
+          <RevenueCard
+            revenue={revenue}
+            setRevenue={(revenue) => setFormData({ ...formData, revenue })}
+            totalRevenue={getTitleByPeriod(totalRevenue, showMonthly)}
+          />
+          <BenefitsCard
+            benefits={benefits}
+            setBenefits={(benefits) => setFormData({ ...formData, benefits })}
+            lostRevenue={totalLostRevenue}
+            pensionCost={pensionCost}
+          />
+          <AdditionalCosts
+            costs={costs}
+            setCosts={(costs) => setFormData({ ...formData, costs })}
+            totalCosts={totalAdditionalCosts}
+            employerFee={employerFee}
+            pensionCost={pensionCost}
+            showMonthly={showMonthly}
+            vacationCost={totalLostRevenue}
+          />
         </div>
       </div>
-      <div className="shrink-0 basis-2/5 sticky h-fit top-[72px] flex flex-col gap-2">
+      <div className="shrink-0 basis-1/2 sticky h-fit top-[72px] flex flex-col gap-2">
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center">
@@ -212,16 +176,17 @@ const Form = () => {
             />
           </CardContent>
         </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="flex items-center">
-              Personliga intäkter
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <IncomeTable salary={totalSalaries} dividend={maxDividend} />
-          </CardContent>
-        </Card>
+        <TaxTable
+          incomeTax={incomeTax}
+          incomeTaxPercentage={incomeTagPercentage}
+          profitTax={profitTax}
+          dividendTax={dividendTax}
+        />
+        <IncomeTable
+          salary={totalSalary}
+          dividend={maxDividend}
+          referenceSalary={referenceSalary}
+        />
       </div>
     </div>
   );

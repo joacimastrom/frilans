@@ -32,6 +32,9 @@ export const periodOptions = [
   },
 ];
 
+export const calculateYearlyRevenue = (rate: number, scope: number): number =>
+  rate * (scope / 100) * HOURS_PER_WORKDAY * WORKING_DAYS_SWEDEN;
+
 /**
  * Calculates the yearly income based on the given array of incomes.
  * @param {Array} incomes - Array of income objects with "amount" and "period".
@@ -148,7 +151,7 @@ export const getHighIncomeTaxPercentage = (monthlySalary: number) => {
   return 33;
 };
 
-export const swedishIncomeTax = (yearlyIncome: number) => {
+export const getIncomeTax = (yearlyIncome: number) => {
   const incomeOverLimit = Math.max(yearlyIncome - TAX_LIMIT, 0);
   const highIncomeTax = incomeOverLimit * (MUNICIPAL_TAX + STATE_TAX);
 

@@ -65,15 +65,6 @@ const InputGroup = ({
                 onInputChange(input.id, "description", e.target.value)
               }
             />
-            <Input
-              type="number"
-              name="amount"
-              placeholder="Belopp"
-              value={input.amount}
-              onChange={(e) =>
-                onInputChange(input.id, "amount", e.target.value)
-              }
-            />
             <Select
               value={input.period}
               name="period"
@@ -92,6 +83,15 @@ const InputGroup = ({
                 ))}
               </SelectContent>
             </Select>
+            <Input
+              type="number"
+              name="amount"
+              placeholder="Belopp"
+              value={input.amount}
+              onChange={(e) =>
+                onInputChange(input.id, "amount", e.target.value)
+              }
+            />
             {isArray && (
               <TrashIcon
                 className="shrink-0 h-4 w-4 text-red-500 cursor-pointer"
