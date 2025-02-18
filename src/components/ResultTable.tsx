@@ -2,27 +2,19 @@ import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { addThousandSeparator } from "@/lib/helpers";
 
 type Props = {
-  resultBeforeTax: number;
   resultAfterTax: number;
   maxDividend: number;
-  balancedProfit: number;
+  balancedResult: number;
 };
 
 export const ResultTable = ({
-  resultBeforeTax,
   resultAfterTax,
   maxDividend,
-  balancedProfit,
+  balancedResult,
 }: Props) => {
   return (
     <Table>
       <TableBody>
-        <TableRow>
-          <TableCell>Resultat innan skatt</TableCell>
-          <TableCell className="text-right">
-            {addThousandSeparator(resultBeforeTax)}
-          </TableCell>
-        </TableRow>
         <TableRow>
           <TableCell>Resultat efter skatt</TableCell>
           <TableCell className="text-right">
@@ -38,7 +30,7 @@ export const ResultTable = ({
         <TableRow className="font-bold">
           <TableCell>Balanserad vinst</TableCell>
           <TableCell className="text-right">
-            {addThousandSeparator(balancedProfit)}
+            {addThousandSeparator(balancedResult)}
           </TableCell>
         </TableRow>
       </TableBody>

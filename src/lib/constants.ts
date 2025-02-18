@@ -5,7 +5,7 @@ export const WORKDAYS__PER_MONTH = 22;
 
 export const RESULT_TAX = 0.206;
 export const RESULT_TAX_PERCENTAGE = 20.6;
-export const SALARY_TAX = 0.3142;
+export const EMPLOYER_TAX = 0.3142;
 
 export const BASE_DIVIDEND = 209550;
 export const DIVIDEND_TAX = 0.2;

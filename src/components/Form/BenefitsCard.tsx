@@ -1,3 +1,4 @@
+import { EMPLOYER_TAX } from "@/lib/constants";
 import { addThousandSeparator } from "@/lib/helpers";
 import { Slider } from "@radix-ui/react-slider";
 import { Data } from "../Data";
@@ -21,7 +22,6 @@ type Props = {
     salary: number;
   }) => void;
   lostRevenue: number;
-  pensionCost: number;
 };
 
 const BenefitsCard = ({ benefits, setBenefits, lostRevenue }: Props) => (
@@ -36,6 +36,7 @@ const BenefitsCard = ({ benefits, setBenefits, lostRevenue }: Props) => (
           <Input
             id="salary"
             type="number"
+            step={1000}
             min={0}
             value={benefits.salary.toString()}
             onChange={(e) =>
@@ -48,6 +49,11 @@ const BenefitsCard = ({ benefits, setBenefits, lostRevenue }: Props) => (
           <Slider></Slider>
         </div>
       </div>
+      <Data
+        className="text-muted-foreground mt-1 ml-1"
+        label="Arbetsgivaragift (31.42%)"
+        value={`${addThousandSeparator(benefits.salary * EMPLOYER_TAX)} kr`}
+      />
       <div>
         <Label htmlFor="vacation">Semesterdagar</Label>
         <Input
@@ -85,6 +91,15 @@ const BenefitsCard = ({ benefits, setBenefits, lostRevenue }: Props) => (
             })
           }
         />
+        {benefits.salary > 0 && (
+          <Data
+            className="text-muted-foreground mt-1 ml-1 mb-1"
+            label="Pensionskostnad"
+            value={`${addThousandSeparator(
+              (benefits.salary * benefits.pension) / 100
+            )} kr`}
+          />
+        )}
       </div>
     </CardContent>
   </Card>

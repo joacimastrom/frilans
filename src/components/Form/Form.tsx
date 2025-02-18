@@ -1,13 +1,13 @@
 import {
-  BASE_DIVIDEND,
   DIVIDEND_TAX,
+  EMPLOYER_TAX,
   RESULT_TAX,
-  SALARY_TAX,
   WORKING_DAYS_SWEDEN,
 } from "@/lib/constants";
 import {
   calculateYearlyInput,
   getIncomeTax,
+  getSalaryData,
   getTitleByPeriod,
 } from "@/lib/helpers";
 import { FinancialPost } from "@/lib/types";
@@ -84,47 +84,42 @@ const Form = () => {
 
   const { revenue, benefits, costs } = formData;
 
+  // Revenue calculations
   const dailyRevenue = revenue.hourlyRate * (revenue.scope / 100) * 8;
-
   const totalLostRevenue = Math.floor(benefits.vacation * dailyRevenue);
-  const pensionCost = benefits.salary * (benefits.pension / 100);
-
   const totalRevenue = dailyRevenue * WORKING_DAYS_SWEDEN;
   const adjustedRevenue = totalRevenue - totalLostRevenue;
 
-  const totalSalary = benefits.salary * 12;
-  const employerFee = benefits.salary * SALARY_TAX;
-  const totalSalaryCosts = benefits.salary + employerFee;
-
-  const incomeTagPercentage = getIncomeTax(benefits.salary * 12);
-  const incomeTax = totalSalary * (incomeTagPercentage / 100);
-
   const totalAdditionalCosts = calculateYearlyInput(costs);
+  const resultBeforeSalary = adjustedRevenue - totalAdditionalCosts;
 
-  const totalCosts =
-    totalAdditionalCosts + (totalSalaryCosts + pensionCost) * 12;
-
-  // Result calculations
-  const resultBeforeTax = adjustedRevenue - totalCosts - totalSalaryCosts;
-  const profitTax = resultBeforeTax * RESULT_TAX;
-  const resultAfterTax = resultBeforeTax - profitTax;
-
-  // Dividend calculations
-  const maxDividend = Math.min(
-    Math.max(totalSalary / 2, BASE_DIVIDEND),
-    resultAfterTax
+  // const salaryMax = getSalaryMax(resultBeforeSalary, benefits.pension);
+  const { maxDividend, balancedResult } = getSalaryData(
+    resultBeforeSalary,
+    benefits.salary,
+    benefits.pension
   );
 
+  // Tax calculations
+  const totalSalary = benefits.salary * 12;
+  const totalSalaryCost =
+    totalSalary * (1 + EMPLOYER_TAX + benefits.pension / 100);
+
+  const resultBeforeTax = resultBeforeSalary - totalSalaryCost;
+  const resultTax = resultBeforeTax * RESULT_TAX;
+  const resultAfterTax = resultBeforeTax - resultTax;
+
+  // Dividend calculations
   const dividendTax = maxDividend * DIVIDEND_TAX;
-  const balancedProfit = resultAfterTax - maxDividend;
 
   // Income calculations
-  const taxPercentage = getIncomeTax(totalSalary);
+  const incomeTaxPercentage = getIncomeTax(totalSalary);
 
-  const salaryAfterTaxes = totalSalary * (1 - taxPercentage / 100);
+  const incomeTax = totalSalary * (incomeTaxPercentage / 100);
+  const salaryAfterTaxes = totalSalary - incomeTax;
   const dividendAfterTaxes = maxDividend - dividendTax;
 
-  const referenceTaxPercentage = taxPercentage + 2; // Add 2% to the tax percentage to account for
+  const referenceTaxPercentage = incomeTaxPercentage + 2; // Add 2% to the tax percentage to account for
   const referenceSalary =
     (salaryAfterTaxes + dividendAfterTaxes) /
     (1 - referenceTaxPercentage / 100) /
@@ -147,16 +142,12 @@ const Form = () => {
             benefits={benefits}
             setBenefits={(benefits) => setFormData({ ...formData, benefits })}
             lostRevenue={totalLostRevenue}
-            pensionCost={pensionCost}
           />
           <AdditionalCosts
             costs={costs}
             setCosts={(costs) => setFormData({ ...formData, costs })}
             totalCosts={totalAdditionalCosts}
-            employerFee={employerFee}
-            pensionCost={pensionCost}
             showMonthly={showMonthly}
-            vacationCost={totalLostRevenue}
           />
         </div>
       </div>
@@ -169,17 +160,16 @@ const Form = () => {
           </CardHeader>
           <CardContent>
             <ResultTable
-              resultBeforeTax={resultBeforeTax}
               resultAfterTax={resultAfterTax}
               maxDividend={maxDividend}
-              balancedProfit={balancedProfit}
+              balancedResult={balancedResult}
             />
           </CardContent>
         </Card>
         <TaxTable
           incomeTax={incomeTax}
-          incomeTaxPercentage={incomeTagPercentage}
-          profitTax={profitTax}
+          incomeTaxPercentage={incomeTaxPercentage}
+          profitTax={resultTax}
           dividendTax={dividendTax}
         />
         <IncomeTable
