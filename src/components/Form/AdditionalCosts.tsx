@@ -14,21 +14,15 @@ type Props = {
   costs: FinancialPost[];
   setCosts: (costs: FinancialPost[]) => void;
   totalCosts: number;
-  showMonthly: boolean;
 };
 
-const AdditionalCosts = ({
-  costs,
-  setCosts,
-  totalCosts,
-  showMonthly,
-}: Props) => (
+const AdditionalCosts = ({ costs, setCosts, totalCosts }: Props) => (
   <Card>
     <CardHeader className="pb-2">
       <CardTitle className="flex items-center">
         Kostnader
         <CardDescription className="ml-auto flex items-center">
-          {getTitleByPeriod(totalCosts, showMonthly)}
+          {getTitleByPeriod(totalCosts)}
           <InfoPopover />
         </CardDescription>
       </CardTitle>

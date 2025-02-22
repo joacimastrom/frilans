@@ -1,10 +1,10 @@
 import { EMPLOYER_TAX } from "@/lib/constants";
 import { addThousandSeparator } from "@/lib/helpers";
-import { Slider } from "@radix-ui/react-slider";
 import { Data } from "../Data";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+import { Slider } from "../ui/slider";
 
 type Props = {
   benefits: {
@@ -22,9 +22,15 @@ type Props = {
     salary: number;
   }) => void;
   lostRevenue: number;
+  maxSalary: number;
 };
 
-const BenefitsCard = ({ benefits, setBenefits, lostRevenue }: Props) => (
+const BenefitsCard = ({
+  benefits,
+  setBenefits,
+  lostRevenue,
+  maxSalary,
+}: Props) => (
   <Card>
     <CardHeader className="pb-2">
       <CardTitle className="flex items-center">Förmåner</CardTitle>
@@ -38,6 +44,7 @@ const BenefitsCard = ({ benefits, setBenefits, lostRevenue }: Props) => (
             type="number"
             step={1000}
             min={0}
+            max={maxSalary}
             value={benefits.salary.toString()}
             onChange={(e) =>
               setBenefits({
@@ -46,8 +53,20 @@ const BenefitsCard = ({ benefits, setBenefits, lostRevenue }: Props) => (
               })
             }
           />
-          <Slider></Slider>
         </div>
+        <Slider
+          min={0}
+          max={maxSalary}
+          step={1000}
+          onValueChange={(value) =>
+            setBenefits({
+              ...benefits,
+              salary: Number(value),
+            })
+          }
+          value={[benefits.salary]}
+          className="w-full mt-4"
+        />
       </div>
       <Data
         className="text-muted-foreground mt-1 ml-1"

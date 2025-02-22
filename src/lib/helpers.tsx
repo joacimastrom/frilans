@@ -1,11 +1,11 @@
+import { Benefits, Revenue } from "@/components/Form/Form";
+import { taxData } from "../data/taxData";
 import {
   BASE_DIVIDEND,
   EMPLOYER_TAX,
   HOURS_PER_WORKDAY,
-  MUNICIPAL_TAX,
   RESULT_TAX,
-  STATE_TAX,
-  TAX_LIMIT,
+  SALARY_PERCENTAGE_LIMIT,
   WORKDAYS__PER_MONTH,
   WORKDAYS_PER_WEEK,
   WORKING_DAYS_SWEDEN,
@@ -117,20 +117,77 @@ export const addThousandSeparator = (number: number, separator = " ") =>
     .replace(/\B(?=(\d{3})+(?!\d))/g, separator);
 
 export const getIncomeTax = (yearlyIncome: number) => {
-  const incomeOverLimit = Math.max(yearlyIncome - TAX_LIMIT, 0);
-  const highIncomeTax = incomeOverLimit * (MUNICIPAL_TAX + STATE_TAX);
+  if (!yearlyIncome || yearlyIncome < 0)
+    return {
+      incomeTax: 0,
+      incomeTaxPercentage: 0,
+    };
 
-  const incomeUnderLimit = Math.min(yearlyIncome, TAX_LIMIT);
-  const lowIncomeTax = incomeUnderLimit * MUNICIPAL_TAX;
+  const taxBracket = taxData.find(
+    ({ salaryFrom, salaryTo }) =>
+      yearlyIncome >= salaryFrom && yearlyIncome <= salaryTo
+  );
 
-  const totalTax = lowIncomeTax + highIncomeTax;
-  const effectiveTaxRate = (totalTax / yearlyIncome) * 100;
+  if (!taxBracket) {
+    throw new Error("No tax bracket found for the given income.");
+  }
 
-  return Math.floor(effectiveTaxRate * 100) / 100;
+  if (yearlyIncome <= 80000) {
+    return {
+      incomeTax: taxBracket.tax,
+      incomeTaxPercentage:
+        Math.floor((taxBracket.tax / yearlyIncome) * 100 * 100) / 100,
+    };
+  }
+
+  return {
+    incomeTaxPercentage: taxBracket.tax,
+    incomeTax: Math.floor((yearlyIncome * taxBracket.tax) / 100),
+  };
 };
 
-export const getSalaryMax = (result: number, pension: number) =>
-  Math.floor(result / (1 + EMPLOYER_TAX + pension / 100) / 1000) * 1000;
+export const getTaxBracket = (monthlyIncomeAfterTax: number) => {
+  let previousTaxBracket;
+
+  for (let i = 0; i < taxData.length; i++) {
+    const { salaryFrom, tax } = taxData[i];
+    if (salaryFrom < SALARY_PERCENTAGE_LIMIT) {
+      if (salaryFrom - tax < monthlyIncomeAfterTax) {
+        previousTaxBracket = taxData[i];
+      } else {
+        break;
+      }
+    } else {
+      if (monthlyIncomeAfterTax > salaryFrom * (1 - tax / 100)) {
+        previousTaxBracket = taxData[i];
+      } else {
+        break;
+      }
+    }
+  }
+
+  if (!previousTaxBracket) {
+    return {
+      referenceSalary: 0,
+      taxPercentage: 0,
+    };
+  }
+
+  if (previousTaxBracket.salaryFrom < SALARY_PERCENTAGE_LIMIT) {
+    return {
+      referenceSalary: previousTaxBracket.salaryTo,
+      taxPercentage: previousTaxBracket.tax / previousTaxBracket.salaryTo,
+    };
+  }
+
+  return {
+    referenceSalary: monthlyIncomeAfterTax / (1 - previousTaxBracket.tax / 100),
+    taxPercentage: previousTaxBracket?.tax,
+  };
+};
+
+export const getMaxSalary = (result: number, pension: number) =>
+  Math.round(result / 12 / (1 + EMPLOYER_TAX + pension / 100) / 1000) * 1000;
 
 export const getSalaryData = (
   result: number,
@@ -141,15 +198,36 @@ export const getSalaryData = (
   const salaryCosts = salary * (1 + EMPLOYER_TAX + pension / 100) * 12;
   const resultAfterTax = Math.floor((result - salaryCosts) * (1 - RESULT_TAX));
 
-  const maxDividend = Math.min(
-    Math.max(salary * 6, BASE_DIVIDEND),
-    resultAfterTax
+  const maxDividend = Math.max(
+    Math.min(Math.max((salary * 12) / 2, BASE_DIVIDEND), resultAfterTax),
+    0
   );
 
   const balancedResult = resultAfterTax - maxDividend;
   return {
     salary,
     maxDividend,
+    totalIncome: salary * 12 + maxDividend,
     balancedResult,
+  };
+};
+
+export const getRevenueData = (
+  revenue: Revenue,
+  benefits: Benefits,
+  costs: FinancialPost[]
+) => {
+  const dailyRevenue = revenue.hourlyRate * (revenue.scope / 100) * 8;
+  const totalRevenue = dailyRevenue * WORKING_DAYS_SWEDEN;
+  const lostRevenue = dailyRevenue * benefits.vacation;
+  const adjustedRevenue = totalRevenue - lostRevenue;
+
+  const totalAdditionalCosts = calculateYearlyInput(costs);
+  const resultBeforeSalary = adjustedRevenue - totalAdditionalCosts;
+  return {
+    totalRevenue,
+    lostRevenue,
+    totalAdditionalCosts,
+    resultBeforeSalary,
   };
 };

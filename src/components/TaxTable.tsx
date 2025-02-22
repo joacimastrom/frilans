@@ -48,7 +48,7 @@ const TaxTable = ({
               </span>
             </TableCell>
             <TableCell className="text-right">
-              {`${addThousandSeparator(incomeTax / 12)} kr / månad`}
+              {`${addThousandSeparator(incomeTax)} kr / månad`}
             </TableCell>
           </TableRow>
           <TableRow>

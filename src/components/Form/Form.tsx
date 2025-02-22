@@ -1,44 +1,38 @@
+import { DIVIDEND_TAX, EMPLOYER_TAX, RESULT_TAX } from "@/lib/constants";
 import {
-  DIVIDEND_TAX,
-  EMPLOYER_TAX,
-  RESULT_TAX,
-  WORKING_DAYS_SWEDEN,
-} from "@/lib/constants";
-import {
-  calculateYearlyInput,
   getIncomeTax,
+  getMaxSalary,
+  getRevenueData,
   getSalaryData,
+  getTaxBracket,
   getTitleByPeriod,
 } from "@/lib/helpers";
 import { FinancialPost } from "@/lib/types";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { IncomeTable } from "../IncomeTable";
 import { ResultTable } from "../ResultTable";
 import TaxTable from "../TaxTable";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import AdditionalCosts from "./AdditionalCosts";
 import BenefitsCard from "./BenefitsCard";
-import PeriodToggle from "./PeriodToggle";
+import { ChartCard } from "./ChartCard";
 import RevenueCard from "./RevenueCard";
 
-type FormData = {
-  revenue: {
-    hourlyRate: number;
-    scope: number;
-  };
-  benefits: {
-    salary: number;
-    vacation: number;
-    pension: number;
-  };
-  lostRevenue: FinancialPost[];
-  salaries: FinancialPost[];
-  costs: FinancialPost[];
+export type Benefits = {
+  salary: number;
+  vacation: number;
+  pension: number;
+};
+export type Revenue = {
+  hourlyRate: number;
+  scope: number;
 };
 
-/* 
-  Calculate values for salary +/- 10k and make graphs for the different values
-*/
+type FormData = {
+  revenue: Revenue;
+  benefits: Benefits;
+  costs: FinancialPost[];
+};
 
 const Form = () => {
   const savedData = localStorage.getItem("formData");
@@ -80,20 +74,25 @@ const Form = () => {
     localStorage.setItem("formData", JSON.stringify(formData));
   }, [formData]);
 
-  const [showMonthly, setShowMonthly] = useState(false);
-
   const { revenue, benefits, costs } = formData;
 
-  // Revenue calculations
-  const dailyRevenue = revenue.hourlyRate * (revenue.scope / 100) * 8;
-  const totalLostRevenue = Math.floor(benefits.vacation * dailyRevenue);
-  const totalRevenue = dailyRevenue * WORKING_DAYS_SWEDEN;
-  const adjustedRevenue = totalRevenue - totalLostRevenue;
+  const {
+    totalRevenue,
+    lostRevenue,
+    totalAdditionalCosts,
+    resultBeforeSalary,
+  } = getRevenueData(revenue, benefits, costs);
 
-  const totalAdditionalCosts = calculateYearlyInput(costs);
-  const resultBeforeSalary = adjustedRevenue - totalAdditionalCosts;
+  const maxSalary = getMaxSalary(resultBeforeSalary, benefits.pension);
 
-  // const salaryMax = getSalaryMax(resultBeforeSalary, benefits.pension);
+  const chartData = useMemo(() => {
+    const data = [];
+    for (let i = 0; i + 1000 <= maxSalary; i += 1000) {
+      data.push(getSalaryData(resultBeforeSalary, i, benefits.pension));
+    }
+    return data;
+  }, [resultBeforeSalary, maxSalary, benefits.pension]);
+
   const { maxDividend, balancedResult } = getSalaryData(
     resultBeforeSalary,
     benefits.salary,
@@ -113,41 +112,53 @@ const Form = () => {
   const dividendTax = maxDividend * DIVIDEND_TAX;
 
   // Income calculations
-  const incomeTaxPercentage = getIncomeTax(totalSalary);
+  const { incomeTax, incomeTaxPercentage } = getIncomeTax(benefits.salary);
 
-  const incomeTax = totalSalary * (incomeTaxPercentage / 100);
-  const salaryAfterTaxes = totalSalary - incomeTax;
+  const salaryAfterTaxes = benefits.salary - incomeTax;
   const dividendAfterTaxes = maxDividend - dividendTax;
 
-  const referenceTaxPercentage = incomeTaxPercentage + 2; // Add 2% to the tax percentage to account for
-  const referenceSalary =
-    (salaryAfterTaxes + dividendAfterTaxes) /
-    (1 - referenceTaxPercentage / 100) /
-    12;
+  const dividendAfterTaxesMonthly = dividendAfterTaxes / 12;
+
+  const { referenceSalary } = getTaxBracket(
+    salaryAfterTaxes + dividendAfterTaxesMonthly
+  );
+
+  const onSetRevenue = (revenue: Revenue) => {
+    const { resultBeforeSalary } = getRevenueData(revenue, benefits, costs);
+    const maxSalary = getMaxSalary(resultBeforeSalary, benefits.pension);
+    if (maxSalary < benefits.salary) {
+      setFormData({
+        ...formData,
+        benefits: {
+          ...benefits,
+          salary: Math.max(maxSalary, 0),
+        },
+        revenue,
+      });
+      return;
+    }
+    setFormData({ ...formData, revenue });
+  };
 
   return (
     <div className="flex gap-8">
-      <div className="mt-2 flex flex-col shrink-0 basis-1/2">
-        <PeriodToggle
-          showMonthly={showMonthly}
-          setShowMonthly={setShowMonthly}
-        />
-        <div className="mt-2 space-y-2">
+      <div className="flex flex-col shrink-0 basis-1/2">
+        <div className="space-y-2">
           <RevenueCard
             revenue={revenue}
-            setRevenue={(revenue) => setFormData({ ...formData, revenue })}
-            totalRevenue={getTitleByPeriod(totalRevenue, showMonthly)}
+            setRevenue={onSetRevenue}
+            totalRevenue={getTitleByPeriod(totalRevenue)}
           />
           <BenefitsCard
             benefits={benefits}
             setBenefits={(benefits) => setFormData({ ...formData, benefits })}
-            lostRevenue={totalLostRevenue}
+            lostRevenue={lostRevenue}
+            maxSalary={maxSalary}
           />
           <AdditionalCosts
             costs={costs}
             setCosts={(costs) => setFormData({ ...formData, costs })}
             totalCosts={totalAdditionalCosts}
-            showMonthly={showMonthly}
           />
         </div>
       </div>
@@ -166,16 +177,29 @@ const Form = () => {
             />
           </CardContent>
         </Card>
-        <TaxTable
-          incomeTax={incomeTax}
-          incomeTaxPercentage={incomeTaxPercentage}
-          profitTax={resultTax}
-          dividendTax={dividendTax}
+        <ChartCard
+          chartData={chartData}
+          salary={benefits.salary}
+          onChartClick={(salary) =>
+            setFormData({
+              ...formData,
+              benefits: {
+                ...benefits,
+                salary,
+              },
+            })
+          }
         />
         <IncomeTable
           salary={totalSalary}
           dividend={maxDividend}
           referenceSalary={referenceSalary}
+        />
+        <TaxTable
+          incomeTax={incomeTax}
+          incomeTaxPercentage={incomeTaxPercentage}
+          profitTax={resultTax}
+          dividendTax={dividendTax}
         />
       </div>
     </div>

@@ -41,7 +41,7 @@ const RevenueCard = ({ revenue, setRevenue, totalRevenue }: Props) => (
         <Input
           id="hourly-rate"
           type="number"
-          value={revenue.hourlyRate}
+          value={String(revenue.hourlyRate)}
           onChange={(e) =>
             setRevenue({
               ...revenue,
