@@ -1,6 +1,6 @@
 import { DIVIDEND_TAX, RESULT_TAX_PERCENTAGE } from "@/lib/constants";
 import { addThousandSeparator } from "@/lib/helpers";
-import { TaxChart, TaxChartData } from "./Form/taxChart";
+import { TaxChart, TaxChartData } from "./Form/TaxChart";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Table, TableBody, TableCell, TableRow } from "./ui/table";
