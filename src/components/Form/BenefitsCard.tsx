@@ -106,7 +106,7 @@ const BenefitsCard = ({
           onChange={(e) =>
             setBenefits({
               ...benefits,
-              pension: Number(e.target.value),
+              pension: Math.min(100, Number(e.target.value)),
             })
           }
         />

@@ -117,8 +117,8 @@ export const addThousandSeparator = (number: number, separator = " ") =>
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, separator);
 
-export const getIncomeTax = (yearlyIncome: number) => {
-  if (!yearlyIncome || yearlyIncome < 0)
+export const getIncomeTax = (monthlyIncome: number) => {
+  if (!monthlyIncome || monthlyIncome < 0)
     return {
       yearlyIncomeTax: 0,
       monthlyIncomeTax: 0,
@@ -127,22 +127,22 @@ export const getIncomeTax = (yearlyIncome: number) => {
 
   const taxBracket = taxData.find(
     ({ salaryFrom, salaryTo }) =>
-      yearlyIncome >= salaryFrom && yearlyIncome <= salaryTo
+      monthlyIncome >= salaryFrom && monthlyIncome <= salaryTo
   );
 
   if (!taxBracket) {
     throw new Error("No tax bracket found for the given income.");
   }
 
-  if (yearlyIncome <= 80000) {
+  if (monthlyIncome <= 80000) {
     return {
       monthlyIncomeTax: taxBracket.tax,
       yearlyIncomeTax: taxBracket.tax * 12,
       incomeTaxPercentage:
-        Math.floor((taxBracket.tax / yearlyIncome) * 100 * 100) / 100,
+        Math.floor((taxBracket.tax / monthlyIncome) * 100 * 100) / 100,
     };
   }
-  const monthlyIncomeTax = Math.floor((yearlyIncome * taxBracket.tax) / 100);
+  const monthlyIncomeTax = Math.floor((monthlyIncome * taxBracket.tax) / 100);
   return {
     incomeTaxPercentage: taxBracket.tax,
     monthlyIncomeTax,
@@ -191,7 +191,10 @@ export const getTaxBracket = (monthlyIncomeAfterTax: number) => {
 };
 
 export const getMaxSalary = (result: number, pension: number) =>
-  Math.round(result / 12 / (1 + EMPLOYER_TAX + pension / 100) / 1000) * 1000;
+  Math.max(
+    0,
+    Math.round(result / 12 / (1 + EMPLOYER_TAX + pension / 100) / 1000) * 1000
+  );
 
 export const getSalaryData = (
   salary: number,
@@ -245,7 +248,7 @@ export const getRevenueData = (
   const dailyRevenue = revenue.hourlyRate * (revenue.scope / 100) * 8;
   const totalRevenue = dailyRevenue * WORKING_DAYS_SWEDEN;
   const lostRevenue = dailyRevenue * benefits.vacation;
-  const adjustedRevenue = totalRevenue - lostRevenue;
+  const adjustedRevenue = Math.max(totalRevenue - lostRevenue, 0);
 
   const totalAdditionalCosts = calculateYearlyInput(costs);
   const resultBeforeSalary = adjustedRevenue - totalAdditionalCosts;

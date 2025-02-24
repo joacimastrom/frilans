@@ -84,6 +84,19 @@ const Form = () => {
   } = getRevenueData(revenue, benefits, costs);
 
   const maxSalary = getMaxSalary(resultBeforeSalary, benefits.pension);
+  console.log(maxSalary);
+
+  useEffect(() => {
+    if (benefits.salary > maxSalary) {
+      setFormData((formData) => ({
+        ...formData,
+        benefits: {
+          ...benefits,
+          salary: maxSalary,
+        },
+      }));
+    }
+  }, [benefits, maxSalary]);
 
   const { incomeChartData, taxChartData } = useMemo(() => {
     const salaryData = [];
@@ -131,23 +144,6 @@ const Form = () => {
     salaryAfterTaxes + dividendAfterTaxesMonthly
   );
 
-  const onSetRevenue = (revenue: Revenue) => {
-    const { resultBeforeSalary } = getRevenueData(revenue, benefits, costs);
-    const maxSalary = getMaxSalary(resultBeforeSalary, benefits.pension);
-    if (maxSalary < benefits.salary) {
-      setFormData({
-        ...formData,
-        benefits: {
-          ...benefits,
-          salary: Math.max(maxSalary, 0),
-        },
-        revenue,
-      });
-      return;
-    }
-    setFormData({ ...formData, revenue });
-  };
-
   const setSalary = (salary: number) =>
     setFormData({
       ...formData,
@@ -163,7 +159,9 @@ const Form = () => {
         <div className="space-y-2">
           <RevenueCard
             revenue={revenue}
-            setRevenue={onSetRevenue}
+            setRevenue={(revenue: Revenue) =>
+              setFormData({ ...formData, revenue })
+            }
             totalRevenue={getTitleByPeriod(totalRevenue)}
           />
           <BenefitsCard
