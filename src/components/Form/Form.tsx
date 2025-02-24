@@ -5,6 +5,7 @@ import {
   getRevenueData,
   getSalaryData,
   getTaxBracket,
+  getTaxData,
   getTitleByPeriod,
 } from "@/lib/helpers";
 import { FinancialPost } from "@/lib/types";
@@ -15,7 +16,6 @@ import TaxTable from "../TaxTable";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import AdditionalCosts from "./AdditionalCosts";
 import BenefitsCard from "./BenefitsCard";
-import { ChartCard } from "./ChartCard";
 import RevenueCard from "./RevenueCard";
 
 export type Benefits = {
@@ -85,19 +85,26 @@ const Form = () => {
 
   const maxSalary = getMaxSalary(resultBeforeSalary, benefits.pension);
 
-  const chartData = useMemo(() => {
-    const data = [];
-    for (let i = 0; i + 1000 <= maxSalary; i += 1000) {
-      data.push(getSalaryData(resultBeforeSalary, i, benefits.pension));
+  const { incomeChartData, taxChartData } = useMemo(() => {
+    const salaryData = [];
+    const taxData = [];
+    for (let i = 0; i <= maxSalary; i += 1000) {
+      const salaryObj = getSalaryData(i, resultBeforeSalary, benefits.pension);
+      salaryData.push(salaryObj);
+      taxData.push(
+        getTaxData(i, salaryObj.maxDividend, salaryObj.resultAfterSalary)
+      );
     }
-    return data;
+
+    return {
+      incomeChartData: salaryData,
+      taxChartData: taxData,
+    };
   }, [resultBeforeSalary, maxSalary, benefits.pension]);
 
-  const { maxDividend, balancedResult } = getSalaryData(
-    resultBeforeSalary,
-    benefits.salary,
-    benefits.pension
-  );
+  const { maxDividend, balancedResult } = incomeChartData.find(
+    ({ salary }) => salary === benefits.salary
+  ) || { maxDividend: 0, balancedResult: 0 };
 
   // Tax calculations
   const totalSalary = benefits.salary * 12;
@@ -112,9 +119,10 @@ const Form = () => {
   const dividendTax = maxDividend * DIVIDEND_TAX;
 
   // Income calculations
-  const { incomeTax, incomeTaxPercentage } = getIncomeTax(benefits.salary);
+  const { monthlyIncomeTax, yearlyIncomeTax, incomeTaxPercentage } =
+    getIncomeTax(benefits.salary);
 
-  const salaryAfterTaxes = benefits.salary - incomeTax;
+  const salaryAfterTaxes = benefits.salary - monthlyIncomeTax;
   const dividendAfterTaxes = maxDividend - dividendTax;
 
   const dividendAfterTaxesMonthly = dividendAfterTaxes / 12;
@@ -139,6 +147,15 @@ const Form = () => {
     }
     setFormData({ ...formData, revenue });
   };
+
+  const setSalary = (salary: number) =>
+    setFormData({
+      ...formData,
+      benefits: {
+        ...benefits,
+        salary,
+      },
+    });
 
   return (
     <div className="flex gap-8">
@@ -177,29 +194,21 @@ const Form = () => {
             />
           </CardContent>
         </Card>
-        <ChartCard
-          chartData={chartData}
-          salary={benefits.salary}
-          onChartClick={(salary) =>
-            setFormData({
-              ...formData,
-              benefits: {
-                ...benefits,
-                salary,
-              },
-            })
-          }
-        />
         <IncomeTable
           salary={totalSalary}
           dividend={maxDividend}
           referenceSalary={referenceSalary}
+          incomeChartData={incomeChartData}
+          setSalary={setSalary}
         />
         <TaxTable
-          incomeTax={incomeTax}
+          yearlyIncomeTax={yearlyIncomeTax}
+          salary={benefits.salary}
           incomeTaxPercentage={incomeTaxPercentage}
           profitTax={resultTax}
           dividendTax={dividendTax}
+          taxChartData={taxChartData}
+          setSalary={setSalary}
         />
       </div>
     </div>

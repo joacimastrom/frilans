@@ -2,6 +2,7 @@ import { Benefits, Revenue } from "@/components/Form/Form";
 import { taxData } from "../data/taxData";
 import {
   BASE_DIVIDEND,
+  DIVIDEND_TAX,
   EMPLOYER_TAX,
   HOURS_PER_WORKDAY,
   RESULT_TAX,
@@ -119,7 +120,8 @@ export const addThousandSeparator = (number: number, separator = " ") =>
 export const getIncomeTax = (yearlyIncome: number) => {
   if (!yearlyIncome || yearlyIncome < 0)
     return {
-      incomeTax: 0,
+      yearlyIncomeTax: 0,
+      monthlyIncomeTax: 0,
       incomeTaxPercentage: 0,
     };
 
@@ -134,15 +136,17 @@ export const getIncomeTax = (yearlyIncome: number) => {
 
   if (yearlyIncome <= 80000) {
     return {
-      incomeTax: taxBracket.tax,
+      monthlyIncomeTax: taxBracket.tax,
+      yearlyIncomeTax: taxBracket.tax * 12,
       incomeTaxPercentage:
         Math.floor((taxBracket.tax / yearlyIncome) * 100 * 100) / 100,
     };
   }
-
+  const monthlyIncomeTax = Math.floor((yearlyIncome * taxBracket.tax) / 100);
   return {
     incomeTaxPercentage: taxBracket.tax,
-    incomeTax: Math.floor((yearlyIncome * taxBracket.tax) / 100),
+    monthlyIncomeTax,
+    yearlyIncomeTax: monthlyIncomeTax * 12,
   };
 };
 
@@ -190,13 +194,14 @@ export const getMaxSalary = (result: number, pension: number) =>
   Math.round(result / 12 / (1 + EMPLOYER_TAX + pension / 100) / 1000) * 1000;
 
 export const getSalaryData = (
-  result: number,
   salary: number,
+  result: number,
   pension: number
 ) => {
   // Calculate result before tax excluding salary costs from scratch
   const salaryCosts = salary * (1 + EMPLOYER_TAX + pension / 100) * 12;
-  const resultAfterTax = Math.floor((result - salaryCosts) * (1 - RESULT_TAX));
+  const resultAfterSalary = result - salaryCosts;
+  const resultAfterTax = Math.floor(resultAfterSalary * (1 - RESULT_TAX));
 
   const maxDividend = Math.max(
     Math.min(Math.max((salary * 12) / 2, BASE_DIVIDEND), resultAfterTax),
@@ -209,6 +214,26 @@ export const getSalaryData = (
     maxDividend,
     totalIncome: salary * 12 + maxDividend,
     balancedResult,
+    resultAfterSalary,
+  };
+};
+
+export const getTaxData = (
+  salary: number,
+  dividend: number,
+  result: number
+) => {
+  const { yearlyIncomeTax, incomeTaxPercentage } = getIncomeTax(salary);
+  const resultTax = Math.round(result * RESULT_TAX);
+  const dividendTax = Math.round(dividend * DIVIDEND_TAX);
+
+  return {
+    salary,
+    yearlyIncomeTax,
+    incomeTaxPercentage,
+    resultTax,
+    dividendTax,
+    totalTax: yearlyIncomeTax + resultTax + dividendTax,
   };
 };
 
