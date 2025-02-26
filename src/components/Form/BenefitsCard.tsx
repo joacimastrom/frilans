@@ -1,6 +1,7 @@
 import { EMPLOYER_TAX } from "@/lib/constants";
 import { addThousandSeparator } from "@/lib/helpers";
 import { Data } from "../Data";
+import InfoPopover from "../InfoPopover";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -88,11 +89,17 @@ const BenefitsCard = ({
           }
         />
         {lostRevenue > 0 && (
-          <Data
-            className="text-muted-foreground mt-1 ml-1"
-            label="Indirekt kostnad"
-            value={`${addThousandSeparator(lostRevenue)} kr`}
-          />
+          <div className="flex width-full items-center mt-1 ">
+            <Data
+              className="text-muted-foreground ml-1"
+              label="Indirekt kostnad"
+              value={`${addThousandSeparator(lostRevenue)} kr`}
+            />
+            <InfoPopover>
+              Semesterdagar är dagar som ej faktureras, detta räknas bort från
+              totala omsättningen.
+            </InfoPopover>
+          </div>
         )}
       </div>
       <div>

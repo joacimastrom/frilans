@@ -13,7 +13,7 @@ import { useEffect, useMemo, useState } from "react";
 import { IncomeTable } from "../IncomeTable";
 import { ResultTable } from "../ResultTable";
 import TaxTable from "../TaxTable";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Table, TableCell, TableRow } from "../ui/table";
 import AdditionalCosts from "./AdditionalCosts";
 import BenefitsCard from "./BenefitsCard";
 import RevenueCard from "./RevenueCard";
@@ -84,7 +84,6 @@ const Form = () => {
   } = getRevenueData(revenue, benefits, costs);
 
   const maxSalary = getMaxSalary(resultBeforeSalary, benefits.pension);
-  console.log(maxSalary);
 
   useEffect(() => {
     if (benefits.salary > maxSalary) {
@@ -154,60 +153,64 @@ const Form = () => {
     });
 
   return (
-    <div className="flex gap-8">
-      <div className="flex flex-col shrink-0 basis-1/2">
-        <div className="space-y-2">
-          <RevenueCard
-            revenue={revenue}
-            setRevenue={(revenue: Revenue) =>
-              setFormData({ ...formData, revenue })
+    <div>
+      <h1 className="scroll-m-20 text-center text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
+        Frilanskalkylatorn
+      </h1>
+      <div className="flex gap-2">
+        <div className="flex flex-col shrink-0 basis-1/2">
+          <div className="space-y-2">
+            <RevenueCard
+              revenue={revenue}
+              setRevenue={(revenue: Revenue) =>
+                setFormData({ ...formData, revenue })
+              }
+              totalRevenue={getTitleByPeriod(totalRevenue)}
+            />
+            <BenefitsCard
+              benefits={benefits}
+              setBenefits={(benefits) => setFormData({ ...formData, benefits })}
+              lostRevenue={lostRevenue}
+              maxSalary={maxSalary}
+            />
+            <AdditionalCosts
+              costs={costs}
+              setCosts={(costs) => setFormData({ ...formData, costs })}
+              totalCosts={totalAdditionalCosts}
+            />
+          </div>
+        </div>
+        <div className="shrink-0 basis-1/2 sticky h-fit top-[72px] flex flex-col gap-2">
+          <ResultTable
+            resultAfterTax={resultAfterTax}
+            maxDividend={maxDividend}
+            balancedResult={balancedResult}
+            resultDescription={
+              <Table>
+                <TableRow>
+                  <TableCell>Årliga intäkter</TableCell>
+                  <TableCell className="text-right">{totalRevenue}</TableCell>
+                </TableRow>
+              </Table>
             }
-            totalRevenue={getTitleByPeriod(totalRevenue)}
           />
-          <BenefitsCard
-            benefits={benefits}
-            setBenefits={(benefits) => setFormData({ ...formData, benefits })}
-            lostRevenue={lostRevenue}
-            maxSalary={maxSalary}
+          <IncomeTable
+            salary={totalSalary}
+            dividend={maxDividend}
+            referenceSalary={referenceSalary}
+            incomeChartData={incomeChartData}
+            setSalary={setSalary}
           />
-          <AdditionalCosts
-            costs={costs}
-            setCosts={(costs) => setFormData({ ...formData, costs })}
-            totalCosts={totalAdditionalCosts}
+          <TaxTable
+            yearlyIncomeTax={yearlyIncomeTax}
+            salary={benefits.salary}
+            incomeTaxPercentage={incomeTaxPercentage}
+            profitTax={resultTax}
+            dividendTax={dividendTax}
+            taxChartData={taxChartData}
+            setSalary={setSalary}
           />
         </div>
-      </div>
-      <div className="shrink-0 basis-1/2 sticky h-fit top-[72px] flex flex-col gap-2">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="flex items-center">
-              Resultatsräkning
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ResultTable
-              resultAfterTax={resultAfterTax}
-              maxDividend={maxDividend}
-              balancedResult={balancedResult}
-            />
-          </CardContent>
-        </Card>
-        <IncomeTable
-          salary={totalSalary}
-          dividend={maxDividend}
-          referenceSalary={referenceSalary}
-          incomeChartData={incomeChartData}
-          setSalary={setSalary}
-        />
-        <TaxTable
-          yearlyIncomeTax={yearlyIncomeTax}
-          salary={benefits.salary}
-          incomeTaxPercentage={incomeTaxPercentage}
-          profitTax={resultTax}
-          dividendTax={dividendTax}
-          taxChartData={taxChartData}
-          setSalary={setSalary}
-        />
       </div>
     </div>
   );

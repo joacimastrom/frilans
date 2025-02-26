@@ -1,4 +1,4 @@
-export const WORKING_DAYS_SWEDEN = 252; // Approximate number of working days in a year in Sweden
+export const WORKING_DAYS_SWEDEN = 249; // Approximate number of working days in a year in Sweden
 export const HOURS_PER_WORKDAY = 8;
 export const WORKDAYS_PER_WEEK = 5;
 export const WORKDAYS__PER_MONTH = 22;

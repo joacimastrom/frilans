@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const Data = ({ label, value, className }: Props) => {
-  const classes = cn("flex justify-between", className);
+  const classes = cn("flex justify-between w-full", className);
   return (
     <h2 className={classes}>
       <span>{label}</span>

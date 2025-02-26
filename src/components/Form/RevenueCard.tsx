@@ -31,7 +31,10 @@ const RevenueCard = ({ revenue, setRevenue, totalRevenue }: Props) => (
         Intäkter
         <CardDescription className="ml-auto flex items-center">
           {totalRevenue}
-          <InfoPopover />
+          <InfoPopover>
+            Totala intäkter är beräknade på timpris och omfattning över 249
+            arbetsdagar för 2025.
+          </InfoPopover>
         </CardDescription>
       </CardTitle>
     </CardHeader>
