@@ -1,3 +1,4 @@
+import { CircleDollarSign } from "lucide-react";
 import InfoPopover from "../InfoPopover";
 import {
   Card,
@@ -26,17 +27,20 @@ type Props = {
 
 const RevenueCard = ({ revenue, setRevenue, totalRevenue }: Props) => (
   <Card>
-    <CardHeader className="pb-2">
-      <CardTitle className="flex items-center">
-        Intäkter
-        <CardDescription className="ml-auto flex items-center">
-          {totalRevenue}
-          <InfoPopover>
-            Totala intäkter är beräknade på timpris och omfattning över 249
-            arbetsdagar för 2025.
-          </InfoPopover>
-        </CardDescription>
+    {/* <CardHeader className="bg-gradient-to-r from-blue-100 to-50 border-b px-6 py-4"> */}
+    <CardHeader className="border-b px-6 py-4">
+      <CardTitle className="flex items-center gap-2 text-lg font-semibold text-gray-800">
+        <CircleDollarSign className="h-5 w-5 text-blue-600" />
+        <h2>Intäkter</h2>
+        <div className="ml-auto">{totalRevenue}</div>
+        <InfoPopover>
+          Totala intäkter är beräknade på timpris och omfattning över 249
+          arbetsdagar för 2025.
+        </InfoPopover>
       </CardTitle>
+      <CardDescription className="ml-auto flex items-center">
+        Ange ditt arvode och din omfattning för att beräkna dina intäkter.
+      </CardDescription>
     </CardHeader>
     <CardContent className="flex gap-4">
       <div>

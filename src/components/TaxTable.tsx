@@ -1,5 +1,6 @@
 import { DIVIDEND_TAX, RESULT_TAX_PERCENTAGE } from "@/lib/constants";
 import { addThousandSeparator } from "@/lib/helpers";
+import { Percent } from "lucide-react";
 import { TaxChart, TaxChartData } from "./Form/TaxChart";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
@@ -33,9 +34,10 @@ const TaxTable = ({
 
   return (
     <Card>
-      <CardHeader className="pb-2">
-        <CardTitle className="flex items-center">
-          Skatter
+      <CardHeader className="border-b px-6 py-4">
+        <CardTitle className="flex items-center gap-2 text-lg font-semibold text-gray-800">
+          <Percent className="h-5 w-5 text-blue-600" />
+          <h2>Skatter</h2>
           <Button
             size="sm"
             className="ml-auto"

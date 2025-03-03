@@ -157,8 +157,8 @@ const Form = () => {
       <h1 className="scroll-m-20 text-center text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
         Frilanskalkylatorn
       </h1>
-      <div className="flex gap-2">
-        <div className="flex flex-col shrink-0 basis-1/2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
+        <div className="flex flex-col">
           <div className="space-y-2">
             <RevenueCard
               revenue={revenue}
@@ -180,7 +180,7 @@ const Form = () => {
             />
           </div>
         </div>
-        <div className="shrink-0 basis-1/2 sticky h-fit top-[72px] flex flex-col gap-2">
+        <div className="flex flex-col gap-2">
           <ResultTable
             resultAfterTax={resultAfterTax}
             maxDividend={maxDividend}

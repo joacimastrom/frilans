@@ -1,5 +1,6 @@
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { addThousandSeparator } from "@/lib/helpers";
+import { TrendingUp } from "lucide-react";
 import { ReactNode } from "react";
 import InfoPopover from "./InfoPopover";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
@@ -19,8 +20,11 @@ export const ResultTable = ({
 }: Props) => {
   return (
     <Card>
-      <CardHeader className="pb-2">
-        <CardTitle className="flex items-center">Resultatsräkning</CardTitle>
+      <CardHeader className="border-b px-6 py-4">
+        <CardTitle className="flex items-center gap-2 text-lg font-semibold text-gray-800">
+          <TrendingUp className="h-5 w-5 text-blue-600" />
+          Resultatsräkning
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <Table>
@@ -28,8 +32,10 @@ export const ResultTable = ({
             <TableRow>
               <TableCell>Resultat efter skatt</TableCell>
               <TableCell className="text-right">
-                {addThousandSeparator(resultAfterTax)}
-                <InfoPopover>{resultDescription}</InfoPopover>
+                <div className="flex items-center justify-end gap-2">
+                  {addThousandSeparator(resultAfterTax)}
+                  <InfoPopover>{resultDescription}</InfoPopover>
+                </div>
               </TableCell>
             </TableRow>
             <TableRow>

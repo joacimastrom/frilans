@@ -1,5 +1,6 @@
 import { EMPLOYER_TAX } from "@/lib/constants";
 import { addThousandSeparator } from "@/lib/helpers";
+import { HeartHandshake } from "lucide-react";
 import { Data } from "../Data";
 import InfoPopover from "../InfoPopover";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
@@ -33,8 +34,11 @@ const BenefitsCard = ({
   maxSalary,
 }: Props) => (
   <Card>
-    <CardHeader className="pb-2">
-      <CardTitle className="flex items-center">Förmåner</CardTitle>
+    <CardHeader className="border-b px-6 py-4">
+      <CardTitle className="flex items-center gap-2 text-lg font-semibold text-gray-800">
+        <HeartHandshake className="h-5 w-5 text-blue-600" />
+        <h2>Förmåner</h2>
+      </CardTitle>
     </CardHeader>
     <CardContent className="flex flex-col gap-2">
       <div>
@@ -95,7 +99,7 @@ const BenefitsCard = ({
               label="Indirekt kostnad"
               value={`${addThousandSeparator(lostRevenue)} kr`}
             />
-            <InfoPopover>
+            <InfoPopover className="ml-2">
               Semesterdagar är dagar som ej faktureras, detta räknas bort från
               totala omsättningen.
             </InfoPopover>
