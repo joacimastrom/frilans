@@ -10,7 +10,9 @@ import {
 } from "@/lib/helpers";
 import { FinancialPost } from "@/lib/types";
 import { useEffect, useMemo, useState } from "react";
+import ChartCard from "../ChartCard";
 import { IncomeTable } from "../IncomeTable";
+import OptimisedCard from "../OptimisedCard";
 import { ResultTable } from "../ResultTable";
 import TaxTable from "../TaxTable";
 import { Table, TableCell, TableRow } from "../ui/table";
@@ -143,6 +145,20 @@ const Form = () => {
     salaryAfterTaxes + dividendAfterTaxesMonthly
   );
 
+  const maxIncomeObject = incomeChartData.reduce((acc, curr) => {
+    if (curr.totalIncome > acc.totalIncome) {
+      return curr;
+    }
+    return acc;
+  }, incomeChartData[0]);
+
+  const minTaxObject = taxChartData.reduce((acc, curr) => {
+    if (curr.totalTax < acc.totalTax) {
+      return curr;
+    }
+    return acc;
+  }, taxChartData[0]);
+
   const setSalary = (salary: number) =>
     setFormData({
       ...formData,
@@ -157,7 +173,7 @@ const Form = () => {
       <h1 className="scroll-m-20 text-center text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
         Frilanskalkylatorn
       </h1>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
         <div className="flex flex-col">
           <div className="space-y-2">
             <RevenueCard
@@ -178,28 +194,33 @@ const Form = () => {
               setCosts={(costs) => setFormData({ ...formData, costs })}
               totalCosts={totalAdditionalCosts}
             />
+            <ResultTable
+              resultAfterTax={resultAfterTax}
+              maxDividend={maxDividend}
+              balancedResult={balancedResult}
+              resultDescription={
+                <Table>
+                  <TableRow>
+                    <TableCell>Årliga intäkter</TableCell>
+                    <TableCell className="text-right">{totalRevenue}</TableCell>
+                  </TableRow>
+                </Table>
+              }
+            />
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <ResultTable
-            resultAfterTax={resultAfterTax}
-            maxDividend={maxDividend}
-            balancedResult={balancedResult}
-            resultDescription={
-              <Table>
-                <TableRow>
-                  <TableCell>Årliga intäkter</TableCell>
-                  <TableCell className="text-right">{totalRevenue}</TableCell>
-                </TableRow>
-              </Table>
-            }
+          <OptimisedCard
+            monthlySalary={maxIncomeObject.salary}
+            dividend={maxIncomeObject.maxDividend}
+            totalIncome={maxIncomeObject.totalIncome}
           />
           <IncomeTable
             salary={totalSalary}
             dividend={maxDividend}
             referenceSalary={referenceSalary}
-            incomeChartData={incomeChartData}
             setSalary={setSalary}
+            maxIncomeObject={maxIncomeObject}
           />
           <TaxTable
             yearlyIncomeTax={yearlyIncomeTax}
@@ -207,11 +228,19 @@ const Form = () => {
             incomeTaxPercentage={incomeTaxPercentage}
             profitTax={resultTax}
             dividendTax={dividendTax}
-            taxChartData={taxChartData}
             setSalary={setSalary}
+            minTaxObject={minTaxObject}
           />
         </div>
       </div>
+      <ChartCard
+        incomeChartData={incomeChartData}
+        salary={benefits.salary}
+        setSalary={setSalary}
+        maxIncomeObject={maxIncomeObject}
+        taxChartData={taxChartData}
+        minTaxObject={minTaxObject}
+      />
     </div>
   );
 };
