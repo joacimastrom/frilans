@@ -41,7 +41,7 @@ const Form = () => {
   const jsonData = savedData && JSON.parse(savedData);
   const [formData, setFormData] = useState<FormData>({
     revenue: {
-      hourlyRate: 900,
+      hourlyRate: 800,
       scope: 100,
     },
     benefits: {
@@ -66,7 +66,7 @@ const Form = () => {
         id: 1738783731573,
         description: "Försäkring",
         amount: "5000",
-        period: "monthly",
+        period: "yearly",
       },
     ],
     ...jsonData,

@@ -1,7 +1,5 @@
 "use client";
 
-import type React from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -13,14 +11,14 @@ import {
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 
 interface CollapsibleCardProps {
-  title: string;
-  description?: string;
+  title: ReactNode;
+  description?: ReactNode;
   defaultOpen?: boolean;
-  children: React.ReactNode;
-  footer?: React.ReactNode;
+  children: ReactNode;
+  footer?: ReactNode;
   className?: string;
 }
 
@@ -60,31 +58,27 @@ export function CollapsibleCard({
         onClick={toggleCard}
       >
         <div className="flex items-center justify-between">
-          <div>
-            <CardTitle>
-              {title}
-              <Button variant="ghost" size="icon" className="shrink-0">
-                <ChevronDown
-                  className={cn(
-                    "h-4 w-4 transition-transform duration-200",
-                    isOpen && "rotate-180"
-                  )}
-                />
-                <span className="sr-only">
-                  {isOpen ? "Collapse" : "Expand"}
-                </span>
-              </Button>
-            </CardTitle>
-            {description && <CardDescription>{description}</CardDescription>}
-          </div>
+          <CardTitle className="flex items-center justify-between gap-2 text-lg font-semibold text-gray-80 w-full">
+            {title}
+            <Button variant="ghost" size="icon" className="shrink-0">
+              <ChevronDown
+                className={cn(
+                  "h-4 w-4 transition-transform duration-200",
+                  isOpen && "rotate-180"
+                )}
+              />
+              <span className="sr-only">{isOpen ? "Collapse" : "Expand"}</span>
+            </Button>
+          </CardTitle>
         </div>
+        {description && <CardDescription>{description}</CardDescription>}
       </CardHeader>
       <div
         className="overflow-hidden transition-all duration-300 ease-in-out"
         style={{ height: height !== undefined ? `${height}px` : "auto" }}
       >
         <div ref={contentRef}>
-          <CardContent className="flex gap-4">{children}</CardContent>
+          <CardContent>{children}</CardContent>
           {footer && <CardFooter>{footer}</CardFooter>}
         </div>
       </div>

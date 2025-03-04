@@ -1,9 +1,9 @@
 import { EMPLOYER_TAX } from "@/lib/constants";
 import { addThousandSeparator } from "@/lib/helpers";
 import { HeartHandshake } from "lucide-react";
+import { CollapsibleCard } from "../CollapsibleCard";
 import { Data } from "../Data";
 import InfoPopover from "../InfoPopover";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Slider } from "../ui/slider";
@@ -33,14 +33,15 @@ const BenefitsCard = ({
   lostRevenue,
   maxSalary,
 }: Props) => (
-  <Card>
-    <CardHeader className="border-b px-6 py-4">
-      <CardTitle className="flex items-center gap-2 text-lg font-semibold text-gray-800">
+  <CollapsibleCard
+    title={
+      <>
         <HeartHandshake className="h-5 w-5 text-blue-600" />
-        <h2>Förmåner</h2>
-      </CardTitle>
-    </CardHeader>
-    <CardContent className="flex flex-col gap-2">
+        <h2 className="mr-auto">Förmåner</h2>
+      </>
+    }
+  >
+    <div className="flex flex-col gap-2">
       <div>
         <Label htmlFor="salary">Månadslön</Label>
         <div className="flex">
@@ -131,8 +132,8 @@ const BenefitsCard = ({
           />
         )}
       </div>
-    </CardContent>
-  </Card>
+    </div>
+  </CollapsibleCard>
 );
 
 export default BenefitsCard;
