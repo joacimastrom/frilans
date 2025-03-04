@@ -93,19 +93,18 @@ const BenefitsCard = ({
             })
           }
         />
-        {lostRevenue > 0 && (
-          <div className="flex width-full items-center mt-1 ">
-            <Data
-              className="text-muted-foreground ml-1"
-              label="Indirekt kostnad"
-              value={`${addThousandSeparator(lostRevenue)} kr`}
-            />
-            <InfoPopover className="ml-2">
-              Semesterdagar är dagar som ej faktureras, detta räknas bort från
-              totala omsättningen.
-            </InfoPopover>
-          </div>
-        )}
+
+        <div className="flex width-full items-center mt-1 ">
+          <Data
+            className="text-muted-foreground ml-1"
+            label="Indirekt kostnad"
+            value={`${addThousandSeparator(lostRevenue)} kr`}
+          />
+          <InfoPopover className="ml-2">
+            Semesterdagar är dagar som ej faktureras, detta räknas bort från
+            totala omsättningen.
+          </InfoPopover>
+        </div>
       </div>
       <div>
         <Label htmlFor="pension">Pension (% av lön)</Label>
@@ -122,15 +121,13 @@ const BenefitsCard = ({
             })
           }
         />
-        {benefits.salary > 0 && (
-          <Data
-            className="text-muted-foreground mt-1 ml-1 mb-1"
-            label="Pensionskostnad"
-            value={`${addThousandSeparator(
-              (benefits.salary * benefits.pension) / 100
-            )} kr`}
-          />
-        )}
+        <Data
+          className="text-muted-foreground mt-1 ml-1 mb-1"
+          label="Pensionskostnad"
+          value={`${addThousandSeparator(
+            (benefits.salary * benefits.pension) / 100
+          )} kr`}
+        />
       </div>
     </div>
   </CollapsibleCard>
