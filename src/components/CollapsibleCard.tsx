@@ -45,7 +45,7 @@ export function CollapsibleCard({
     } else {
       setHeight(0);
     }
-  }, [isOpen]);
+  }, [isOpen, children]);
 
   const toggleCard = () => {
     setIsOpen(!isOpen);
