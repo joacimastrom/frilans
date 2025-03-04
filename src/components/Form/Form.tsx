@@ -170,9 +170,6 @@ const Form = () => {
 
   return (
     <div>
-      <h1 className="scroll-m-20 text-center text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
-        Frilanskalkylatorn
-      </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
         <div className="flex flex-col">
           <div className="space-y-2">
