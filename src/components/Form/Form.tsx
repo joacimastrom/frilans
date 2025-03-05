@@ -36,41 +36,42 @@ type FormData = {
   costs: FinancialPost[];
 };
 
+const initialState: FormData = {
+  revenue: {
+    hourlyRate: 800,
+    scope: 100,
+  },
+  benefits: {
+    salary: 45000,
+    vacation: 25,
+    pension: 4.5,
+  },
+  costs: [
+    {
+      id: 1738783675953,
+      description: "Telefon",
+      amount: 450,
+      period: "monthly",
+    },
+    {
+      id: 1738783727097,
+      description: "Bil",
+      amount: 2500,
+      period: "monthly",
+    },
+    {
+      id: 1738783731573,
+      description: "Försäkring",
+      amount: 5000,
+      period: "yearly",
+    },
+  ],
+};
+
 const Form = () => {
   const savedData = localStorage.getItem("formData");
   const jsonData = savedData && JSON.parse(savedData);
-  const [formData, setFormData] = useState<FormData>({
-    revenue: {
-      hourlyRate: 800,
-      scope: 100,
-    },
-    benefits: {
-      salary: 45000,
-      vacation: 25,
-      pension: 4.5,
-    },
-    costs: [
-      {
-        id: 1738783675953,
-        description: "Telefon",
-        amount: "450",
-        period: "monthly",
-      },
-      {
-        id: 1738783727097,
-        description: "Bil",
-        amount: "2500",
-        period: "monthly",
-      },
-      {
-        id: 1738783731573,
-        description: "Försäkring",
-        amount: "5000",
-        period: "yearly",
-      },
-    ],
-    ...jsonData,
-  });
+  const [formData, setFormData] = useState<FormData>(jsonData || initialState);
 
   useEffect(() => {
     localStorage.setItem("formData", JSON.stringify(formData));
@@ -99,20 +100,32 @@ const Form = () => {
     }
   }, [benefits, maxSalary]);
 
-  const { incomeChartData, taxChartData } = useMemo(() => {
-    const salaryData = [];
-    const taxData = [];
+  const { incomeChartData, taxChartData, combinedChartData } = useMemo(() => {
+    const incomeChartData = [];
+    const taxChartData = [];
+    const combinedChartData = [];
     for (let i = 0; i <= maxSalary; i += 1000) {
       const salaryObj = getSalaryData(i, resultBeforeSalary, benefits.pension);
-      salaryData.push(salaryObj);
-      taxData.push(
-        getTaxData(i, salaryObj.maxDividend, salaryObj.resultAfterSalary)
+      incomeChartData.push(salaryObj);
+      const taxObj = getTaxData(
+        i,
+        salaryObj.maxDividend,
+        salaryObj.resultAfterSalary
       );
+      taxChartData.push(taxObj);
+      const totalTaxPercent =
+        Math.round((taxObj.totalTax / salaryObj.totalIncome) * 10000) / 100;
+      combinedChartData.push({
+        salary: i,
+        totalTaxPercent,
+        totalTax: taxObj.totalTax,
+      });
     }
 
     return {
-      incomeChartData: salaryData,
-      taxChartData: taxData,
+      incomeChartData,
+      taxChartData,
+      combinedChartData,
     };
   }, [resultBeforeSalary, maxSalary, benefits.pension]);
 
@@ -221,7 +234,6 @@ const Form = () => {
           />
           <TaxTable
             yearlyIncomeTax={yearlyIncomeTax}
-            salary={benefits.salary}
             incomeTaxPercentage={incomeTaxPercentage}
             profitTax={resultTax}
             dividendTax={dividendTax}
@@ -237,6 +249,7 @@ const Form = () => {
         maxIncomeObject={maxIncomeObject}
         taxChartData={taxChartData}
         minTaxObject={minTaxObject}
+        combinedChartData={combinedChartData}
       />
     </div>
   );

@@ -226,13 +226,15 @@ export const getTaxData = (
   dividend: number,
   result: number
 ) => {
-  const { yearlyIncomeTax, incomeTaxPercentage } = getIncomeTax(salary);
+  const { yearlyIncomeTax, incomeTaxPercentage, monthlyIncomeTax } =
+    getIncomeTax(salary);
   const resultTax = Math.round(result * RESULT_TAX);
   const dividendTax = Math.round(dividend * DIVIDEND_TAX);
 
   return {
     salary,
     yearlyIncomeTax,
+    monthlyIncomeTax,
     incomeTaxPercentage,
     resultTax,
     dividendTax,

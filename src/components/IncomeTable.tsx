@@ -2,7 +2,7 @@ import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { addThousandSeparator } from "@/lib/helpers";
 import { Wallet } from "lucide-react";
 import { CollapsibleCard } from "./CollapsibleCard";
-import { IncomeChartData } from "./Form/IncomeChart";
+import { IncomeChartData } from "./Form/charts/IncomeChart";
 import { Button } from "./ui/button";
 
 type Props = {

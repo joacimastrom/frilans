@@ -1,8 +1,9 @@
 import { cn } from "@/lib/utils";
 import { BarChart2 } from "lucide-react";
 import { useState } from "react";
-import { IncomeChart, IncomeChartData } from "./Form/IncomeChart";
-import { TaxChart, TaxChartData } from "./Form/TaxChart";
+import { CombinedChart, CombinedChartData } from "./Form/charts/CombinedChart";
+import { IncomeChart, IncomeChartData } from "./Form/charts/IncomeChart";
+import { TaxChart, TaxChartData } from "./Form/charts/TaxChart";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 type Props = {
@@ -12,11 +13,13 @@ type Props = {
   maxIncomeObject: IncomeChartData;
   taxChartData: TaxChartData[];
   minTaxObject: TaxChartData;
+  combinedChartData: CombinedChartData[];
 };
 
 enum Chart {
   TAX = "TAX",
   SALARY = "SALARY",
+  COMBINED = "COMBINED",
 }
 
 const ChartCard = ({
@@ -26,6 +29,7 @@ const ChartCard = ({
   maxIncomeObject,
   taxChartData,
   minTaxObject,
+  combinedChartData,
 }: Props) => {
   const [selectedChart, setSelectedChart] = useState<Chart>(Chart.SALARY);
 
@@ -56,7 +60,18 @@ const ChartCard = ({
               )}
               onClick={() => setSelectedChart(Chart.TAX)}
             >
-              Skatt
+              Skatt (SEK)
+            </button>
+            <button
+              className={cn(
+                "px-4 py-2 text-sm rounded-md flex items-center gap-2",
+                selectedChart === Chart.COMBINED
+                  ? "bg-white shadow-sm text-blue-600"
+                  : "text-gray-600"
+              )}
+              onClick={() => setSelectedChart(Chart.COMBINED)}
+            >
+              Skatt (%)
             </button>
           </div>
         </CardTitle>
@@ -75,6 +90,13 @@ const ChartCard = ({
             taxChartData={taxChartData}
             salary={salary}
             minTaxSalary={minTaxObject.salary}
+            onChartClick={setSalary}
+          />
+        )}
+        {selectedChart === Chart.COMBINED && (
+          <CombinedChart
+            combinedChartData={combinedChartData}
+            salary={salary}
             onChartClick={setSalary}
           />
         )}

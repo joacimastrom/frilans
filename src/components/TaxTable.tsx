@@ -2,7 +2,7 @@ import { DIVIDEND_TAX, RESULT_TAX_PERCENTAGE } from "@/lib/constants";
 import { addThousandSeparator } from "@/lib/helpers";
 import { Percent } from "lucide-react";
 import { CollapsibleCard } from "./CollapsibleCard";
-import { TaxChartData } from "./Form/TaxChart";
+import { TaxChartData } from "./Form/charts/TaxChart";
 import { Button } from "./ui/button";
 import { Table, TableBody, TableCell, TableRow } from "./ui/table";
 
