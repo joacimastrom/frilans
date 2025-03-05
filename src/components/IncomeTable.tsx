@@ -58,12 +58,12 @@ export const IncomeTable = ({
             {addThousandSeparator(salary + dividend)}
           </TableCell>
         </TableRow>
-        <TableRow className="font-bold">
+        {/* <TableRow className="font-bold">
           <TableCell>Jämförelselön</TableCell>
           <TableCell className="text-right whitespace-nowrap">
             {addThousandSeparator(referenceSalary) + " kr / månad"}
           </TableCell>
-        </TableRow>
+        </TableRow> */}
       </TableBody>
     </Table>
   </CollapsibleCard>

@@ -56,18 +56,18 @@ const OptimisedCard = ({ monthlySalary, dividend, totalIncome }: Props) => {
           </div>
         </div>
         <div className="bg-white/10 p-2 rounded-lg">
-          <div className="flex justify-between mb-1">
+          <div className="flex justify-between items-center mb-1">
             <p className="text-sm text-blue-100">Total personlig inkomst</p>
             <p className="text-xl font-bold">
               {addThousandSeparator(totalIncome)} kr
             </p>
           </div>
-          <div className="flex justify-between">
+          {/*   <div className="flex justify-between">
             <p className="text-sm text-blue-100">Månatlig jämförelselön</p>
             <p className="text-lg font-medium">
               {addThousandSeparator(referenceSalary)} kr
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </CollapsibleCard>
