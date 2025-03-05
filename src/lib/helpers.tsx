@@ -230,15 +230,18 @@ export const getTaxData = (
     getIncomeTax(salary);
   const resultTax = Math.round(result * RESULT_TAX);
   const dividendTax = Math.round(dividend * DIVIDEND_TAX);
+  const employerFee = salary * 12 * EMPLOYER_TAX;
 
   return {
     salary,
     yearlyIncomeTax,
     monthlyIncomeTax,
+    yearlyEmployerFee: employerFee,
+    monthlyEmployerFee: employerFee / 12,
     incomeTaxPercentage,
     resultTax,
     dividendTax,
-    totalTax: yearlyIncomeTax + resultTax + dividendTax,
+    totalTax: yearlyIncomeTax + resultTax + dividendTax + employerFee,
   };
 };
 

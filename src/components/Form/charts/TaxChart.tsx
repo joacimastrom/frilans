@@ -20,6 +20,14 @@ const chartConfig = {
     label: "Total skatt",
     color: "hsl(var(--chart-1))",
   },
+  yearlyIncomeTax: {
+    label: "Löneskatt",
+    color: "hsl(var(--chart-2))",
+  },
+  yearlyEmployerFee: {
+    label: "Arbetsgivaravgift",
+    color: "hsl(var(--chart-3))",
+  },
   resultTax: {
     label: "Bolagsskatt",
     color: "hsl(var(--chart-4))",
@@ -27,10 +35,6 @@ const chartConfig = {
   dividendTax: {
     label: "Utdelningskatt",
     color: "hsl(var(--chart-5))",
-  },
-  yearlyIncomeTax: {
-    label: "Löneskatt",
-    color: "hsl(var(--chart-2))",
   },
 } satisfies ChartConfig;
 
@@ -40,6 +44,7 @@ export type TaxChartData = {
   resultTax: number;
   dividendTax: number;
   totalTax: number;
+  yearlyEmployerFee: number;
 };
 
 type Props = {
@@ -96,6 +101,14 @@ export const TaxChart = ({
         dataKey="resultTax"
         type="monotone"
         stroke="var(--color-resultTax)"
+        strokeWidth={2}
+        dot={false}
+      />
+      <Line
+        name="Arbetsgivearavgift"
+        dataKey="yearlyEmployerFee"
+        type="monotone"
+        stroke="var(--color-yearlyEmployerFee)"
         strokeWidth={2}
         dot={false}
       />

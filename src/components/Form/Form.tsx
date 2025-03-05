@@ -135,8 +135,9 @@ const Form = () => {
 
   // Tax calculations
   const totalSalary = benefits.salary * 12;
+  const employerFee = totalSalary * EMPLOYER_TAX;
   const totalSalaryCost =
-    totalSalary * (1 + EMPLOYER_TAX + benefits.pension / 100);
+    totalSalary * (1 + benefits.pension / 100) + employerFee;
 
   const resultBeforeTax = resultBeforeSalary - totalSalaryCost;
   const resultTax = resultBeforeTax * RESULT_TAX;
@@ -235,6 +236,7 @@ const Form = () => {
           <TaxTable
             yearlyIncomeTax={yearlyIncomeTax}
             incomeTaxPercentage={incomeTaxPercentage}
+            employerFee={employerFee}
             profitTax={resultTax}
             dividendTax={dividendTax}
             setSalary={setSalary}

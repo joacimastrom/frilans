@@ -13,6 +13,7 @@ type Props = {
   dividendTax: number;
   setSalary: (salary: number) => void;
   minTaxObject: TaxChartData;
+  employerFee: number;
 };
 
 const TaxTable = ({
@@ -22,12 +23,13 @@ const TaxTable = ({
   dividendTax,
   setSalary,
   minTaxObject,
+  employerFee,
 }: Props) => (
   <CollapsibleCard
     title={
       <>
         <Percent className="h-5 w-5 text-blue-600" />
-        <h2>Skatter</h2>
+        <h2>Skatter & avgifter</h2>
         <Button
           size="sm"
           className="ml-auto"
@@ -42,7 +44,7 @@ const TaxTable = ({
       <TableBody>
         <TableRow>
           <TableCell>
-            Vinstskatt{" "}
+            Bolagsskatt{" "}
             <span className="text-muted-foreground whitespace-nowrap">
               ({RESULT_TAX_PERCENTAGE}%)
             </span>
@@ -64,6 +66,17 @@ const TaxTable = ({
         </TableRow>
         <TableRow>
           <TableCell>
+            Arbetsgivaraftift{" "}
+            <span className="text-muted-foreground whitespace-nowrap">
+              (31.42%)
+            </span>
+          </TableCell>
+          <TableCell className="text-right">
+            {`${addThousandSeparator(employerFee)} kr / år`}
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>
             Utdelningsskatt{" "}
             <span className="text-muted-foreground whitespace-nowrap">
               ({DIVIDEND_TAX * 100}%)
@@ -77,7 +90,7 @@ const TaxTable = ({
           <TableCell>Total</TableCell>
           <TableCell className="text-right">
             {`${addThousandSeparator(
-              dividendTax + profitTax + yearlyIncomeTax
+              dividendTax + profitTax + yearlyIncomeTax + employerFee
             )}`}
           </TableCell>
         </TableRow>
