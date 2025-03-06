@@ -34,8 +34,8 @@ function App() {
             </li>
           </ul>
         </nav>
-        <main className="flex flex-col items-center min-h-screen py-8 ">
-          <div className="max-w-[1020px] px-4">
+        <main className="flex flex-col items-center min-h-screen py-8 px-4">
+          <div className="max-w-[1020px] w-full">
             <Hero />
             <HowItWorks />
             <Form />
