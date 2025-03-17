@@ -59,17 +59,14 @@
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+html {
+  scroll-padding-top: 70px;
 }
 
 @layer base {
   * {
+    /*     @apply border-border;
+ */
     @apply border-border outline-ring/50;
   }
   body {

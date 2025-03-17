@@ -23,7 +23,7 @@ function App() {
               </a>
             </li>
             <li>
-              <a href="#calculator" className="hover:text-blue-600">
+              <a href="#calculate" className="hover:text-blue-600">
                 Räkna
               </a>
             </li>
@@ -34,12 +34,10 @@ function App() {
             </li>
           </ul>
         </nav>
-        <main className="flex flex-col items-center min-h-screen py-8 px-4">
-          <div className="max-w-[1020px] w-full">
-            <Hero />
-            <HowItWorks />
-            <Form />
-          </div>
+        <main className="flex flex-col items-center min-h-screen py-8">
+          <Hero />
+          <HowItWorks />
+          <Form />
         </main>
         <footer className="bg-gray-900 text-white text-center py-6 mt-12">
           <p className="text-sm">

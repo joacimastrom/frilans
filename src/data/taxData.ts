@@ -426,11 +426,11 @@ export const taxData = [
   },
   {
     salaryFrom: 118401,
-    salaryTo: 120000,
+    salaryTo: 128000,
     tax: 39,
   },
   {
-    salaryFrom: 131601,
+    salaryFrom: 129000,
     salaryTo: 134000,
     tax: 40,
   },

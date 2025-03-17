@@ -131,7 +131,9 @@ export const getIncomeTax = (monthlyIncome: number) => {
   );
 
   if (!taxBracket) {
-    throw new Error("No tax bracket found for the given income.");
+    throw new Error(
+      "No tax bracket found for the given income: " + monthlyIncome
+    );
   }
 
   if (monthlyIncome <= 80000) {

@@ -1,4 +1,5 @@
 import { BarChart3, Calculator, Lightbulb } from "lucide-react";
+import MaxWidthSection from "./MaxWidthSection";
 
 const HowItWorks = () => {
   const steps = [
@@ -22,8 +23,8 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section id="how-it-works" className="py-12">
-      <div className="max-w-4xl mx-auto text-center">
+    <MaxWidthSection id="how-it-works" className="bg-white">
+      <div className="mx-auto text-center">
         <h2 className="text-3xl font-bold text-gray-900">Så fungerar det</h2>
         <p className="mt-4 text-gray-600 text-lg">
           Få en tydlig bild av din ekonomi med vår enkla kalkylator.
@@ -43,7 +44,7 @@ const HowItWorks = () => {
           </div>
         ))}
       </div>
-    </section>
+    </MaxWidthSection>
   );
 };
 

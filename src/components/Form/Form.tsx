@@ -12,12 +12,14 @@ import { FinancialPost } from "@/lib/types";
 import { useEffect, useMemo, useState } from "react";
 import ChartCard from "../ChartCard";
 import { IncomeTable } from "../IncomeTable";
+import MaxWidthSection from "../MaxWidthSection";
 import OptimisedCard from "../OptimisedCard";
 import { ResultTable } from "../ResultTable";
 import TaxTable from "../TaxTable";
 import { Table, TableCell, TableRow } from "../ui/table";
 import AdditionalCosts from "./AdditionalCosts";
 import BenefitsCard from "./BenefitsCard";
+import CalculationSteps from "./CalculationSteps";
 import RevenueCard from "./RevenueCard";
 
 export type Benefits = {
@@ -183,77 +185,90 @@ const Form = () => {
     });
 
   return (
-    <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-        <div className="flex flex-col">
-          <div className="space-y-2">
-            <RevenueCard
-              revenue={revenue}
-              setRevenue={(revenue: Revenue) =>
-                setFormData({ ...formData, revenue })
-              }
-              totalRevenue={getTitleByPeriod(totalRevenue)}
+    <>
+      <MaxWidthSection className="py-12">
+        <h2
+          id="calculate"
+          className="text-3xl mb-8 font-bold text-gray-900 max-w-4xl mx-auto text-center"
+        >
+          Räkna på din ekonomi
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <div className="flex flex-col">
+            <div className="space-y-2">
+              <RevenueCard
+                revenue={revenue}
+                setRevenue={(revenue: Revenue) =>
+                  setFormData({ ...formData, revenue })
+                }
+                totalRevenue={getTitleByPeriod(totalRevenue)}
+              />
+              <BenefitsCard
+                benefits={benefits}
+                setBenefits={(benefits) =>
+                  setFormData({ ...formData, benefits })
+                }
+                lostRevenue={lostRevenue}
+                maxSalary={maxSalary}
+              />
+              <AdditionalCosts
+                costs={costs}
+                setCosts={(costs) => setFormData({ ...formData, costs })}
+                totalCosts={totalAdditionalCosts}
+              />
+              <ResultTable
+                resultAfterTax={resultAfterTax}
+                maxDividend={maxDividend}
+                balancedResult={balancedResult}
+                resultDescription={
+                  <Table>
+                    <TableRow>
+                      <TableCell>Årliga intäkter</TableCell>
+                      <TableCell className="text-right">
+                        {totalRevenue}
+                      </TableCell>
+                    </TableRow>
+                  </Table>
+                }
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <OptimisedCard
+              monthlySalary={maxIncomeObject.salary}
+              dividend={maxIncomeObject.maxDividend}
+              totalIncome={maxIncomeObject.totalIncome}
             />
-            <BenefitsCard
-              benefits={benefits}
-              setBenefits={(benefits) => setFormData({ ...formData, benefits })}
-              lostRevenue={lostRevenue}
-              maxSalary={maxSalary}
+            <IncomeTable
+              salary={totalSalary}
+              dividend={maxDividend}
+              referenceSalary={referenceSalary}
+              setSalary={setSalary}
+              maxIncomeObject={maxIncomeObject}
             />
-            <AdditionalCosts
-              costs={costs}
-              setCosts={(costs) => setFormData({ ...formData, costs })}
-              totalCosts={totalAdditionalCosts}
-            />
-            <ResultTable
-              resultAfterTax={resultAfterTax}
-              maxDividend={maxDividend}
-              balancedResult={balancedResult}
-              resultDescription={
-                <Table>
-                  <TableRow>
-                    <TableCell>Årliga intäkter</TableCell>
-                    <TableCell className="text-right">{totalRevenue}</TableCell>
-                  </TableRow>
-                </Table>
-              }
+            <TaxTable
+              yearlyIncomeTax={yearlyIncomeTax}
+              incomeTaxPercentage={incomeTaxPercentage}
+              employerFee={employerFee}
+              profitTax={resultTax}
+              dividendTax={dividendTax}
+              setSalary={setSalary}
+              minTaxObject={minTaxObject}
             />
           </div>
         </div>
-        <div className="flex flex-col gap-2">
-          <OptimisedCard
-            monthlySalary={maxIncomeObject.salary}
-            dividend={maxIncomeObject.maxDividend}
-            totalIncome={maxIncomeObject.totalIncome}
-          />
-          <IncomeTable
-            salary={totalSalary}
-            dividend={maxDividend}
-            referenceSalary={referenceSalary}
-            setSalary={setSalary}
-            maxIncomeObject={maxIncomeObject}
-          />
-          <TaxTable
-            yearlyIncomeTax={yearlyIncomeTax}
-            incomeTaxPercentage={incomeTaxPercentage}
-            employerFee={employerFee}
-            profitTax={resultTax}
-            dividendTax={dividendTax}
-            setSalary={setSalary}
-            minTaxObject={minTaxObject}
-          />
-        </div>
-      </div>
-      <ChartCard
-        incomeChartData={incomeChartData}
-        salary={benefits.salary}
-        setSalary={setSalary}
-        maxIncomeObject={maxIncomeObject}
-        taxChartData={taxChartData}
-        minTaxObject={minTaxObject}
-        combinedChartData={combinedChartData}
-      />
-    </div>
+        <ChartCard
+          incomeChartData={incomeChartData}
+          salary={benefits.salary}
+          setSalary={setSalary}
+          maxIncomeObject={maxIncomeObject}
+          taxChartData={taxChartData}
+          minTaxObject={minTaxObject}
+          combinedChartData={combinedChartData}
+        />
+      </MaxWidthSection>
+      <CalculationSteps />
+    </>
   );
 };
 

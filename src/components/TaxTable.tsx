@@ -33,7 +33,10 @@ const TaxTable = ({
         <Button
           size="sm"
           className="ml-auto"
-          onClick={() => setSalary(minTaxObject.salary)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setSalary(minTaxObject.salary);
+          }}
         >
           Minimera skatt
         </Button>
