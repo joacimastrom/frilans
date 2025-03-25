@@ -37,7 +37,7 @@ const BenefitsCard = ({
     title={
       <>
         <HeartHandshake className="h-5 w-5 text-blue-600" />
-        <h2 className="mr-auto">Förmåner</h2>
+        <h2 className="mr-auto">Lön & Semester</h2>
       </>
     }
   >
@@ -48,7 +48,7 @@ const BenefitsCard = ({
           <Input
             id="salary"
             type="number"
-            step={1000}
+            step={1}
             min={0}
             max={maxSalary}
             value={benefits.salary.toString()}
@@ -63,7 +63,7 @@ const BenefitsCard = ({
         <Slider
           min={0}
           max={maxSalary}
-          step={1000}
+          step={1}
           onValueChange={(value) =>
             setBenefits({
               ...benefits,

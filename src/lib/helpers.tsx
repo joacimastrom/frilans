@@ -1,5 +1,5 @@
 import { Benefits, Revenue } from "@/components/Form/Form";
-import { taxData } from "../data/taxData";
+import taxData from "../data/taxTable31_25.json";
 import {
   BASE_DIVIDEND,
   DIVIDEND_TAX,
@@ -193,10 +193,7 @@ export const getTaxBracket = (monthlyIncomeAfterTax: number) => {
 };
 
 export const getMaxSalary = (result: number, pension: number) =>
-  Math.max(
-    0,
-    Math.round(result / 12 / (1 + EMPLOYER_TAX + pension / 100) / 1000) * 1000
-  );
+  Math.max(0, Math.round(result / 12 / (1 + EMPLOYER_TAX + pension / 100)));
 
 export const getSalaryData = (
   salary: number,

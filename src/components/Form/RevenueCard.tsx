@@ -56,11 +56,11 @@ const RevenueCard = ({ revenue, setRevenue, totalRevenue }: Props) => (
           id="scope"
           type="number"
           min={0}
-          max={100}
+          max={150}
           value={revenue.scope.toString()}
           onChange={(e) => {
-            const numberValue = Number(e.target.value) || 100;
-            const clampedValue = Math.min(Math.max(numberValue, 1), 100);
+            const numberValue = Number(e.target.value);
+            const clampedValue = Math.min(Math.max(numberValue, 0), 150);
 
             setRevenue({
               ...revenue,

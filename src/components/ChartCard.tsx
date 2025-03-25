@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { BarChart2 } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { CombinedChart, CombinedChartData } from "./Form/charts/CombinedChart";
 import { IncomeChart, IncomeChartData } from "./Form/charts/IncomeChart";
 import { TaxChart, TaxChartData } from "./Form/charts/TaxChart";
@@ -32,6 +32,25 @@ const ChartCard = ({
   combinedChartData,
 }: Props) => {
   const [selectedChart, setSelectedChart] = useState<Chart>(Chart.SALARY);
+
+  const normalizedIncomeChartData = useMemo(
+    () => incomeChartData.filter((data) => data.salary % 500 === 0),
+    [incomeChartData]
+  );
+  const normalizedTaxChartData = useMemo(
+    () => taxChartData.filter((data) => data.salary % 500 === 0),
+    [taxChartData]
+  );
+  const normalizedCombinedChartData = useMemo(
+    () => combinedChartData.filter((data) => data.salary % 500 === 0),
+    [combinedChartData]
+  );
+
+  const roundedSalary = Math.round(salary / 500) * 500;
+  const roundedMaxIncomeSalary =
+    Math.round((maxIncomeObject?.salary || 0) / 500) * 500;
+  const roundedMinTaxSalary =
+    Math.round((minTaxObject?.salary || 0) / 500) * 500;
 
   return (
     <Card className="mt-2">
@@ -79,24 +98,24 @@ const ChartCard = ({
       <CardContent>
         {selectedChart === Chart.SALARY && (
           <IncomeChart
-            incomeChartData={incomeChartData}
-            salary={salary}
+            incomeChartData={normalizedIncomeChartData}
+            salary={roundedSalary}
             onChartClick={setSalary}
-            maxIncomeSalary={maxIncomeObject.salary}
+            maxIncomeSalary={roundedMaxIncomeSalary}
           />
         )}
         {selectedChart === Chart.TAX && (
           <TaxChart
-            taxChartData={taxChartData}
-            salary={salary}
-            minTaxSalary={minTaxObject.salary}
+            taxChartData={normalizedTaxChartData}
+            salary={roundedSalary}
+            minTaxSalary={roundedMinTaxSalary}
             onChartClick={setSalary}
           />
         )}
         {selectedChart === Chart.COMBINED && (
           <CombinedChart
-            combinedChartData={combinedChartData}
-            salary={salary}
+            combinedChartData={normalizedCombinedChartData}
+            salary={roundedSalary}
             onChartClick={setSalary}
           />
         )}

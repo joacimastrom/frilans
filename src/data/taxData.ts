@@ -1,6 +1,6 @@
 export const taxData = [
   {
-    salaryFrom: 1,
+    salaryFrom: 0,
     salaryTo: 2000,
     tax: 0,
   },

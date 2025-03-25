@@ -106,7 +106,8 @@ const Form = () => {
     const incomeChartData = [];
     const taxChartData = [];
     const combinedChartData = [];
-    for (let i = 0; i <= maxSalary; i += 1000) {
+
+    for (let i = 0; i <= maxSalary; i++) {
       const salaryObj = getSalaryData(i, resultBeforeSalary, benefits.pension);
       incomeChartData.push(salaryObj);
       const taxObj = getTaxData(
@@ -234,11 +235,13 @@ const Form = () => {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <OptimisedCard
-              monthlySalary={maxIncomeObject.salary}
-              dividend={maxIncomeObject.maxDividend}
-              totalIncome={maxIncomeObject.totalIncome}
-            />
+            {
+              <OptimisedCard
+                monthlySalary={maxIncomeObject.salary}
+                dividend={maxIncomeObject.maxDividend}
+                totalIncome={maxIncomeObject.totalIncome}
+              />
+            }
             <IncomeTable
               salary={totalSalary}
               dividend={maxDividend}

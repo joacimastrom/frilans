@@ -24,7 +24,7 @@ export const IncomeTable = ({
     title={
       <>
         <Wallet className="h-5 w-5 text-blue-600" />
-        <h2>Personliga intäkter</h2>
+        <h2>Personlig inkomst</h2>
         <Button
           size="sm"
           className="ml-auto"
@@ -33,7 +33,7 @@ export const IncomeTable = ({
             setSalary(maxIncomeObject.salary);
           }}
         >
-          Maximera intäkter
+          Maximera inkomst
         </Button>
       </>
     }
@@ -58,12 +58,12 @@ export const IncomeTable = ({
             {addThousandSeparator(salary + dividend)}
           </TableCell>
         </TableRow>
-        {/* <TableRow className="font-bold">
+        <TableRow className="font-bold">
           <TableCell>Jämförelselön</TableCell>
           <TableCell className="text-right whitespace-nowrap">
             {addThousandSeparator(referenceSalary) + " kr / månad"}
           </TableCell>
-        </TableRow> */}
+        </TableRow>
       </TableBody>
     </Table>
   </CollapsibleCard>

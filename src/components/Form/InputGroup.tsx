@@ -87,10 +87,8 @@ const InputGroup = ({
               type="number"
               name="amount"
               placeholder="Belopp"
-              value={input.amount}
-              onChange={(e) =>
-                onInputChange(input.id, "amount", e.target.value)
-              }
+              defaultValue={input.amount}
+              onBlur={(e) => onInputChange(input.id, "amount", e.target.value)}
             />
             {isArray && (
               <TrashIcon
