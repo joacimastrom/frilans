@@ -106,14 +106,19 @@ const Form = () => {
     const incomeChartData = [];
     const taxChartData = [];
     const combinedChartData = [];
+    let currentIncomeTaxData = getIncomeTax(0);
 
     for (let i = 0; i <= maxSalary; i++) {
       const salaryObj = getSalaryData(i, resultBeforeSalary, benefits.pension);
       incomeChartData.push(salaryObj);
+      if (i > currentIncomeTaxData?.maxSalary) {
+        currentIncomeTaxData = getIncomeTax(i);
+      }
       const taxObj = getTaxData(
         i,
         salaryObj.maxDividend,
-        salaryObj.resultAfterSalary
+        salaryObj.resultAfterSalary,
+        currentIncomeTaxData
       );
       taxChartData.push(taxObj);
       const totalTaxPercent =

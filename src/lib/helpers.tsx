@@ -117,12 +117,20 @@ export const addThousandSeparator = (number: number, separator = " ") =>
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, separator);
 
-export const getIncomeTax = (monthlyIncome: number) => {
+export type IncomeTaxData = {
+  yearlyIncomeTax: number;
+  monthlyIncomeTax: number;
+  incomeTaxPercentage: number;
+  maxSalary: number;
+};
+
+export const getIncomeTax = (monthlyIncome: number): IncomeTaxData => {
   if (!monthlyIncome || monthlyIncome < 0)
     return {
       yearlyIncomeTax: 0,
       monthlyIncomeTax: 0,
       incomeTaxPercentage: 0,
+      maxSalary: 2000,
     };
 
   const taxBracket = taxData.find(
@@ -142,6 +150,7 @@ export const getIncomeTax = (monthlyIncome: number) => {
       yearlyIncomeTax: taxBracket.tax * 12,
       incomeTaxPercentage:
         Math.floor((taxBracket.tax / monthlyIncome) * 100 * 100) / 100,
+      maxSalary: taxBracket.salaryTo,
     };
   }
   const monthlyIncomeTax = Math.floor((monthlyIncome * taxBracket.tax) / 100);
@@ -149,6 +158,7 @@ export const getIncomeTax = (monthlyIncome: number) => {
     incomeTaxPercentage: taxBracket.tax,
     monthlyIncomeTax,
     yearlyIncomeTax: monthlyIncomeTax * 12,
+    maxSalary: taxBracket.salaryTo,
   };
 };
 
@@ -223,10 +233,11 @@ export const getSalaryData = (
 export const getTaxData = (
   salary: number,
   dividend: number,
-  result: number
+  result: number,
+  incomeTaxData: IncomeTaxData
 ) => {
   const { yearlyIncomeTax, incomeTaxPercentage, monthlyIncomeTax } =
-    getIncomeTax(salary);
+    incomeTaxData;
   const resultTax = Math.round(result * RESULT_TAX);
   const dividendTax = Math.round(dividend * DIVIDEND_TAX);
   const employerFee = salary * 12 * EMPLOYER_TAX;
