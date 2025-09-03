@@ -32,7 +32,7 @@ const OptimisedCard = ({ monthlySalary, dividend, totalIncome }: Props) => {
       title={
         <>
           <TrendingUp className="h-5 w-5 " />
-          <h2 className="mr-auto">Optimerad Sammanställning</h2>
+          <h2 className="mr-auto">Maximal personlig inkomst</h2>
         </>
       }
       className="bg-gradient-to-br from-indigo-400 to-blue-700 text-white rounded-lg shadow-md overflow-hidden"
@@ -62,12 +62,14 @@ const OptimisedCard = ({ monthlySalary, dividend, totalIncome }: Props) => {
               {addThousandSeparator(totalIncome)} kr
             </p>
           </div>
-          {/*   <div className="flex justify-between">
-            <p className="text-sm text-blue-100">Månatlig jämförelselön</p>
+          <div className="flex justify-between">
+            <p className="text-sm text-blue-100">
+              Motsvarande lön som anställd
+            </p>
             <p className="text-lg font-medium">
               {addThousandSeparator(referenceSalary)} kr
             </p>
-          </div> */}
+          </div>
         </div>
       </div>
     </CollapsibleCard>

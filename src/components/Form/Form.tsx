@@ -13,7 +13,6 @@ import { useEffect, useMemo, useState } from "react";
 import ChartCard from "../ChartCard";
 import { IncomeTable } from "../IncomeTable";
 import MaxWidthSection from "../MaxWidthSection";
-import OptimisedCard from "../OptimisedCard";
 import { ResultTable } from "../ResultTable";
 import TaxTable from "../TaxTable";
 import { Table, TableCell, TableRow } from "../ui/table";
@@ -240,13 +239,11 @@ const Form = () => {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            {
-              <OptimisedCard
-                monthlySalary={maxIncomeObject.salary}
-                dividend={maxIncomeObject.maxDividend}
-                totalIncome={maxIncomeObject.totalIncome}
-              />
-            }
+            {/* <OptimisedCard
+              monthlySalary={maxIncomeObject.salary}
+              dividend={maxIncomeObject.maxDividend}
+              totalIncome={maxIncomeObject.totalIncome}
+            /> */}
             <IncomeTable
               salary={totalSalary}
               dividend={maxDividend}

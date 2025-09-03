@@ -1,9 +1,10 @@
-import { EMPLOYER_TAX } from "@/lib/constants";
+import { EMPLOYER_TAX, TAX_LIMIT } from "@/lib/constants";
 import { addThousandSeparator } from "@/lib/helpers";
 import { HeartHandshake } from "lucide-react";
 import { CollapsibleCard } from "../CollapsibleCard";
 import { Data } from "../Data";
 import InfoPopover from "../InfoPopover";
+import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Slider } from "../ui/slider";
@@ -44,7 +45,7 @@ const BenefitsCard = ({
     <div className="flex flex-col gap-2">
       <div>
         <Label htmlFor="salary">Månadslön</Label>
-        <div className="flex">
+        <div className="flex gap-2">
           <Input
             id="salary"
             type="number"
@@ -59,6 +60,18 @@ const BenefitsCard = ({
               })
             }
           />
+          <Button
+            type="button"
+            size={"sm"}
+            onClick={() =>
+              setBenefits({
+                ...benefits,
+                salary: Math.round(TAX_LIMIT / 12),
+              })
+            }
+          >
+            Skiktgränsen
+          </Button>
         </div>
         <Slider
           min={0}

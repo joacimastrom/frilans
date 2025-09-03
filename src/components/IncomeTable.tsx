@@ -21,6 +21,7 @@ export const IncomeTable = ({
   setSalary,
 }: Props) => (
   <CollapsibleCard
+    defaultOpen
     title={
       <>
         <Wallet className="h-5 w-5 text-blue-600" />
