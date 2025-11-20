@@ -89,17 +89,8 @@ const Form = () => {
 
   const maxSalary = getMaxSalary(resultBeforeSalary, benefits.pension);
 
-  useEffect(() => {
-    if (benefits.salary > maxSalary) {
-      setFormData((formData) => ({
-        ...formData,
-        benefits: {
-          ...benefits,
-          salary: maxSalary,
-        },
-      }));
-    }
-  }, [benefits, maxSalary]);
+  // Clamp the salary for calculations without modifying the user's selected value
+  const effectiveSalary = Math.min(Math.max(0, benefits.salary), maxSalary);
 
   const { incomeChartData, taxChartData, combinedChartData } = useMemo(() => {
     const incomeChartData = [];
@@ -137,11 +128,11 @@ const Form = () => {
   }, [resultBeforeSalary, maxSalary, benefits.pension]);
 
   const { maxDividend, balancedResult } = incomeChartData.find(
-    ({ salary }) => salary === benefits.salary
+    ({ salary }) => salary === effectiveSalary
   ) || { maxDividend: 0, balancedResult: 0 };
 
   // Tax calculations
-  const totalSalary = benefits.salary * 12;
+  const totalSalary = effectiveSalary * 12;
   const employerFee = totalSalary * EMPLOYER_TAX;
   const totalSalaryCost =
     totalSalary * (1 + benefits.pension / 100) + employerFee;
@@ -155,9 +146,9 @@ const Form = () => {
 
   // Income calculations
   const { monthlyIncomeTax, yearlyIncomeTax, incomeTaxPercentage } =
-    getIncomeTax(benefits.salary);
+    getIncomeTax(effectiveSalary);
 
-  const salaryAfterTaxes = benefits.salary - monthlyIncomeTax;
+  const salaryAfterTaxes = effectiveSalary - monthlyIncomeTax;
   const dividendAfterTaxes = maxDividend - dividendTax;
 
   const dividendAfterTaxesMonthly = dividendAfterTaxes / 12;
@@ -209,6 +200,7 @@ const Form = () => {
                 totalRevenue={getTitleByPeriod(totalRevenue)}
               />
               <BenefitsCard
+                effectiveSalary={effectiveSalary}
                 benefits={benefits}
                 setBenefits={(benefits) =>
                   setFormData({ ...formData, benefits })
@@ -264,7 +256,7 @@ const Form = () => {
         </div>
         <ChartCard
           incomeChartData={incomeChartData}
-          salary={benefits.salary}
+          salary={effectiveSalary}
           setSalary={setSalary}
           maxIncomeObject={maxIncomeObject}
           taxChartData={taxChartData}

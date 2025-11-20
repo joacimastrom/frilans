@@ -26,6 +26,7 @@ type Props = {
   }) => void;
   lostRevenue: number;
   maxSalary: number;
+  effectiveSalary: number;
 };
 
 const BenefitsCard = ({
@@ -33,6 +34,7 @@ const BenefitsCard = ({
   setBenefits,
   lostRevenue,
   maxSalary,
+  effectiveSalary,
 }: Props) => (
   <CollapsibleCard
     title={
@@ -52,7 +54,7 @@ const BenefitsCard = ({
             step={1}
             min={0}
             max={maxSalary}
-            value={benefits.salary.toString()}
+            value={effectiveSalary.toString()}
             onChange={(e) =>
               setBenefits({
                 ...benefits,
@@ -63,6 +65,7 @@ const BenefitsCard = ({
           <Button
             type="button"
             size={"sm"}
+            disabled={maxSalary * 12 < TAX_LIMIT}
             onClick={() =>
               setBenefits({
                 ...benefits,
@@ -83,14 +86,14 @@ const BenefitsCard = ({
               salary: Number(value),
             })
           }
-          value={[benefits.salary]}
+          value={[effectiveSalary]}
           className="w-full mt-4"
         />
       </div>
       <Data
         className="text-muted-foreground mt-1 ml-1"
         label="Arbetsgivaragift (31.42%)"
-        value={`${addThousandSeparator(benefits.salary * EMPLOYER_TAX)} kr`}
+        value={`${addThousandSeparator(effectiveSalary * EMPLOYER_TAX)} kr`}
       />
       <div>
         <Label htmlFor="vacation">Semesterdagar</Label>
@@ -138,7 +141,7 @@ const BenefitsCard = ({
           className="text-muted-foreground mt-1 ml-1 mb-1"
           label="Pensionskostnad"
           value={`${addThousandSeparator(
-            (benefits.salary * benefits.pension) / 100
+            (effectiveSalary * benefits.pension) / 100
           )} kr`}
         />
       </div>
