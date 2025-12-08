@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { getIncomeTax } from "@/lib/helpers";
+import { formatNumber, parseNumber } from "@/lib/numberUtils";
 import { PersonalFinances } from "@/models/home-comparison";
 import FormattedNumberInput from "./FormattedNumberInput";
 import LabelWithHelp from "./LabelWithHelp";
@@ -18,8 +19,6 @@ interface BasicInformationSectionProps {
   includeHome: boolean;
   onIncludeHomeChange: (include: boolean) => void;
   isBaseline: boolean;
-  formatNumber: (value: number) => string;
-  parseNumber: (value: string) => number;
 }
 
 export default function BasicInformationSection({
@@ -30,8 +29,6 @@ export default function BasicInformationSection({
   includeHome,
   onIncludeHomeChange,
   isBaseline,
-  formatNumber,
-  parseNumber,
 }: BasicInformationSectionProps) {
   // Calculate net salary
   const { monthlyIncomeTax } = getIncomeTax(personalFinances.monthlySalary);

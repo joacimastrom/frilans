@@ -2,9 +2,8 @@ import ComparisonChart from "@/components/home-comparison/ComparisonChart";
 import ScenarioForm from "@/components/home-comparison/ScenarioForm";
 import ScenarioList from "@/components/home-comparison/ScenarioList";
 import MaxWidthSection from "@/components/MaxWidthSection";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   calculateScenario,
   clearScenarios,
@@ -393,80 +392,6 @@ export default function HomeComparisonPage() {
           </Card>
         ) : (
           <>
-            {/* Summary Cards */}
-            {results.length > 0 && (
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                {results
-                  .filter((result) => visibleScenarios.has(result.scenarioId))
-                  .slice(0, 4) // Show max 4 summary cards
-                  .map((result) => {
-                    const scenario = scenarios.find(
-                      (s) => s.id === result.scenarioId
-                    );
-                    if (!scenario) return null;
-
-                    const finalData =
-                      result.yearlyData[result.yearlyData.length - 1];
-
-                    return (
-                      <Card key={result.scenarioId}>
-                        <CardHeader className="pb-2">
-                          <div className="flex items-center gap-2">
-                            <div
-                              className="w-3 h-3 rounded-full flex-shrink-0"
-                              style={{ backgroundColor: scenario.color }}
-                            />
-                            <CardTitle className="text-lg truncate">
-                              {scenario.name}
-                            </CardTitle>
-                            {scenario.isBaseline && (
-                              <Badge variant="secondary">Baseline</Badge>
-                            )}
-                          </div>
-                        </CardHeader>
-                        <CardContent className="space-y-2">
-                          <div className="text-sm space-y-1">
-                            <div className="flex justify-between">
-                              <span className="text-gray-600">
-                                Nettoförmögenhet:
-                              </span>
-                              <span className="font-semibold">
-                                {formatCurrency(finalData.netWorth)}
-                              </span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-gray-600">
-                                Investeringar:
-                              </span>
-                              <span>
-                                {formatCurrency(finalData.investmentValue)}
-                              </span>
-                            </div>
-                            {finalData.homeEquity > 0 && (
-                              <div className="flex justify-between">
-                                <span className="text-gray-600">
-                                  Bostadskapital:
-                                </span>
-                                <span>
-                                  {formatCurrency(finalData.homeEquity)}
-                                </span>
-                              </div>
-                            )}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    );
-                  })}
-              </div>
-            )}
-
-            {/* Comparison Chart */}
-            <ComparisonChart
-              results={results}
-              scenarios={scenarios}
-              visibleScenarios={visibleScenarios}
-            />
-
             {/* Scenario List */}
             <ScenarioList
               scenarios={scenarios}
@@ -475,6 +400,13 @@ export default function HomeComparisonPage() {
               onEditScenario={handleEditScenario}
               onDuplicateScenario={handleDuplicateScenario}
               onDeleteScenario={handleDeleteScenario}
+            />
+
+            {/* Comparison Chart */}
+            <ComparisonChart
+              results={results}
+              scenarios={scenarios}
+              visibleScenarios={visibleScenarios}
             />
           </>
         )}

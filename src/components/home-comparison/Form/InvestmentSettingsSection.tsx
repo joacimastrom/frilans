@@ -1,5 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import {
+  formatNumber,
+  formatToTwoDecimals,
+  parseNumber,
+} from "@/lib/numberUtils";
 import { Investment } from "@/models/home-comparison";
 import FormattedNumberInput from "./FormattedNumberInput";
 import LabelWithHelp from "./LabelWithHelp";
@@ -7,9 +12,6 @@ import LabelWithHelp from "./LabelWithHelp";
 interface InvestmentSettingsSectionProps {
   investment: Investment;
   onInvestmentChange: (field: keyof Investment, value: number) => void;
-  formatNumber: (value: number) => string;
-  parseNumber: (value: string) => number;
-  formatToTwoDecimals: (value: number) => number;
   totalLiquidFunds: number;
   downPayment: number;
   netSalary?: number;
@@ -19,9 +21,6 @@ interface InvestmentSettingsSectionProps {
 export default function InvestmentSettingsSection({
   investment,
   onInvestmentChange,
-  formatNumber,
-  parseNumber,
-  formatToTwoDecimals,
   totalLiquidFunds,
   downPayment,
   netSalary = 0,

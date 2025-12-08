@@ -54,7 +54,7 @@ export const calculateAmortization = (
 
   const totalRate = ltvBasedRate + incomeBasedRate;
   const annualAmount = loanAmount * totalRate;
-  const monthlyAmount = annualAmount / 12;
+  const monthlyAmount = Math.round(annualAmount / 12);
 
   return {
     requiredAnnualRate: totalRate,

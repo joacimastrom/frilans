@@ -51,12 +51,6 @@ export default function ScenarioForm({
     !!scenario?.homeOwnership || !isBaseline
   );
 
-  // Helper function to format numbers to 2 decimals
-  const formatToTwoDecimals = (value: string | number): number => {
-    const num = typeof value === "string" ? parseFloat(value) : value;
-    return isNaN(num) ? 0 : Math.round(num * 100) / 100;
-  };
-
   const updatePersonalFinances = (
     field: keyof PersonalFinances,
     value: string | number
@@ -110,15 +104,6 @@ export default function ScenarioForm({
     onSave(scenarioToSave);
   };
 
-  const formatNumber = (value: number): string => {
-    return new Intl.NumberFormat("sv-SE").format(value);
-  };
-
-  const parseNumber = (value: string): number => {
-    const num = parseFloat(value.replace(/\s/g, "")) || 0;
-    return formatToTwoDecimals(num);
-  };
-
   // Calculate net salary and total monthly costs for investment section
   const { monthlyIncomeTax } = getIncomeTax(
     formData.personalFinances.monthlySalary
@@ -158,8 +143,6 @@ export default function ScenarioForm({
         includeHome={includeHome}
         onIncludeHomeChange={setIncludeHome}
         isBaseline={isBaseline}
-        formatNumber={formatNumber}
-        parseNumber={parseNumber}
       />
 
       {/* Color Picker - Only show for non-baseline scenarios with available colors */}
@@ -197,9 +180,6 @@ export default function ScenarioForm({
         <HomeOwnershipSection
           homeOwnership={formData.homeOwnership}
           onHomeOwnershipChange={updateHomeOwnership}
-          formatNumber={formatNumber}
-          parseNumber={parseNumber}
-          formatToTwoDecimals={formatToTwoDecimals}
           monthlySalary={formData.personalFinances.monthlySalary}
           totalLiquidFunds={formData.personalFinances.totalLiquidFunds}
         />
@@ -207,9 +187,6 @@ export default function ScenarioForm({
       <InvestmentSettingsSection
         investment={formData.investment}
         onInvestmentChange={updateInvestment}
-        formatNumber={formatNumber}
-        parseNumber={parseNumber}
-        formatToTwoDecimals={formatToTwoDecimals}
         totalLiquidFunds={formData.personalFinances.totalLiquidFunds}
         downPayment={formData.homeOwnership?.downPayment || 0}
         netSalary={netSalary}

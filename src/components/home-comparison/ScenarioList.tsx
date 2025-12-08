@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Scenario } from "@/models/home-comparison";
@@ -73,18 +72,6 @@ export default function ScenarioList({
                         <EyeOff className="h-4 w-4" />
                       )}
                     </Button>
-                  </div>
-
-                  <div className="flex flex-wrap gap-1">
-                    {scenario.isBaseline && (
-                      <Badge variant="secondary">Baseline</Badge>
-                    )}
-                    {scenario.homeOwnership && (
-                      <Badge variant="outline">Bostadsköp</Badge>
-                    )}
-                    <Badge variant="outline">
-                      {scenario.investment.investmentAccountType}
-                    </Badge>
                   </div>
                 </CardHeader>
 

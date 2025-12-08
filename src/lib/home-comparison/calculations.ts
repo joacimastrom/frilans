@@ -46,7 +46,7 @@ export function calculateInvestmentGrowth(
 
   for (let month = 1; month <= totalMonths; month++) {
     // Add annual deposit at the beginning of each year (month 1, 13, 25, etc.)
-    if ((month - 1) % 12 === 0 && month > 1) {
+    if ((month - 1) % 12 === 1 && month > 1) {
       value += annualDeposit;
     }
 
@@ -106,13 +106,6 @@ export function calculateLoanSchedule(
 
       if (remainingLoan <= 0) break;
     }
-
-    // DEBUG: Log loan schedule calculation
-    console.log(
-      `LOAN SCHEDULE - Year ${year}: Started at ${startingLoanBalance.toLocaleString()}, ended at ${remainingLoan.toLocaleString()}, amortization: ${
-        monthlyAmortization * 12
-      }`
-    );
 
     yearlyData.push({ remainingLoan, interestPaid: yearlyInterest });
     if (remainingLoan <= 0) break;
