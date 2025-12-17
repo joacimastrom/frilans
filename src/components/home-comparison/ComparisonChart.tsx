@@ -77,27 +77,9 @@ export default function ComparisonChart({
     return (value / 1000000).toFixed(2);
   };
 
-  const formatTooltipLabel = (dataKey: string): string => {
-    const parts = dataKey.split("_");
-    const scenarioName = parts[0];
-    const metric = parts[1];
-
-    let metricLabel = "";
-    switch (metric) {
-      case "netWorth":
-        metricLabel = "Nettoförmögenhet";
-        break;
-      case "investment":
-        metricLabel = "Investeringsvärde";
-        break;
-      case "homeEquity":
-        metricLabel = "Bostadskapital";
-        break;
-      default:
-        metricLabel = metric;
-    }
-
-    return `${scenarioName} - ${metricLabel}`;
+  const getStartingValue = (dataKey: string): number => {
+    if (chartData.length === 0) return 0;
+    return chartData[0][dataKey] || 0;
   };
 
   const CustomTooltip = ({
@@ -106,15 +88,71 @@ export default function ComparisonChart({
     label,
   }: TooltipProps<number, string>) => {
     if (active && payload && payload.length) {
+      // Group payload entries by scenario
+      const scenarioGroups: { [scenarioName: string]: typeof payload } = {};
+
+      payload.forEach((entry) => {
+        const parts = (entry.dataKey as string).split("_");
+        const scenarioName = parts[0];
+
+        if (!scenarioGroups[scenarioName]) {
+          scenarioGroups[scenarioName] = [];
+        }
+        scenarioGroups[scenarioName].push(entry);
+      });
+
       return (
         <div className="bg-white p-3 border rounded-lg shadow-lg">
-          <p className="font-semibold">{`År ${label}`}</p>
-          {payload.map((entry, index) => (
-            <p key={index} style={{ color: entry.color }}>
-              {`${formatTooltipLabel(
-                entry.dataKey as string
-              )}: ${formatCurrency(entry.value || 0)}`}
-            </p>
+          <p className="font-semibold mb-2">{`År ${label}`}</p>
+          {Object.entries(scenarioGroups).map(([scenarioName, entries]) => (
+            <div key={scenarioName} className="mb-3 last:mb-0">
+              <p
+                className="font-semibold text-sm mb-1"
+                style={{ color: entries[0]?.color }}
+              >
+                {scenarioName}
+              </p>
+              {entries.map((entry, index) => {
+                const parts = (entry.dataKey as string).split("_");
+                const metricType = parts[1];
+
+                let metricLabel = "";
+                switch (metricType) {
+                  case "netWorth":
+                    metricLabel = "Nettoförmögenhet";
+                    break;
+                  case "investment":
+                    metricLabel = "Investeringar";
+                    break;
+                  case "homeEquity":
+                    metricLabel = "Bostadskapital";
+                    break;
+                  default:
+                    metricLabel = metricType;
+                }
+
+                const currentValue = entry.value || 0;
+                const startingValue = getStartingValue(entry.dataKey as string);
+                const difference = currentValue - startingValue;
+                const percentageChange =
+                  startingValue !== 0 ? (difference / startingValue) * 100 : 0;
+
+                return (
+                  <div key={index} className="ml-2 text-sm">
+                    <p className="font-medium">
+                      {`${metricLabel}: ${formatCurrency(currentValue)} M kr`}
+                    </p>
+                    <p className="text-xs opacity-75">
+                      {`Förändring: ${
+                        difference >= 0 ? "+" : ""
+                      }${formatCurrency(difference)} M kr (${
+                        percentageChange >= 0 ? "+" : ""
+                      }${percentageChange.toFixed(1)}%)`}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
           ))}
         </div>
       );

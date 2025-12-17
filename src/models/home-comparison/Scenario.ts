@@ -1,6 +1,7 @@
 export interface PersonalFinances {
   totalLiquidFunds: number; // Total available money (savings + investments)
   monthlySalary: number; // Monthly gross salary for loan calculations
+  yearlyCapitalIncome: number; // Yearly capital income (dividends, interest, etc.)
 }
 
 export interface Investment {
@@ -10,10 +11,16 @@ export interface Investment {
   expectedYearlyGrowth: number; // as decimal (e.g., 0.07 for 7%)
 }
 
+export type HomeOwnershipType = "none" | "purchase" | "owned";
+
 export interface HomeOwnership {
-  purchasePrice: number; // Total cost of the home
-  downPayment: number; // Must be at least 15% of purchasePrice
-  loanAmount: number; // Will be calculated as purchasePrice - downPayment
+  type: HomeOwnershipType;
+  // For purchase scenarios
+  purchasePrice?: number; // Total cost of the home
+  downPayment?: number; // Must be at least 15% of purchasePrice
+  // For both purchase and owned scenarios
+  currentValue?: number; // Current market value (for owned) or purchase price (for purchase)
+  loanAmount: number; // Current loan amount or calculated as purchasePrice - downPayment
   yearlyInterestRate: number; // as decimal (e.g., 0.04 for 4%)
   monthlyAmortering?: number; // optional, will calculate from amorteringskrav if not provided
   monthlyCosts: {
@@ -80,6 +87,7 @@ export interface ScenarioSummary {
 export const DEFAULT_PERSONAL_FINANCES: PersonalFinances = {
   totalLiquidFunds: 1000000, // 1M SEK liquid funds
   monthlySalary: 50000, // 50k SEK monthly salary
+  yearlyCapitalIncome: 0, // Default no capital income
 };
 
 export const DEFAULT_INVESTMENT: Investment = {
@@ -90,10 +98,31 @@ export const DEFAULT_INVESTMENT: Investment = {
 };
 
 export const DEFAULT_HOME_OWNERSHIP: HomeOwnership = {
-  purchasePrice: 0, // 5M SEK home
-  downPayment: 0, // 15% minimum
-  loanAmount: 0, // Calculated from purchase - down payment
+  type: "purchase",
+  purchasePrice: 0,
+  downPayment: 0,
+  loanAmount: 0,
   yearlyInterestRate: 0.03,
+  monthlyCosts: {
+    avgift: 3000,
+    drift: 1000,
+    el: 800,
+    värme: 1200,
+    försäkring: 400,
+    övrigt: 500,
+  },
+  yearlyIncrease: 0.02,
+  amorteringsbefrielse: {
+    enabled: false,
+  },
+};
+
+export const DEFAULT_OWNED_HOME: HomeOwnership = {
+  type: "owned",
+  currentValue: 5000000,
+  loanAmount: 3500000, // Example: 70% LTV
+  yearlyInterestRate: 0.03,
+  monthlyAmortering: 7000,
   monthlyCosts: {
     avgift: 3000,
     drift: 1000,
@@ -136,13 +165,14 @@ export const MORTGAGE_CONSTANTS = {
 } as const;
 
 /**
- * Calculate maximum purchase price based on salary and liquid funds
+ * Calculate maximum purchase price based on salary, capital income and liquid funds
  */
 export function calculateMaxPurchasePrice(
   monthlySalary: number,
+  yearlyCapitalIncome: number,
   totalLiquidFunds: number
 ): number {
-  const yearlyIncome = monthlySalary * 12;
+  const yearlyIncome = monthlySalary * 12 + yearlyCapitalIncome;
   const maxLoanBasedOnIncome =
     yearlyIncome * MORTGAGE_CONSTANTS.MAX_LOAN_TO_INCOME_RATIO;
 
@@ -184,9 +214,10 @@ export function calculateDownPaymentRange(
  */
 export function validateLoanAmount(
   loanAmount: number,
-  monthlySalary: number
+  monthlySalary: number,
+  yearlyCapitalIncome: number
 ): boolean {
-  const yearlyIncome = monthlySalary * 12;
+  const yearlyIncome = monthlySalary * 12 + yearlyCapitalIncome;
   const maxAllowedLoan =
     yearlyIncome * MORTGAGE_CONSTANTS.MAX_LOAN_TO_INCOME_RATIO;
 

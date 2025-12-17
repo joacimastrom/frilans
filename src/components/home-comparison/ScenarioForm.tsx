@@ -5,8 +5,10 @@ import {
   BASELINE_COLOR,
   DEFAULT_HOME_OWNERSHIP,
   DEFAULT_INVESTMENT,
+  DEFAULT_OWNED_HOME,
   DEFAULT_PERSONAL_FINANCES,
   HomeOwnership,
+  HomeOwnershipType,
   Investment,
   PersonalFinances,
   Scenario,
@@ -47,9 +49,33 @@ export default function ScenarioForm({
       (isBaseline ? undefined : { ...DEFAULT_HOME_OWNERSHIP }),
   });
 
-  const [includeHome, setIncludeHome] = useState(
-    !!scenario?.homeOwnership || !isBaseline
+  const [homeOwnershipType, setHomeOwnershipType] = useState<HomeOwnershipType>(
+    scenario?.homeOwnership?.type || (isBaseline ? "none" : "purchase")
   );
+
+  const handleHomeOwnershipTypeChange = (type: HomeOwnershipType) => {
+    setHomeOwnershipType(type);
+
+    if (type === "none") {
+      setFormData((prev) => ({
+        ...prev,
+        homeOwnership: undefined,
+        selling: undefined,
+      }));
+    } else if (type === "purchase") {
+      setFormData((prev) => ({
+        ...prev,
+        homeOwnership: { ...DEFAULT_HOME_OWNERSHIP },
+        selling: undefined,
+      }));
+    } else if (type === "owned") {
+      setFormData((prev) => ({
+        ...prev,
+        homeOwnership: { ...DEFAULT_OWNED_HOME },
+        selling: undefined,
+      }));
+    }
+  };
 
   const updatePersonalFinances = (
     field: keyof PersonalFinances,
@@ -97,8 +123,9 @@ export default function ScenarioForm({
 
     const scenarioToSave: Scenario = {
       ...formData,
-      homeOwnership: includeHome ? formData.homeOwnership : undefined,
-      selling: includeHome ? formData.selling : undefined,
+      homeOwnership:
+        homeOwnershipType !== "none" ? formData.homeOwnership : undefined,
+      selling: homeOwnershipType !== "none" ? formData.selling : undefined,
     };
 
     onSave(scenarioToSave);
@@ -112,18 +139,27 @@ export default function ScenarioForm({
 
   // Calculate total monthly housing costs if home ownership is included
   let totalMonthlyCosts = 0;
-  if (includeHome && formData.homeOwnership) {
-    const loanAmount =
-      (formData.homeOwnership.purchasePrice || 0) -
-      (formData.homeOwnership.downPayment || 0);
+  if (homeOwnershipType !== "none" && formData.homeOwnership) {
+    const loanAmount = formData.homeOwnership.loanAmount || 0;
     const monthlyInterest =
       (loanAmount * (formData.homeOwnership.yearlyInterestRate || 0)) / 12;
-    const { requiredMonthlyAmount: monthlyAmortization } =
-      calculateAmortization(
+
+    let monthlyAmortization = 0;
+    if (homeOwnershipType === "purchase") {
+      // For purchases, calculate amortization based on Swedish rules
+      const totalAnnualIncome =
+        formData.personalFinances.monthlySalary * 12 +
+        formData.personalFinances.yearlyCapitalIncome;
+      const { requiredMonthlyAmount } = calculateAmortization(
         loanAmount,
         formData.homeOwnership.purchasePrice || 0,
-        formData.personalFinances.monthlySalary * 12
+        totalAnnualIncome
       );
+      monthlyAmortization = requiredMonthlyAmount;
+    } else if (homeOwnershipType === "owned") {
+      // For owned homes, use the manually entered amortization
+      monthlyAmortization = formData.homeOwnership.monthlyAmortering || 0;
+    }
 
     const monthlyCosts = formData.homeOwnership.monthlyCosts;
     const monthlyFees = monthlyCosts
@@ -140,8 +176,8 @@ export default function ScenarioForm({
         onNameChange={(name) => setFormData((prev) => ({ ...prev, name }))}
         personalFinances={formData.personalFinances}
         onPersonalFinancesChange={updatePersonalFinances}
-        includeHome={includeHome}
-        onIncludeHomeChange={setIncludeHome}
+        homeOwnershipType={homeOwnershipType}
+        onHomeOwnershipTypeChange={handleHomeOwnershipTypeChange}
         isBaseline={isBaseline}
       />
 
@@ -176,12 +212,14 @@ export default function ScenarioForm({
       )}
 
       {/* Home Ownership */}
-      {includeHome && (
+      {homeOwnershipType !== "none" && (
         <HomeOwnershipSection
           homeOwnership={formData.homeOwnership}
           onHomeOwnershipChange={updateHomeOwnership}
           monthlySalary={formData.personalFinances.monthlySalary}
+          yearlyCapitalIncome={formData.personalFinances.yearlyCapitalIncome}
           totalLiquidFunds={formData.personalFinances.totalLiquidFunds}
+          homeOwnershipType={homeOwnershipType as "purchase" | "owned"}
         />
       )}
       <InvestmentSettingsSection

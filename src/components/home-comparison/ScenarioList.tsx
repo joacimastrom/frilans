@@ -43,8 +43,11 @@ export default function ScenarioList({
           {scenarios.map((scenario) => {
             const isVisible = visibleScenarios.has(scenario.id);
             const totalPropertyValue = scenario.homeOwnership
-              ? scenario.homeOwnership.downPayment +
-                scenario.homeOwnership.loanAmount
+              ? scenario.homeOwnership.type === "purchase"
+                ? scenario.homeOwnership.purchasePrice ||
+                  (scenario.homeOwnership.downPayment || 0) +
+                    scenario.homeOwnership.loanAmount
+                : scenario.homeOwnership.currentValue || 0
               : 0;
 
             return (
@@ -105,15 +108,38 @@ export default function ScenarioList({
                   {scenario.homeOwnership && (
                     <div className="text-sm space-y-1 pt-2 border-t">
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Bostadspris:</span>
+                        <span className="text-gray-600">
+                          {scenario.homeOwnership.type === "purchase"
+                            ? "Bostadspris:"
+                            : "Marknadsvärde:"}
+                        </span>
                         <span>{formatNumber(totalPropertyValue)}</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Kontantinsats:</span>
-                        <span>
-                          {formatNumber(scenario.homeOwnership.downPayment)}
-                        </span>
-                      </div>
+                      {scenario.homeOwnership.type === "purchase" &&
+                        scenario.homeOwnership.downPayment !== undefined && (
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">
+                              Kontantinsats:
+                            </span>
+                            <span>
+                              {formatNumber(scenario.homeOwnership.downPayment)}
+                            </span>
+                          </div>
+                        )}
+                      {scenario.homeOwnership.type === "owned" && (
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Bostadskapital:</span>
+                          <span>
+                            {formatNumber(
+                              Math.max(
+                                0,
+                                (scenario.homeOwnership.currentValue || 0) -
+                                  scenario.homeOwnership.loanAmount
+                              )
+                            )}
+                          </span>
+                        </div>
+                      )}
                       <div className="flex justify-between">
                         <span className="text-gray-600">Lån:</span>
                         <span>
@@ -127,6 +153,23 @@ export default function ScenarioList({
                             scenario.homeOwnership.yearlyInterestRate * 100
                           ).toFixed(2)}
                           %
+                        </span>
+                      </div>
+                      <div className="flex justify-between font-medium">
+                        <span className="text-gray-600">Månadskostnad:</span>
+                        <span>
+                          {formatNumber(
+                            // Monthly interest
+                            (scenario.homeOwnership.loanAmount *
+                              scenario.homeOwnership.yearlyInterestRate) /
+                              12 +
+                              // Monthly amortization
+                              (scenario.homeOwnership.monthlyAmortering || 0) +
+                              // Monthly fees (drift + avgift)
+                              (scenario.homeOwnership.monthlyCosts?.drift ||
+                                0) +
+                              (scenario.homeOwnership.monthlyCosts?.avgift || 0)
+                          )}
                         </span>
                       </div>
                     </div>

@@ -91,7 +91,6 @@ export function calculateLoanSchedule(
 
   for (let year = 1; year <= years; year++) {
     let yearlyInterest = 0;
-    const startingLoanBalance = remainingLoan;
 
     for (let month = 1; month <= 12; month++) {
       const monthlyInterest = remainingLoan * monthlyInterestRate;
@@ -176,10 +175,13 @@ export function calculateScenario(
   if (scenario.homeOwnership) {
     const monthlyAmortization =
       scenario.homeOwnership.monthlyAmortering ||
-      calculateAmorteringskrav(
-        scenario.homeOwnership.loanAmount,
-        scenario.homeOwnership.purchasePrice
-      );
+      (scenario.homeOwnership.type === "purchase" &&
+      scenario.homeOwnership.purchasePrice
+        ? calculateAmorteringskrav(
+            scenario.homeOwnership.loanAmount,
+            scenario.homeOwnership.purchasePrice
+          )
+        : 0);
 
     loanSchedule = calculateLoanSchedule(
       scenario.homeOwnership.loanAmount,
@@ -193,7 +195,9 @@ export function calculateScenario(
 
   // Calculate property growth if applicable
   const initialPropertyValue = scenario.homeOwnership
-    ? scenario.homeOwnership.purchasePrice
+    ? scenario.homeOwnership.currentValue ||
+      scenario.homeOwnership.purchasePrice ||
+      0
     : 0;
 
   const propertyGrowthRate = 0.03; // Default 3% property growth
@@ -250,14 +254,17 @@ export function calculateScenario(
 
     const netWorth = investmentValue + homeEquity;
 
-    // Lost growth from down payment
-    const lostGrowthFromDownPayment = scenario.homeOwnership
-      ? calculateLostGrowth(
-          scenario.homeOwnership.downPayment,
-          scenario.investment.expectedYearlyGrowth,
-          year
-        )
-      : 0;
+    // Lost growth from down payment (only applicable for purchase scenarios)
+    const lostGrowthFromDownPayment =
+      scenario.homeOwnership &&
+      scenario.homeOwnership.type === "purchase" &&
+      scenario.homeOwnership.downPayment
+        ? calculateLostGrowth(
+            scenario.homeOwnership.downPayment,
+            scenario.investment.expectedYearlyGrowth,
+            year
+          )
+        : 0;
 
     yearlyData.push({
       year,

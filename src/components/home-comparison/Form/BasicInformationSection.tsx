@@ -1,10 +1,16 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { getIncomeTax } from "@/lib/helpers";
 import { formatNumber, parseNumber } from "@/lib/numberUtils";
-import { PersonalFinances } from "@/models/home-comparison";
+import { HomeOwnershipType, PersonalFinances } from "@/models/home-comparison";
 import FormattedNumberInput from "./FormattedNumberInput";
 import LabelWithHelp from "./LabelWithHelp";
 
@@ -16,8 +22,8 @@ interface BasicInformationSectionProps {
     field: keyof PersonalFinances,
     value: number
   ) => void;
-  includeHome: boolean;
-  onIncludeHomeChange: (include: boolean) => void;
+  homeOwnershipType: HomeOwnershipType;
+  onHomeOwnershipTypeChange: (type: HomeOwnershipType) => void;
   isBaseline: boolean;
 }
 
@@ -26,13 +32,15 @@ export default function BasicInformationSection({
   onNameChange,
   personalFinances,
   onPersonalFinancesChange,
-  includeHome,
-  onIncludeHomeChange,
+  homeOwnershipType,
+  onHomeOwnershipTypeChange,
   isBaseline,
 }: BasicInformationSectionProps) {
-  // Calculate net salary
+  // Calculate net salary and total annual income
   const { monthlyIncomeTax } = getIncomeTax(personalFinances.monthlySalary);
   const netSalary = personalFinances.monthlySalary - monthlyIncomeTax;
+  const totalAnnualIncome =
+    personalFinances.monthlySalary * 12 + personalFinances.yearlyCapitalIncome;
 
   return (
     <Card>
@@ -87,19 +95,52 @@ export default function BasicInformationSection({
             {personalFinances.monthlySalary > 0 && (
               <div className="text-sm text-gray-600 mt-1">
                 Nettolön: {formatNumber(netSalary)} kr/månad
+                {totalAnnualIncome > personalFinances.monthlySalary * 12 && (
+                  <>
+                    <br />
+                    Total årsinkomst: {formatNumber(totalAnnualIncome)} kr/år
+                  </>
+                )}
               </div>
             )}
           </div>
         </div>
 
+        <div>
+          <LabelWithHelp
+            htmlFor="yearly-capital-income"
+            helpText="Utdelningar, räntor och andra kapitalinkomster som räknas in i lånekalkylen"
+          >
+            Årlig kapitalinkomst (kr)
+          </LabelWithHelp>
+          <FormattedNumberInput
+            id="yearly-capital-income"
+            value={personalFinances.yearlyCapitalIncome}
+            onChange={(value) =>
+              onPersonalFinancesChange("yearlyCapitalIncome", value)
+            }
+            placeholder="T.ex. 50 000"
+            formatNumber={formatNumber}
+            parseNumber={parseNumber}
+          />
+        </div>
+
         {!isBaseline && (
-          <div className="flex items-center space-x-2">
-            <Switch
-              id="include-home"
-              checked={includeHome}
-              onCheckedChange={onIncludeHomeChange}
-            />
-            <Label htmlFor="include-home">Inkludera bostadsköp</Label>
+          <div className="space-y-2">
+            <Label htmlFor="home-ownership-type">Bostadssituation</Label>
+            <Select
+              value={homeOwnershipType}
+              onValueChange={onHomeOwnershipTypeChange}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Välj bostadssituation" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="none">Ingen bostad</SelectItem>
+                <SelectItem value="purchase">Bostadsköp</SelectItem>
+                <SelectItem value="owned">Redan ägd bostad</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         )}
       </CardContent>

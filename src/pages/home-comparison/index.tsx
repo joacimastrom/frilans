@@ -219,14 +219,6 @@ export default function HomeComparisonPage() {
     }
   };
 
-  const formatCurrency = (value: number): string => {
-    return new Intl.NumberFormat("sv-SE", {
-      style: "currency",
-      currency: "SEK",
-      maximumFractionDigits: 0,
-    }).format(value);
-  };
-
   const getAvailableColors = (): string[] => {
     const usedColors = scenarios
       .filter(
