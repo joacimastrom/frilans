@@ -1,0 +1,2502 @@
+[
+  {
+    "salaryFrom": 1,
+    "salaryTo": 2000,
+    "tax": 0
+  },
+  {
+    "salaryFrom": 2001,
+    "salaryTo": 2100,
+    "tax": 150
+  },
+  {
+    "salaryFrom": 2101,
+    "salaryTo": 2200,
+    "tax": 152
+  },
+  {
+    "salaryFrom": 2201,
+    "salaryTo": 2300,
+    "tax": 162
+  },
+  {
+    "salaryFrom": 2301,
+    "salaryTo": 2400,
+    "tax": 173
+  },
+  {
+    "salaryFrom": 2401,
+    "salaryTo": 2500,
+    "tax": 183
+  },
+  {
+    "salaryFrom": 2501,
+    "salaryTo": 2600,
+    "tax": 194
+  },
+  {
+    "salaryFrom": 2601,
+    "salaryTo": 2700,
+    "tax": 204
+  },
+  {
+    "salaryFrom": 2701,
+    "salaryTo": 2800,
+    "tax": 215
+  },
+  {
+    "salaryFrom": 2801,
+    "salaryTo": 2900,
+    "tax": 217
+  },
+  {
+    "salaryFrom": 2901,
+    "salaryTo": 3000,
+    "tax": 227
+  },
+  {
+    "salaryFrom": 3001,
+    "salaryTo": 3100,
+    "tax": 238
+  },
+  {
+    "salaryFrom": 3101,
+    "salaryTo": 3200,
+    "tax": 248
+  },
+  {
+    "salaryFrom": 3201,
+    "salaryTo": 3300,
+    "tax": 259
+  },
+  {
+    "salaryFrom": 3301,
+    "salaryTo": 3400,
+    "tax": 269
+  },
+  {
+    "salaryFrom": 3401,
+    "salaryTo": 3500,
+    "tax": 272
+  },
+  {
+    "salaryFrom": 3501,
+    "salaryTo": 3600,
+    "tax": 282
+  },
+  {
+    "salaryFrom": 3601,
+    "salaryTo": 3700,
+    "tax": 293
+  },
+  {
+    "salaryFrom": 3701,
+    "salaryTo": 3800,
+    "tax": 303
+  },
+  {
+    "salaryFrom": 3801,
+    "salaryTo": 3900,
+    "tax": 314
+  },
+  {
+    "salaryFrom": 3901,
+    "salaryTo": 4000,
+    "tax": 324
+  },
+  {
+    "salaryFrom": 4001,
+    "salaryTo": 4100,
+    "tax": 326
+  },
+  {
+    "salaryFrom": 4101,
+    "salaryTo": 4200,
+    "tax": 337
+  },
+  {
+    "salaryFrom": 4201,
+    "salaryTo": 4300,
+    "tax": 347
+  },
+  {
+    "salaryFrom": 4301,
+    "salaryTo": 4400,
+    "tax": 358
+  },
+  {
+    "salaryFrom": 4401,
+    "salaryTo": 4500,
+    "tax": 368
+  },
+  {
+    "salaryFrom": 4501,
+    "salaryTo": 4600,
+    "tax": 379
+  },
+  {
+    "salaryFrom": 4601,
+    "salaryTo": 4700,
+    "tax": 381
+  },
+  {
+    "salaryFrom": 4701,
+    "salaryTo": 4800,
+    "tax": 391
+  },
+  {
+    "salaryFrom": 4801,
+    "salaryTo": 4900,
+    "tax": 402
+  },
+  {
+    "salaryFrom": 4901,
+    "salaryTo": 5000,
+    "tax": 412
+  },
+  {
+    "salaryFrom": 5001,
+    "salaryTo": 5100,
+    "tax": 422
+  },
+  {
+    "salaryFrom": 5101,
+    "salaryTo": 5200,
+    "tax": 432
+  },
+  {
+    "salaryFrom": 5201,
+    "salaryTo": 5300,
+    "tax": 442
+  },
+  {
+    "salaryFrom": 5301,
+    "salaryTo": 5400,
+    "tax": 444
+  },
+  {
+    "salaryFrom": 5401,
+    "salaryTo": 5500,
+    "tax": 454
+  },
+  {
+    "salaryFrom": 5501,
+    "salaryTo": 5600,
+    "tax": 464
+  },
+  {
+    "salaryFrom": 5601,
+    "salaryTo": 5700,
+    "tax": 474
+  },
+  {
+    "salaryFrom": 5701,
+    "salaryTo": 5800,
+    "tax": 484
+  },
+  {
+    "salaryFrom": 5801,
+    "salaryTo": 5900,
+    "tax": 494
+  },
+  {
+    "salaryFrom": 5901,
+    "salaryTo": 6000,
+    "tax": 496
+  },
+  {
+    "salaryFrom": 6001,
+    "salaryTo": 6100,
+    "tax": 506
+  },
+  {
+    "salaryFrom": 6101,
+    "salaryTo": 6200,
+    "tax": 516
+  },
+  {
+    "salaryFrom": 6201,
+    "salaryTo": 6300,
+    "tax": 526
+  },
+  {
+    "salaryFrom": 6301,
+    "salaryTo": 6400,
+    "tax": 536
+  },
+  {
+    "salaryFrom": 6401,
+    "salaryTo": 6500,
+    "tax": 546
+  },
+  {
+    "salaryFrom": 6501,
+    "salaryTo": 6600,
+    "tax": 548
+  },
+  {
+    "salaryFrom": 6601,
+    "salaryTo": 6700,
+    "tax": 558
+  },
+  {
+    "salaryFrom": 6701,
+    "salaryTo": 6800,
+    "tax": 568
+  },
+  {
+    "salaryFrom": 6801,
+    "salaryTo": 6900,
+    "tax": 578
+  },
+  {
+    "salaryFrom": 6901,
+    "salaryTo": 7000,
+    "tax": 588
+  },
+  {
+    "salaryFrom": 7001,
+    "salaryTo": 7100,
+    "tax": 598
+  },
+  {
+    "salaryFrom": 7101,
+    "salaryTo": 7200,
+    "tax": 600
+  },
+  {
+    "salaryFrom": 7201,
+    "salaryTo": 7300,
+    "tax": 610
+  },
+  {
+    "salaryFrom": 7301,
+    "salaryTo": 7400,
+    "tax": 624
+  },
+  {
+    "salaryFrom": 7401,
+    "salaryTo": 7500,
+    "tax": 644
+  },
+  {
+    "salaryFrom": 7501,
+    "salaryTo": 7600,
+    "tax": 663
+  },
+  {
+    "salaryFrom": 7601,
+    "salaryTo": 7700,
+    "tax": 683
+  },
+  {
+    "salaryFrom": 7701,
+    "salaryTo": 7800,
+    "tax": 702
+  },
+  {
+    "salaryFrom": 7801,
+    "salaryTo": 7900,
+    "tax": 722
+  },
+  {
+    "salaryFrom": 7901,
+    "salaryTo": 8000,
+    "tax": 741
+  },
+  {
+    "salaryFrom": 8001,
+    "salaryTo": 8100,
+    "tax": 760
+  },
+  {
+    "salaryFrom": 8101,
+    "salaryTo": 8200,
+    "tax": 780
+  },
+  {
+    "salaryFrom": 8201,
+    "salaryTo": 8300,
+    "tax": 799
+  },
+  {
+    "salaryFrom": 8301,
+    "salaryTo": 8400,
+    "tax": 819
+  },
+  {
+    "salaryFrom": 8401,
+    "salaryTo": 8500,
+    "tax": 838
+  },
+  {
+    "salaryFrom": 8501,
+    "salaryTo": 8600,
+    "tax": 857
+  },
+  {
+    "salaryFrom": 8601,
+    "salaryTo": 8700,
+    "tax": 877
+  },
+  {
+    "salaryFrom": 8701,
+    "salaryTo": 8800,
+    "tax": 896
+  },
+  {
+    "salaryFrom": 8801,
+    "salaryTo": 8900,
+    "tax": 916
+  },
+  {
+    "salaryFrom": 8901,
+    "salaryTo": 9000,
+    "tax": 935
+  },
+  {
+    "salaryFrom": 9001,
+    "salaryTo": 9100,
+    "tax": 954
+  },
+  {
+    "salaryFrom": 9101,
+    "salaryTo": 9200,
+    "tax": 974
+  },
+  {
+    "salaryFrom": 9201,
+    "salaryTo": 9300,
+    "tax": 993
+  },
+  {
+    "salaryFrom": 9301,
+    "salaryTo": 9400,
+    "tax": 1013
+  },
+  {
+    "salaryFrom": 9401,
+    "salaryTo": 9500,
+    "tax": 1032
+  },
+  {
+    "salaryFrom": 9501,
+    "salaryTo": 9600,
+    "tax": 1051
+  },
+  {
+    "salaryFrom": 9601,
+    "salaryTo": 9700,
+    "tax": 1071
+  },
+  {
+    "salaryFrom": 9701,
+    "salaryTo": 9800,
+    "tax": 1090
+  },
+  {
+    "salaryFrom": 9801,
+    "salaryTo": 9900,
+    "tax": 1110
+  },
+  {
+    "salaryFrom": 9901,
+    "salaryTo": 10000,
+    "tax": 1129
+  },
+  {
+    "salaryFrom": 10001,
+    "salaryTo": 10100,
+    "tax": 1148
+  },
+  {
+    "salaryFrom": 10101,
+    "salaryTo": 10200,
+    "tax": 1168
+  },
+  {
+    "salaryFrom": 10201,
+    "salaryTo": 10300,
+    "tax": 1187
+  },
+  {
+    "salaryFrom": 10301,
+    "salaryTo": 10400,
+    "tax": 1207
+  },
+  {
+    "salaryFrom": 10401,
+    "salaryTo": 10500,
+    "tax": 1226
+  },
+  {
+    "salaryFrom": 10501,
+    "salaryTo": 10600,
+    "tax": 1245
+  },
+  {
+    "salaryFrom": 10601,
+    "salaryTo": 10700,
+    "tax": 1265
+  },
+  {
+    "salaryFrom": 10701,
+    "salaryTo": 10800,
+    "tax": 1284
+  },
+  {
+    "salaryFrom": 10801,
+    "salaryTo": 10900,
+    "tax": 1304
+  },
+  {
+    "salaryFrom": 10901,
+    "salaryTo": 11000,
+    "tax": 1323
+  },
+  {
+    "salaryFrom": 11001,
+    "salaryTo": 11100,
+    "tax": 1342
+  },
+  {
+    "salaryFrom": 11101,
+    "salaryTo": 11200,
+    "tax": 1362
+  },
+  {
+    "salaryFrom": 11201,
+    "salaryTo": 11300,
+    "tax": 1381
+  },
+  {
+    "salaryFrom": 11301,
+    "salaryTo": 11400,
+    "tax": 1401
+  },
+  {
+    "salaryFrom": 11401,
+    "salaryTo": 11500,
+    "tax": 1420
+  },
+  {
+    "salaryFrom": 11501,
+    "salaryTo": 11600,
+    "tax": 1439
+  },
+  {
+    "salaryFrom": 11601,
+    "salaryTo": 11700,
+    "tax": 1459
+  },
+  {
+    "salaryFrom": 11701,
+    "salaryTo": 11800,
+    "tax": 1478
+  },
+  {
+    "salaryFrom": 11801,
+    "salaryTo": 11900,
+    "tax": 1498
+  },
+  {
+    "salaryFrom": 11901,
+    "salaryTo": 12000,
+    "tax": 1517
+  },
+  {
+    "salaryFrom": 12001,
+    "salaryTo": 12100,
+    "tax": 1537
+  },
+  {
+    "salaryFrom": 12101,
+    "salaryTo": 12200,
+    "tax": 1556
+  },
+  {
+    "salaryFrom": 12201,
+    "salaryTo": 12300,
+    "tax": 1575
+  },
+  {
+    "salaryFrom": 12301,
+    "salaryTo": 12400,
+    "tax": 1595
+  },
+  {
+    "salaryFrom": 12401,
+    "salaryTo": 12500,
+    "tax": 1614
+  },
+  {
+    "salaryFrom": 12501,
+    "salaryTo": 12600,
+    "tax": 1634
+  },
+  {
+    "salaryFrom": 12601,
+    "salaryTo": 12700,
+    "tax": 1653
+  },
+  {
+    "salaryFrom": 12701,
+    "salaryTo": 12800,
+    "tax": 1672
+  },
+  {
+    "salaryFrom": 12801,
+    "salaryTo": 12900,
+    "tax": 1692
+  },
+  {
+    "salaryFrom": 12901,
+    "salaryTo": 13000,
+    "tax": 1711
+  },
+  {
+    "salaryFrom": 13001,
+    "salaryTo": 13100,
+    "tax": 1731
+  },
+  {
+    "salaryFrom": 13101,
+    "salaryTo": 13200,
+    "tax": 1750
+  },
+  {
+    "salaryFrom": 13201,
+    "salaryTo": 13300,
+    "tax": 1769
+  },
+  {
+    "salaryFrom": 13301,
+    "salaryTo": 13400,
+    "tax": 1789
+  },
+  {
+    "salaryFrom": 13401,
+    "salaryTo": 13500,
+    "tax": 1808
+  },
+  {
+    "salaryFrom": 13501,
+    "salaryTo": 13600,
+    "tax": 1828
+  },
+  {
+    "salaryFrom": 13601,
+    "salaryTo": 13700,
+    "tax": 1847
+  },
+  {
+    "salaryFrom": 13701,
+    "salaryTo": 13800,
+    "tax": 1866
+  },
+  {
+    "salaryFrom": 13801,
+    "salaryTo": 13900,
+    "tax": 1885
+  },
+  {
+    "salaryFrom": 13901,
+    "salaryTo": 14000,
+    "tax": 1904
+  },
+  {
+    "salaryFrom": 14001,
+    "salaryTo": 14100,
+    "tax": 1922
+  },
+  {
+    "salaryFrom": 14101,
+    "salaryTo": 14200,
+    "tax": 1941
+  },
+  {
+    "salaryFrom": 14201,
+    "salaryTo": 14300,
+    "tax": 1960
+  },
+  {
+    "salaryFrom": 14301,
+    "salaryTo": 14400,
+    "tax": 1978
+  },
+  {
+    "salaryFrom": 14401,
+    "salaryTo": 14500,
+    "tax": 1997
+  },
+  {
+    "salaryFrom": 14501,
+    "salaryTo": 14600,
+    "tax": 2016
+  },
+  {
+    "salaryFrom": 14601,
+    "salaryTo": 14700,
+    "tax": 2034
+  },
+  {
+    "salaryFrom": 14701,
+    "salaryTo": 14800,
+    "tax": 2053
+  },
+  {
+    "salaryFrom": 14801,
+    "salaryTo": 14900,
+    "tax": 2072
+  },
+  {
+    "salaryFrom": 14901,
+    "salaryTo": 15000,
+    "tax": 2090
+  },
+  {
+    "salaryFrom": 15001,
+    "salaryTo": 15100,
+    "tax": 2109
+  },
+  {
+    "salaryFrom": 15101,
+    "salaryTo": 15200,
+    "tax": 2128
+  },
+  {
+    "salaryFrom": 15201,
+    "salaryTo": 15300,
+    "tax": 2147
+  },
+  {
+    "salaryFrom": 15301,
+    "salaryTo": 15400,
+    "tax": 2165
+  },
+  {
+    "salaryFrom": 15401,
+    "salaryTo": 15500,
+    "tax": 2184
+  },
+  {
+    "salaryFrom": 15501,
+    "salaryTo": 15600,
+    "tax": 2203
+  },
+  {
+    "salaryFrom": 15601,
+    "salaryTo": 15700,
+    "tax": 2221
+  },
+  {
+    "salaryFrom": 15701,
+    "salaryTo": 15800,
+    "tax": 2240
+  },
+  {
+    "salaryFrom": 15801,
+    "salaryTo": 15900,
+    "tax": 2259
+  },
+  {
+    "salaryFrom": 15901,
+    "salaryTo": 16000,
+    "tax": 2278
+  },
+  {
+    "salaryFrom": 16001,
+    "salaryTo": 16100,
+    "tax": 2301
+  },
+  {
+    "salaryFrom": 16101,
+    "salaryTo": 16200,
+    "tax": 2323
+  },
+  {
+    "salaryFrom": 16201,
+    "salaryTo": 16300,
+    "tax": 2346
+  },
+  {
+    "salaryFrom": 16301,
+    "salaryTo": 16400,
+    "tax": 2369
+  },
+  {
+    "salaryFrom": 16401,
+    "salaryTo": 16500,
+    "tax": 2392
+  },
+  {
+    "salaryFrom": 16501,
+    "salaryTo": 16600,
+    "tax": 2415
+  },
+  {
+    "salaryFrom": 16601,
+    "salaryTo": 16700,
+    "tax": 2437
+  },
+  {
+    "salaryFrom": 16701,
+    "salaryTo": 16800,
+    "tax": 2460
+  },
+  {
+    "salaryFrom": 16801,
+    "salaryTo": 16900,
+    "tax": 2483
+  },
+  {
+    "salaryFrom": 16901,
+    "salaryTo": 17000,
+    "tax": 2506
+  },
+  {
+    "salaryFrom": 17001,
+    "salaryTo": 17100,
+    "tax": 2529
+  },
+  {
+    "salaryFrom": 17101,
+    "salaryTo": 17200,
+    "tax": 2551
+  },
+  {
+    "salaryFrom": 17201,
+    "salaryTo": 17300,
+    "tax": 2574
+  },
+  {
+    "salaryFrom": 17301,
+    "salaryTo": 17400,
+    "tax": 2597
+  },
+  {
+    "salaryFrom": 17401,
+    "salaryTo": 17500,
+    "tax": 2620
+  },
+  {
+    "salaryFrom": 17501,
+    "salaryTo": 17600,
+    "tax": 2643
+  },
+  {
+    "salaryFrom": 17601,
+    "salaryTo": 17700,
+    "tax": 2665
+  },
+  {
+    "salaryFrom": 17701,
+    "salaryTo": 17800,
+    "tax": 2688
+  },
+  {
+    "salaryFrom": 17801,
+    "salaryTo": 17900,
+    "tax": 2711
+  },
+  {
+    "salaryFrom": 17901,
+    "salaryTo": 18000,
+    "tax": 2734
+  },
+  {
+    "salaryFrom": 18001,
+    "salaryTo": 18100,
+    "tax": 2757
+  },
+  {
+    "salaryFrom": 18101,
+    "salaryTo": 18200,
+    "tax": 2779
+  },
+  {
+    "salaryFrom": 18201,
+    "salaryTo": 18300,
+    "tax": 2802
+  },
+  {
+    "salaryFrom": 18301,
+    "salaryTo": 18400,
+    "tax": 2825
+  },
+  {
+    "salaryFrom": 18401,
+    "salaryTo": 18500,
+    "tax": 2848
+  },
+  {
+    "salaryFrom": 18501,
+    "salaryTo": 18600,
+    "tax": 2871
+  },
+  {
+    "salaryFrom": 18601,
+    "salaryTo": 18700,
+    "tax": 2893
+  },
+  {
+    "salaryFrom": 18701,
+    "salaryTo": 18800,
+    "tax": 2916
+  },
+  {
+    "salaryFrom": 18801,
+    "salaryTo": 18900,
+    "tax": 2939
+  },
+  {
+    "salaryFrom": 18901,
+    "salaryTo": 19000,
+    "tax": 2962
+  },
+  {
+    "salaryFrom": 19001,
+    "salaryTo": 19100,
+    "tax": 2985
+  },
+  {
+    "salaryFrom": 19101,
+    "salaryTo": 19200,
+    "tax": 3007
+  },
+  {
+    "salaryFrom": 19201,
+    "salaryTo": 19300,
+    "tax": 3030
+  },
+  {
+    "salaryFrom": 19301,
+    "salaryTo": 19400,
+    "tax": 3053
+  },
+  {
+    "salaryFrom": 19401,
+    "salaryTo": 19500,
+    "tax": 3076
+  },
+  {
+    "salaryFrom": 19501,
+    "salaryTo": 19600,
+    "tax": 3099
+  },
+  {
+    "salaryFrom": 19601,
+    "salaryTo": 19700,
+    "tax": 3121
+  },
+  {
+    "salaryFrom": 19701,
+    "salaryTo": 19800,
+    "tax": 3144
+  },
+  {
+    "salaryFrom": 19801,
+    "salaryTo": 19900,
+    "tax": 3167
+  },
+  {
+    "salaryFrom": 19901,
+    "salaryTo": 20000,
+    "tax": 3190
+  },
+  {
+    "salaryFrom": 20001,
+    "salaryTo": 20200,
+    "tax": 3235
+  },
+  {
+    "salaryFrom": 20201,
+    "salaryTo": 20400,
+    "tax": 3281
+  },
+  {
+    "salaryFrom": 20401,
+    "salaryTo": 20600,
+    "tax": 3327
+  },
+  {
+    "salaryFrom": 20601,
+    "salaryTo": 20800,
+    "tax": 3372
+  },
+  {
+    "salaryFrom": 20801,
+    "salaryTo": 21000,
+    "tax": 3418
+  },
+  {
+    "salaryFrom": 21001,
+    "salaryTo": 21200,
+    "tax": 3463
+  },
+  {
+    "salaryFrom": 21201,
+    "salaryTo": 21400,
+    "tax": 3509
+  },
+  {
+    "salaryFrom": 21401,
+    "salaryTo": 21600,
+    "tax": 3555
+  },
+  {
+    "salaryFrom": 21601,
+    "salaryTo": 21800,
+    "tax": 3600
+  },
+  {
+    "salaryFrom": 21801,
+    "salaryTo": 22000,
+    "tax": 3646
+  },
+  {
+    "salaryFrom": 22001,
+    "salaryTo": 22200,
+    "tax": 3691
+  },
+  {
+    "salaryFrom": 22201,
+    "salaryTo": 22400,
+    "tax": 3737
+  },
+  {
+    "salaryFrom": 22401,
+    "salaryTo": 22600,
+    "tax": 3783
+  },
+  {
+    "salaryFrom": 22601,
+    "salaryTo": 22800,
+    "tax": 3828
+  },
+  {
+    "salaryFrom": 22801,
+    "salaryTo": 23000,
+    "tax": 3874
+  },
+  {
+    "salaryFrom": 23001,
+    "salaryTo": 23200,
+    "tax": 3921
+  },
+  {
+    "salaryFrom": 23201,
+    "salaryTo": 23400,
+    "tax": 3968
+  },
+  {
+    "salaryFrom": 23401,
+    "salaryTo": 23600,
+    "tax": 4015
+  },
+  {
+    "salaryFrom": 23601,
+    "salaryTo": 23800,
+    "tax": 4063
+  },
+  {
+    "salaryFrom": 23801,
+    "salaryTo": 24000,
+    "tax": 4110
+  },
+  {
+    "salaryFrom": 24001,
+    "salaryTo": 24200,
+    "tax": 4157
+  },
+  {
+    "salaryFrom": 24201,
+    "salaryTo": 24400,
+    "tax": 4204
+  },
+  {
+    "salaryFrom": 24401,
+    "salaryTo": 24600,
+    "tax": 4252
+  },
+  {
+    "salaryFrom": 24601,
+    "salaryTo": 24800,
+    "tax": 4299
+  },
+  {
+    "salaryFrom": 24801,
+    "salaryTo": 25000,
+    "tax": 4346
+  },
+  {
+    "salaryFrom": 25001,
+    "salaryTo": 25200,
+    "tax": 4393
+  },
+  {
+    "salaryFrom": 25201,
+    "salaryTo": 25400,
+    "tax": 4441
+  },
+  {
+    "salaryFrom": 25401,
+    "salaryTo": 25600,
+    "tax": 4488
+  },
+  {
+    "salaryFrom": 25601,
+    "salaryTo": 25800,
+    "tax": 4535
+  },
+  {
+    "salaryFrom": 25801,
+    "salaryTo": 26000,
+    "tax": 4582
+  },
+  {
+    "salaryFrom": 26001,
+    "salaryTo": 26200,
+    "tax": 4630
+  },
+  {
+    "salaryFrom": 26201,
+    "salaryTo": 26400,
+    "tax": 4677
+  },
+  {
+    "salaryFrom": 26401,
+    "salaryTo": 26600,
+    "tax": 4724
+  },
+  {
+    "salaryFrom": 26601,
+    "salaryTo": 26800,
+    "tax": 4771
+  },
+  {
+    "salaryFrom": 26801,
+    "salaryTo": 27000,
+    "tax": 4819
+  },
+  {
+    "salaryFrom": 27001,
+    "salaryTo": 27200,
+    "tax": 4866
+  },
+  {
+    "salaryFrom": 27201,
+    "salaryTo": 27400,
+    "tax": 4913
+  },
+  {
+    "salaryFrom": 27401,
+    "salaryTo": 27600,
+    "tax": 4960
+  },
+  {
+    "salaryFrom": 27601,
+    "salaryTo": 27800,
+    "tax": 5008
+  },
+  {
+    "salaryFrom": 27801,
+    "salaryTo": 28000,
+    "tax": 5055
+  },
+  {
+    "salaryFrom": 28001,
+    "salaryTo": 28200,
+    "tax": 5102
+  },
+  {
+    "salaryFrom": 28201,
+    "salaryTo": 28400,
+    "tax": 5149
+  },
+  {
+    "salaryFrom": 28401,
+    "salaryTo": 28600,
+    "tax": 5197
+  },
+  {
+    "salaryFrom": 28601,
+    "salaryTo": 28800,
+    "tax": 5244
+  },
+  {
+    "salaryFrom": 28801,
+    "salaryTo": 29000,
+    "tax": 5291
+  },
+  {
+    "salaryFrom": 29001,
+    "salaryTo": 29200,
+    "tax": 5338
+  },
+  {
+    "salaryFrom": 29201,
+    "salaryTo": 29400,
+    "tax": 5386
+  },
+  {
+    "salaryFrom": 29401,
+    "salaryTo": 29600,
+    "tax": 5433
+  },
+  {
+    "salaryFrom": 29601,
+    "salaryTo": 29800,
+    "tax": 5480
+  },
+  {
+    "salaryFrom": 29801,
+    "salaryTo": 30000,
+    "tax": 5527
+  },
+  {
+    "salaryFrom": 30001,
+    "salaryTo": 30200,
+    "tax": 5575
+  },
+  {
+    "salaryFrom": 30201,
+    "salaryTo": 30400,
+    "tax": 5622
+  },
+  {
+    "salaryFrom": 30401,
+    "salaryTo": 30600,
+    "tax": 5669
+  },
+  {
+    "salaryFrom": 30601,
+    "salaryTo": 30800,
+    "tax": 5716
+  },
+  {
+    "salaryFrom": 30801,
+    "salaryTo": 31000,
+    "tax": 5764
+  },
+  {
+    "salaryFrom": 31001,
+    "salaryTo": 31200,
+    "tax": 5811
+  },
+  {
+    "salaryFrom": 31201,
+    "salaryTo": 31400,
+    "tax": 5858
+  },
+  {
+    "salaryFrom": 31401,
+    "salaryTo": 31600,
+    "tax": 5905
+  },
+  {
+    "salaryFrom": 31601,
+    "salaryTo": 31800,
+    "tax": 5953
+  },
+  {
+    "salaryFrom": 31801,
+    "salaryTo": 32000,
+    "tax": 6000
+  },
+  {
+    "salaryFrom": 32001,
+    "salaryTo": 32200,
+    "tax": 6047
+  },
+  {
+    "salaryFrom": 32201,
+    "salaryTo": 32400,
+    "tax": 6094
+  },
+  {
+    "salaryFrom": 32401,
+    "salaryTo": 32600,
+    "tax": 6142
+  },
+  {
+    "salaryFrom": 32601,
+    "salaryTo": 32800,
+    "tax": 6189
+  },
+  {
+    "salaryFrom": 32801,
+    "salaryTo": 33000,
+    "tax": 6236
+  },
+  {
+    "salaryFrom": 33001,
+    "salaryTo": 33200,
+    "tax": 6283
+  },
+  {
+    "salaryFrom": 33201,
+    "salaryTo": 33400,
+    "tax": 6331
+  },
+  {
+    "salaryFrom": 33401,
+    "salaryTo": 33600,
+    "tax": 6378
+  },
+  {
+    "salaryFrom": 33601,
+    "salaryTo": 33800,
+    "tax": 6425
+  },
+  {
+    "salaryFrom": 33801,
+    "salaryTo": 34000,
+    "tax": 6472
+  },
+  {
+    "salaryFrom": 34001,
+    "salaryTo": 34200,
+    "tax": 6520
+  },
+  {
+    "salaryFrom": 34201,
+    "salaryTo": 34400,
+    "tax": 6567
+  },
+  {
+    "salaryFrom": 34401,
+    "salaryTo": 34600,
+    "tax": 6614
+  },
+  {
+    "salaryFrom": 34601,
+    "salaryTo": 34800,
+    "tax": 6661
+  },
+  {
+    "salaryFrom": 34801,
+    "salaryTo": 35000,
+    "tax": 6709
+  },
+  {
+    "salaryFrom": 35001,
+    "salaryTo": 35200,
+    "tax": 6756
+  },
+  {
+    "salaryFrom": 35201,
+    "salaryTo": 35400,
+    "tax": 6803
+  },
+  {
+    "salaryFrom": 35401,
+    "salaryTo": 35600,
+    "tax": 6850
+  },
+  {
+    "salaryFrom": 35601,
+    "salaryTo": 35800,
+    "tax": 6898
+  },
+  {
+    "salaryFrom": 35801,
+    "salaryTo": 36000,
+    "tax": 6945
+  },
+  {
+    "salaryFrom": 36001,
+    "salaryTo": 36200,
+    "tax": 6992
+  },
+  {
+    "salaryFrom": 36201,
+    "salaryTo": 36400,
+    "tax": 7039
+  },
+  {
+    "salaryFrom": 36401,
+    "salaryTo": 36600,
+    "tax": 7087
+  },
+  {
+    "salaryFrom": 36601,
+    "salaryTo": 36800,
+    "tax": 7134
+  },
+  {
+    "salaryFrom": 36801,
+    "salaryTo": 37000,
+    "tax": 7181
+  },
+  {
+    "salaryFrom": 37001,
+    "salaryTo": 37200,
+    "tax": 7228
+  },
+  {
+    "salaryFrom": 37201,
+    "salaryTo": 37400,
+    "tax": 7276
+  },
+  {
+    "salaryFrom": 37401,
+    "salaryTo": 37600,
+    "tax": 7323
+  },
+  {
+    "salaryFrom": 37601,
+    "salaryTo": 37800,
+    "tax": 7370
+  },
+  {
+    "salaryFrom": 37801,
+    "salaryTo": 38000,
+    "tax": 7417
+  },
+  {
+    "salaryFrom": 38001,
+    "salaryTo": 38200,
+    "tax": 7465
+  },
+  {
+    "salaryFrom": 38201,
+    "salaryTo": 38400,
+    "tax": 7512
+  },
+  {
+    "salaryFrom": 38401,
+    "salaryTo": 38600,
+    "tax": 7559
+  },
+  {
+    "salaryFrom": 38601,
+    "salaryTo": 38800,
+    "tax": 7606
+  },
+  {
+    "salaryFrom": 38801,
+    "salaryTo": 39000,
+    "tax": 7654
+  },
+  {
+    "salaryFrom": 39001,
+    "salaryTo": 39200,
+    "tax": 7701
+  },
+  {
+    "salaryFrom": 39201,
+    "salaryTo": 39400,
+    "tax": 7748
+  },
+  {
+    "salaryFrom": 39401,
+    "salaryTo": 39600,
+    "tax": 7795
+  },
+  {
+    "salaryFrom": 39601,
+    "salaryTo": 39800,
+    "tax": 7842
+  },
+  {
+    "salaryFrom": 39801,
+    "salaryTo": 40000,
+    "tax": 7900
+  },
+  {
+    "salaryFrom": 40001,
+    "salaryTo": 40200,
+    "tax": 7962
+  },
+  {
+    "salaryFrom": 40201,
+    "salaryTo": 40400,
+    "tax": 8024
+  },
+  {
+    "salaryFrom": 40401,
+    "salaryTo": 40600,
+    "tax": 8086
+  },
+  {
+    "salaryFrom": 40601,
+    "salaryTo": 40800,
+    "tax": 8148
+  },
+  {
+    "salaryFrom": 40801,
+    "salaryTo": 41000,
+    "tax": 8210
+  },
+  {
+    "salaryFrom": 41001,
+    "salaryTo": 41200,
+    "tax": 8272
+  },
+  {
+    "salaryFrom": 41201,
+    "salaryTo": 41400,
+    "tax": 8334
+  },
+  {
+    "salaryFrom": 41401,
+    "salaryTo": 41600,
+    "tax": 8396
+  },
+  {
+    "salaryFrom": 41601,
+    "salaryTo": 41800,
+    "tax": 8458
+  },
+  {
+    "salaryFrom": 41801,
+    "salaryTo": 42000,
+    "tax": 8520
+  },
+  {
+    "salaryFrom": 42001,
+    "salaryTo": 42200,
+    "tax": 8582
+  },
+  {
+    "salaryFrom": 42201,
+    "salaryTo": 42400,
+    "tax": 8644
+  },
+  {
+    "salaryFrom": 42401,
+    "salaryTo": 42600,
+    "tax": 8706
+  },
+  {
+    "salaryFrom": 42601,
+    "salaryTo": 42800,
+    "tax": 8768
+  },
+  {
+    "salaryFrom": 42801,
+    "salaryTo": 43000,
+    "tax": 8830
+  },
+  {
+    "salaryFrom": 43001,
+    "salaryTo": 43200,
+    "tax": 8892
+  },
+  {
+    "salaryFrom": 43201,
+    "salaryTo": 43400,
+    "tax": 8954
+  },
+  {
+    "salaryFrom": 43401,
+    "salaryTo": 43600,
+    "tax": 9016
+  },
+  {
+    "salaryFrom": 43601,
+    "salaryTo": 43800,
+    "tax": 9078
+  },
+  {
+    "salaryFrom": 43801,
+    "salaryTo": 44000,
+    "tax": 9140
+  },
+  {
+    "salaryFrom": 44001,
+    "salaryTo": 44200,
+    "tax": 9202
+  },
+  {
+    "salaryFrom": 44201,
+    "salaryTo": 44400,
+    "tax": 9264
+  },
+  {
+    "salaryFrom": 44401,
+    "salaryTo": 44600,
+    "tax": 9326
+  },
+  {
+    "salaryFrom": 44601,
+    "salaryTo": 44800,
+    "tax": 9388
+  },
+  {
+    "salaryFrom": 44801,
+    "salaryTo": 45000,
+    "tax": 9450
+  },
+  {
+    "salaryFrom": 45001,
+    "salaryTo": 45200,
+    "tax": 9512
+  },
+  {
+    "salaryFrom": 45201,
+    "salaryTo": 45400,
+    "tax": 9574
+  },
+  {
+    "salaryFrom": 45401,
+    "salaryTo": 45600,
+    "tax": 9636
+  },
+  {
+    "salaryFrom": 45601,
+    "salaryTo": 45800,
+    "tax": 9698
+  },
+  {
+    "salaryFrom": 45801,
+    "salaryTo": 46000,
+    "tax": 9760
+  },
+  {
+    "salaryFrom": 46001,
+    "salaryTo": 46200,
+    "tax": 9822
+  },
+  {
+    "salaryFrom": 46201,
+    "salaryTo": 46400,
+    "tax": 9884
+  },
+  {
+    "salaryFrom": 46401,
+    "salaryTo": 46600,
+    "tax": 9946
+  },
+  {
+    "salaryFrom": 46601,
+    "salaryTo": 46800,
+    "tax": 10008
+  },
+  {
+    "salaryFrom": 46801,
+    "salaryTo": 47000,
+    "tax": 10070
+  },
+  {
+    "salaryFrom": 47001,
+    "salaryTo": 47200,
+    "tax": 10132
+  },
+  {
+    "salaryFrom": 47201,
+    "salaryTo": 47400,
+    "tax": 10194
+  },
+  {
+    "salaryFrom": 47401,
+    "salaryTo": 47600,
+    "tax": 10256
+  },
+  {
+    "salaryFrom": 47601,
+    "salaryTo": 47800,
+    "tax": 10318
+  },
+  {
+    "salaryFrom": 47801,
+    "salaryTo": 48000,
+    "tax": 10380
+  },
+  {
+    "salaryFrom": 48001,
+    "salaryTo": 48200,
+    "tax": 10442
+  },
+  {
+    "salaryFrom": 48201,
+    "salaryTo": 48400,
+    "tax": 10504
+  },
+  {
+    "salaryFrom": 48401,
+    "salaryTo": 48600,
+    "tax": 10566
+  },
+  {
+    "salaryFrom": 48601,
+    "salaryTo": 48800,
+    "tax": 10628
+  },
+  {
+    "salaryFrom": 48801,
+    "salaryTo": 49000,
+    "tax": 10690
+  },
+  {
+    "salaryFrom": 49001,
+    "salaryTo": 49200,
+    "tax": 10752
+  },
+  {
+    "salaryFrom": 49201,
+    "salaryTo": 49400,
+    "tax": 10814
+  },
+  {
+    "salaryFrom": 49401,
+    "salaryTo": 49600,
+    "tax": 10876
+  },
+  {
+    "salaryFrom": 49601,
+    "salaryTo": 49800,
+    "tax": 10938
+  },
+  {
+    "salaryFrom": 49801,
+    "salaryTo": 50000,
+    "tax": 11000
+  },
+  {
+    "salaryFrom": 50001,
+    "salaryTo": 50200,
+    "tax": 11062
+  },
+  {
+    "salaryFrom": 50201,
+    "salaryTo": 50400,
+    "tax": 11124
+  },
+  {
+    "salaryFrom": 50401,
+    "salaryTo": 50600,
+    "tax": 11186
+  },
+  {
+    "salaryFrom": 50601,
+    "salaryTo": 50800,
+    "tax": 11248
+  },
+  {
+    "salaryFrom": 50801,
+    "salaryTo": 51000,
+    "tax": 11310
+  },
+  {
+    "salaryFrom": 51001,
+    "salaryTo": 51200,
+    "tax": 11372
+  },
+  {
+    "salaryFrom": 51201,
+    "salaryTo": 51400,
+    "tax": 11434
+  },
+  {
+    "salaryFrom": 51401,
+    "salaryTo": 51600,
+    "tax": 11496
+  },
+  {
+    "salaryFrom": 51601,
+    "salaryTo": 51800,
+    "tax": 11558
+  },
+  {
+    "salaryFrom": 51801,
+    "salaryTo": 52000,
+    "tax": 11620
+  },
+  {
+    "salaryFrom": 52001,
+    "salaryTo": 52200,
+    "tax": 11682
+  },
+  {
+    "salaryFrom": 52201,
+    "salaryTo": 52400,
+    "tax": 11744
+  },
+  {
+    "salaryFrom": 52401,
+    "salaryTo": 52600,
+    "tax": 11806
+  },
+  {
+    "salaryFrom": 52601,
+    "salaryTo": 52800,
+    "tax": 11868
+  },
+  {
+    "salaryFrom": 52801,
+    "salaryTo": 53000,
+    "tax": 11930
+  },
+  {
+    "salaryFrom": 53001,
+    "salaryTo": 53200,
+    "tax": 11992
+  },
+  {
+    "salaryFrom": 53201,
+    "salaryTo": 53400,
+    "tax": 12054
+  },
+  {
+    "salaryFrom": 53401,
+    "salaryTo": 53600,
+    "tax": 12116
+  },
+  {
+    "salaryFrom": 53601,
+    "salaryTo": 53800,
+    "tax": 12178
+  },
+  {
+    "salaryFrom": 53801,
+    "salaryTo": 54000,
+    "tax": 12240
+  },
+  {
+    "salaryFrom": 54001,
+    "salaryTo": 54200,
+    "tax": 12302
+  },
+  {
+    "salaryFrom": 54201,
+    "salaryTo": 54400,
+    "tax": 12364
+  },
+  {
+    "salaryFrom": 54401,
+    "salaryTo": 54600,
+    "tax": 12426
+  },
+  {
+    "salaryFrom": 54601,
+    "salaryTo": 54800,
+    "tax": 12488
+  },
+  {
+    "salaryFrom": 54801,
+    "salaryTo": 55000,
+    "tax": 12550
+  },
+  {
+    "salaryFrom": 55001,
+    "salaryTo": 55200,
+    "tax": 12646
+  },
+  {
+    "salaryFrom": 55201,
+    "salaryTo": 55400,
+    "tax": 12748
+  },
+  {
+    "salaryFrom": 55401,
+    "salaryTo": 55600,
+    "tax": 12850
+  },
+  {
+    "salaryFrom": 55601,
+    "salaryTo": 55800,
+    "tax": 12952
+  },
+  {
+    "salaryFrom": 55801,
+    "salaryTo": 56000,
+    "tax": 13054
+  },
+  {
+    "salaryFrom": 56001,
+    "salaryTo": 56200,
+    "tax": 13156
+  },
+  {
+    "salaryFrom": 56201,
+    "salaryTo": 56400,
+    "tax": 13258
+  },
+  {
+    "salaryFrom": 56401,
+    "salaryTo": 56600,
+    "tax": 13360
+  },
+  {
+    "salaryFrom": 56601,
+    "salaryTo": 56800,
+    "tax": 13462
+  },
+  {
+    "salaryFrom": 56801,
+    "salaryTo": 57000,
+    "tax": 13564
+  },
+  {
+    "salaryFrom": 57001,
+    "salaryTo": 57200,
+    "tax": 13666
+  },
+  {
+    "salaryFrom": 57201,
+    "salaryTo": 57400,
+    "tax": 13768
+  },
+  {
+    "salaryFrom": 57401,
+    "salaryTo": 57600,
+    "tax": 13870
+  },
+  {
+    "salaryFrom": 57601,
+    "salaryTo": 57800,
+    "tax": 13972
+  },
+  {
+    "salaryFrom": 57801,
+    "salaryTo": 58000,
+    "tax": 14074
+  },
+  {
+    "salaryFrom": 58001,
+    "salaryTo": 58200,
+    "tax": 14176
+  },
+  {
+    "salaryFrom": 58201,
+    "salaryTo": 58400,
+    "tax": 14278
+  },
+  {
+    "salaryFrom": 58401,
+    "salaryTo": 58600,
+    "tax": 14380
+  },
+  {
+    "salaryFrom": 58601,
+    "salaryTo": 58800,
+    "tax": 14482
+  },
+  {
+    "salaryFrom": 58801,
+    "salaryTo": 59000,
+    "tax": 14584
+  },
+  {
+    "salaryFrom": 59001,
+    "salaryTo": 59200,
+    "tax": 14686
+  },
+  {
+    "salaryFrom": 59201,
+    "salaryTo": 59400,
+    "tax": 14788
+  },
+  {
+    "salaryFrom": 59401,
+    "salaryTo": 59600,
+    "tax": 14890
+  },
+  {
+    "salaryFrom": 59601,
+    "salaryTo": 59800,
+    "tax": 14992
+  },
+  {
+    "salaryFrom": 59801,
+    "salaryTo": 60000,
+    "tax": 15094
+  },
+  {
+    "salaryFrom": 60001,
+    "salaryTo": 60200,
+    "tax": 15196
+  },
+  {
+    "salaryFrom": 60201,
+    "salaryTo": 60400,
+    "tax": 15298
+  },
+  {
+    "salaryFrom": 60401,
+    "salaryTo": 60600,
+    "tax": 15400
+  },
+  {
+    "salaryFrom": 60601,
+    "salaryTo": 60800,
+    "tax": 15502
+  },
+  {
+    "salaryFrom": 60801,
+    "salaryTo": 61000,
+    "tax": 15604
+  },
+  {
+    "salaryFrom": 61001,
+    "salaryTo": 61200,
+    "tax": 15706
+  },
+  {
+    "salaryFrom": 61201,
+    "salaryTo": 61400,
+    "tax": 15808
+  },
+  {
+    "salaryFrom": 61401,
+    "salaryTo": 61600,
+    "tax": 15910
+  },
+  {
+    "salaryFrom": 61601,
+    "salaryTo": 61800,
+    "tax": 16012
+  },
+  {
+    "salaryFrom": 61801,
+    "salaryTo": 62000,
+    "tax": 16114
+  },
+  {
+    "salaryFrom": 62001,
+    "salaryTo": 62200,
+    "tax": 16216
+  },
+  {
+    "salaryFrom": 62201,
+    "salaryTo": 62400,
+    "tax": 16318
+  },
+  {
+    "salaryFrom": 62401,
+    "salaryTo": 62600,
+    "tax": 16420
+  },
+  {
+    "salaryFrom": 62601,
+    "salaryTo": 62800,
+    "tax": 16522
+  },
+  {
+    "salaryFrom": 62801,
+    "salaryTo": 63000,
+    "tax": 16624
+  },
+  {
+    "salaryFrom": 63001,
+    "salaryTo": 63200,
+    "tax": 16726
+  },
+  {
+    "salaryFrom": 63201,
+    "salaryTo": 63400,
+    "tax": 16828
+  },
+  {
+    "salaryFrom": 63401,
+    "salaryTo": 63600,
+    "tax": 16930
+  },
+  {
+    "salaryFrom": 63601,
+    "salaryTo": 63800,
+    "tax": 17032
+  },
+  {
+    "salaryFrom": 63801,
+    "salaryTo": 64000,
+    "tax": 17134
+  },
+  {
+    "salaryFrom": 64001,
+    "salaryTo": 64200,
+    "tax": 17236
+  },
+  {
+    "salaryFrom": 64201,
+    "salaryTo": 64400,
+    "tax": 17338
+  },
+  {
+    "salaryFrom": 64401,
+    "salaryTo": 64600,
+    "tax": 17440
+  },
+  {
+    "salaryFrom": 64601,
+    "salaryTo": 64800,
+    "tax": 17542
+  },
+  {
+    "salaryFrom": 64801,
+    "salaryTo": 65000,
+    "tax": 17644
+  },
+  {
+    "salaryFrom": 65001,
+    "salaryTo": 65200,
+    "tax": 17746
+  },
+  {
+    "salaryFrom": 65201,
+    "salaryTo": 65400,
+    "tax": 17848
+  },
+  {
+    "salaryFrom": 65401,
+    "salaryTo": 65600,
+    "tax": 17950
+  },
+  {
+    "salaryFrom": 65601,
+    "salaryTo": 65800,
+    "tax": 18052
+  },
+  {
+    "salaryFrom": 65801,
+    "salaryTo": 66000,
+    "tax": 18154
+  },
+  {
+    "salaryFrom": 66001,
+    "salaryTo": 66200,
+    "tax": 18256
+  },
+  {
+    "salaryFrom": 66201,
+    "salaryTo": 66400,
+    "tax": 18358
+  },
+  {
+    "salaryFrom": 66401,
+    "salaryTo": 66600,
+    "tax": 18460
+  },
+  {
+    "salaryFrom": 66601,
+    "salaryTo": 66800,
+    "tax": 18562
+  },
+  {
+    "salaryFrom": 66801,
+    "salaryTo": 67000,
+    "tax": 18664
+  },
+  {
+    "salaryFrom": 67001,
+    "salaryTo": 67200,
+    "tax": 18766
+  },
+  {
+    "salaryFrom": 67201,
+    "salaryTo": 67400,
+    "tax": 18868
+  },
+  {
+    "salaryFrom": 67401,
+    "salaryTo": 67600,
+    "tax": 18970
+  },
+  {
+    "salaryFrom": 67601,
+    "salaryTo": 67800,
+    "tax": 19072
+  },
+  {
+    "salaryFrom": 67801,
+    "salaryTo": 68000,
+    "tax": 19174
+  },
+  {
+    "salaryFrom": 68001,
+    "salaryTo": 68200,
+    "tax": 19276
+  },
+  {
+    "salaryFrom": 68201,
+    "salaryTo": 68400,
+    "tax": 19378
+  },
+  {
+    "salaryFrom": 68401,
+    "salaryTo": 68600,
+    "tax": 19480
+  },
+  {
+    "salaryFrom": 68601,
+    "salaryTo": 68800,
+    "tax": 19582
+  },
+  {
+    "salaryFrom": 68801,
+    "salaryTo": 69000,
+    "tax": 19684
+  },
+  {
+    "salaryFrom": 69001,
+    "salaryTo": 69200,
+    "tax": 19786
+  },
+  {
+    "salaryFrom": 69201,
+    "salaryTo": 69400,
+    "tax": 19888
+  },
+  {
+    "salaryFrom": 69401,
+    "salaryTo": 69600,
+    "tax": 19990
+  },
+  {
+    "salaryFrom": 69601,
+    "salaryTo": 69800,
+    "tax": 20092
+  },
+  {
+    "salaryFrom": 69801,
+    "salaryTo": 70000,
+    "tax": 20194
+  },
+  {
+    "salaryFrom": 70001,
+    "salaryTo": 70200,
+    "tax": 20296
+  },
+  {
+    "salaryFrom": 70201,
+    "salaryTo": 70400,
+    "tax": 20398
+  },
+  {
+    "salaryFrom": 70401,
+    "salaryTo": 70600,
+    "tax": 20500
+  },
+  {
+    "salaryFrom": 70601,
+    "salaryTo": 70800,
+    "tax": 20602
+  },
+  {
+    "salaryFrom": 70801,
+    "salaryTo": 71000,
+    "tax": 20704
+  },
+  {
+    "salaryFrom": 71001,
+    "salaryTo": 71200,
+    "tax": 20806
+  },
+  {
+    "salaryFrom": 71201,
+    "salaryTo": 71400,
+    "tax": 20908
+  },
+  {
+    "salaryFrom": 71401,
+    "salaryTo": 71600,
+    "tax": 21010
+  },
+  {
+    "salaryFrom": 71601,
+    "salaryTo": 71800,
+    "tax": 21112
+  },
+  {
+    "salaryFrom": 71801,
+    "salaryTo": 72000,
+    "tax": 21214
+  },
+  {
+    "salaryFrom": 72001,
+    "salaryTo": 72200,
+    "tax": 21316
+  },
+  {
+    "salaryFrom": 72201,
+    "salaryTo": 72400,
+    "tax": 21418
+  },
+  {
+    "salaryFrom": 72401,
+    "salaryTo": 72600,
+    "tax": 21520
+  },
+  {
+    "salaryFrom": 72601,
+    "salaryTo": 72800,
+    "tax": 21622
+  },
+  {
+    "salaryFrom": 72801,
+    "salaryTo": 73000,
+    "tax": 21724
+  },
+  {
+    "salaryFrom": 73001,
+    "salaryTo": 73200,
+    "tax": 21826
+  },
+  {
+    "salaryFrom": 73201,
+    "salaryTo": 73400,
+    "tax": 21928
+  },
+  {
+    "salaryFrom": 73401,
+    "salaryTo": 73600,
+    "tax": 22030
+  },
+  {
+    "salaryFrom": 73601,
+    "salaryTo": 73800,
+    "tax": 22132
+  },
+  {
+    "salaryFrom": 73801,
+    "salaryTo": 74000,
+    "tax": 22234
+  },
+  {
+    "salaryFrom": 74001,
+    "salaryTo": 74200,
+    "tax": 22336
+  },
+  {
+    "salaryFrom": 74201,
+    "salaryTo": 74400,
+    "tax": 22438
+  },
+  {
+    "salaryFrom": 74401,
+    "salaryTo": 74600,
+    "tax": 22540
+  },
+  {
+    "salaryFrom": 74601,
+    "salaryTo": 74800,
+    "tax": 22642
+  },
+  {
+    "salaryFrom": 74801,
+    "salaryTo": 75000,
+    "tax": 22744
+  },
+  {
+    "salaryFrom": 75001,
+    "salaryTo": 75200,
+    "tax": 22846
+  },
+  {
+    "salaryFrom": 75201,
+    "salaryTo": 75400,
+    "tax": 22948
+  },
+  {
+    "salaryFrom": 75401,
+    "salaryTo": 75600,
+    "tax": 23050
+  },
+  {
+    "salaryFrom": 75601,
+    "salaryTo": 75800,
+    "tax": 23152
+  },
+  {
+    "salaryFrom": 75801,
+    "salaryTo": 76000,
+    "tax": 23254
+  },
+  {
+    "salaryFrom": 76001,
+    "salaryTo": 76200,
+    "tax": 23356
+  },
+  {
+    "salaryFrom": 76201,
+    "salaryTo": 76400,
+    "tax": 23458
+  },
+  {
+    "salaryFrom": 76401,
+    "salaryTo": 76600,
+    "tax": 23560
+  },
+  {
+    "salaryFrom": 76601,
+    "salaryTo": 76800,
+    "tax": 23662
+  },
+  {
+    "salaryFrom": 76801,
+    "salaryTo": 77000,
+    "tax": 23764
+  },
+  {
+    "salaryFrom": 77001,
+    "salaryTo": 77200,
+    "tax": 23866
+  },
+  {
+    "salaryFrom": 77201,
+    "salaryTo": 77400,
+    "tax": 23968
+  },
+  {
+    "salaryFrom": 77401,
+    "salaryTo": 77600,
+    "tax": 24070
+  },
+  {
+    "salaryFrom": 77601,
+    "salaryTo": 77800,
+    "tax": 24172
+  },
+  {
+    "salaryFrom": 77801,
+    "salaryTo": 78000,
+    "tax": 24274
+  },
+  {
+    "salaryFrom": 78001,
+    "salaryTo": 78200,
+    "tax": 24376
+  },
+  {
+    "salaryFrom": 78201,
+    "salaryTo": 78400,
+    "tax": 24478
+  },
+  {
+    "salaryFrom": 78401,
+    "salaryTo": 78600,
+    "tax": 24580
+  },
+  {
+    "salaryFrom": 78601,
+    "salaryTo": 78800,
+    "tax": 24682
+  },
+  {
+    "salaryFrom": 78801,
+    "salaryTo": 79000,
+    "tax": 24784
+  },
+  {
+    "salaryFrom": 79001,
+    "salaryTo": 79200,
+    "tax": 24886
+  },
+  {
+    "salaryFrom": 79201,
+    "salaryTo": 79400,
+    "tax": 24988
+  },
+  {
+    "salaryFrom": 79401,
+    "salaryTo": 79600,
+    "tax": 25090
+  },
+  {
+    "salaryFrom": 79601,
+    "salaryTo": 79800,
+    "tax": 25192
+  },
+  {
+    "salaryFrom": 79801,
+    "salaryTo": 80000,
+    "tax": 25294
+  },
+  {
+    "salaryFrom": 80001,
+    "salaryTo": 83800,
+    "tax": 32
+  },
+  {
+    "salaryFrom": 83801,
+    "salaryTo": 88600,
+    "tax": 33
+  },
+  {
+    "salaryFrom": 88601,
+    "salaryTo": 93800,
+    "tax": 34
+  },
+  {
+    "salaryFrom": 93801,
+    "salaryTo": 100000,
+    "tax": 35
+  },
+  {
+    "salaryFrom": 100001,
+    "salaryTo": 106800,
+    "tax": 36
+  },
+  {
+    "salaryFrom": 106801,
+    "salaryTo": 114800,
+    "tax": 37
+  },
+  {
+    "salaryFrom": 114801,
+    "salaryTo": 124000,
+    "tax": 38
+  },
+  {
+    "salaryFrom": 124001,
+    "salaryTo": 134800,
+    "tax": 39
+  },
+  {
+    "salaryFrom": 134801,
+    "salaryTo": 147600,
+    "tax": 40
+  },
+  {
+    "salaryFrom": 147601,
+    "salaryTo": 163200,
+    "tax": 41
+  },
+  {
+    "salaryFrom": 163201,
+    "salaryTo": 182400,
+    "tax": 42
+  },
+  {
+    "salaryFrom": 182401,
+    "salaryTo": 206600,
+    "tax": 43
+  },
+  {
+    "salaryFrom": 206601,
+    "salaryTo": 238400,
+    "tax": 44
+  },
+  {
+    "salaryFrom": 238401,
+    "salaryTo": 281800,
+    "tax": 45
+  },
+  {
+    "salaryFrom": 281801,
+    "salaryTo": 344400,
+    "tax": 46
+  },
+  {
+    "salaryFrom": 344401,
+    "salaryTo": 443000,
+    "tax": 47
+  },
+  {
+    "salaryFrom": 443001,
+    "salaryTo": 620200,
+    "tax": 48
+  },
+  {
+    "salaryFrom": 620201,
+    "salaryTo": 1033600,
+    "tax": 49
+  },
+  {
+    "salaryFrom": 1033601,
+    "salaryTo": 1256000,
+    "tax": 50
+  }
+]

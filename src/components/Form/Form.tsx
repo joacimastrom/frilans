@@ -213,21 +213,6 @@ const Form = () => {
                 setCosts={(costs) => setFormData({ ...formData, costs })}
                 totalCosts={totalAdditionalCosts}
               />
-              <ResultTable
-                resultAfterTax={resultAfterTax}
-                maxDividend={maxDividend}
-                balancedResult={balancedResult}
-                resultDescription={
-                  <Table>
-                    <TableRow>
-                      <TableCell>Årliga intäkter</TableCell>
-                      <TableCell className="text-right">
-                        {totalRevenue}
-                      </TableCell>
-                    </TableRow>
-                  </Table>
-                }
-              />
             </div>
           </div>
           <div className="flex flex-col gap-2">
@@ -243,6 +228,21 @@ const Form = () => {
               setSalary={setSalary}
               maxIncomeObject={maxIncomeObject}
             />
+            <ResultTable
+                resultAfterTax={resultAfterTax}
+                maxDividend={maxDividend}
+                balancedResult={balancedResult}
+                resultDescription={
+                  <Table>
+                    <TableRow>
+                      <TableCell>Årliga intäkter</TableCell>
+                      <TableCell className="text-right">
+                        {totalRevenue}
+                      </TableCell>
+                    </TableRow>
+                  </Table>
+                }
+              />
             <TaxTable
               yearlyIncomeTax={yearlyIncomeTax}
               incomeTaxPercentage={incomeTaxPercentage}

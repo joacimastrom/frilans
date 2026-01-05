@@ -12,5 +12,5 @@ export const DIVIDEND_TAX = 0.2;
 
 export const MUNICIPAL_TAX = 0.32;
 export const STATE_TAX = 0.2;
-export const TAX_LIMIT = 625800;
+export const TAX_LIMIT = 660400;
 export const SALARY_PERCENTAGE_LIMIT = 80000;

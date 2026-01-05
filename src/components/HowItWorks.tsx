@@ -5,32 +5,26 @@ const HowItWorks = () => {
   const steps = [
     {
       icon: <Calculator className="text-blue-600 w-10 h-10" />,
-      title: "Fyll i dina uppgifter",
+      title: "Fyll i intäkter och utgifter",
       description:
-        "Ange din lön och eventuella avdrag för att få en detaljerad analys.",
+        "Ange ditt arvode och dina kostnader för att få en tydlig bild av din ekonomi.",
     },
     {
       icon: <BarChart3 className="text-blue-600 w-10 h-10" />,
       title: "Se skatter och resultat",
       description:
-        "Vi räknar ut hur skatter och avgifter påverkar din inkomst.",
+        "Se hur olika löner påverkar skatter, resultat och din totala inkomst.",
     },
     {
       icon: <Lightbulb className="text-blue-600 w-10 h-10" />,
       title: "Optimera dina beslut",
-      description: "Jämför olika scenarion för att fatta smartare beslut.",
+      description: "Jämför olika scenarion och minimera skatt eller maximera din inkomst.",
     },
   ];
 
   return (
     <MaxWidthSection id="how-it-works" className="bg-white">
-      <div className="mx-auto text-center">
-        <h2 className="text-3xl font-bold text-gray-900">Så fungerar det</h2>
-        <p className="mt-4 text-gray-600 text-lg">
-          Få en tydlig bild av din ekonomi med vår enkla kalkylator.
-        </p>
-      </div>
-      <div className="mt-8 grid gap-8 md:grid-cols-3 max-w-5xl mx-auto">
+      <div className="grid gap-8 md:grid-cols-3 max-w-5xl mx-auto">
         {steps.map((step, index) => (
           <div
             key={index}

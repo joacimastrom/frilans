@@ -17,7 +17,7 @@ const CalculationSteps = () => {
     },
     {
       icon: <CalendarDays className="text-blue-600 w-10 h-10" />,
-      title: "2. Dra av semester",
+      title: "2. Dra av semester och pension",
       description: "Minskad intäkt baserat på valt antal semesterdagar.",
     },
     {

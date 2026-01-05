@@ -16,7 +16,7 @@ const Hero = () => (
           size="lg"
           className="mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md"
         >
-          Börja räkna nu
+          Börja räkna
         </Button>
       </a>
     </div>

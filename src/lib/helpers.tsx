@@ -1,5 +1,5 @@
 import { Benefits, Revenue } from "@/components/Form/Form";
-import taxData from "../data/taxTable31_25.json";
+import taxData from "../../data/processed/taxTable31_26.json";
 import {
   BASE_DIVIDEND,
   DIVIDEND_TAX,
